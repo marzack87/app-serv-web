@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Ciao mi chiamo Mario Bravetti mi piace il cazzo</h1>
+        <h1>http://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/300px-PHP-logo.svg.png</h1>
     </body>
 </html>
