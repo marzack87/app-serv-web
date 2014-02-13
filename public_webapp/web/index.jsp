@@ -10,8 +10,39 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="style/style.css">
     </head>
     <body>
-        <h1>http://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/300px-PHP-logo.svg.png</h1>
+        <%@ include file="/navigation_bar.jspf" %>
+        <h1>Page Heading</h1>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
+        <p>Content placeholder ...</p>
     </body>
 </html>
