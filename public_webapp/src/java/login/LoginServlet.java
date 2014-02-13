@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
+            out.println("<!DOCTYPE html> ");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet LoginServlet</title>");            
