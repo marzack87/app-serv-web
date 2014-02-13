@@ -1,0 +1,17 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="navbar">
+    <ul>
+        <li>
+            <a href="#" class="item">Sedere</a>
+        </li>
+        <li>
+            <a href="#" class="item">Ano</a>
+        </li>
+        <li>
+            <a href="#" class="item">Culo</a>
+        </li>
+    </ul>
+    <div class="login">
+        <a href="#" class="button">LOGIN</a>
+    </div>
+</div>
