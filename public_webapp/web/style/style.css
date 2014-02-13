@@ -24,6 +24,7 @@ div.navbar {
     height: 50px;
     color:white;
     background:#333;
+    margin-top: -5px;
 }
 
 div.navbar * {
