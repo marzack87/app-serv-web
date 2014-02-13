@@ -26,6 +26,8 @@
                 <br>
                 <input class="button" type="submit" value="LOGIN">
             </form>
+                <br>
+                non hai un account? <a href="/public_webapp/register.jsp">REGISTRATI</a>
             </div>
         </body>
 </html>

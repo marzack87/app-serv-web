@@ -74,14 +74,14 @@ div.navbar .login {
     border: 2px solid silver;
     border-radius: 10px;
     width: 300px;
-    height: 225px;
+    height: 300px;
     font-weight: lighter;
     position: absolute;
     left: 50%;
     top: 50%; 
     margin-left: -150px;
-    margin-top: -125px;
-    padding: 10px;
+    margin-top: -150px;
+    padding-top: 15px;
 }
 
 input {
@@ -94,4 +94,9 @@ input {
     margin-bottom: 10px;
     font-weight: 100;
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: lightskyblue;
 }
