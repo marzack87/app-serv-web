@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         String pwd = request.getParameter("pwd");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
         PrintWriter out= response.getWriter();
-        out.println("<font color=red>Either user name or password is wrong.</font>");
+        out.println("<div align=center><font color=red >Username or password is wrong.</font></div>");
         rd.include(request, response);
         
     }
