@@ -34,7 +34,7 @@ public class FindApplet extends JApplet {
         //tx.setEditable(false);
         //tx.setVisible(true);
         
-        JLabel label = new JLabel("Crea un nuovo annuncio");
+        JLabel label = new JLabel("Crea un nuovo annuncio!");
         JPanel nord = new JPanel();
         
         JButton b1 = new JButton("Primo");
