@@ -67,3 +67,31 @@ div.navbar .login {
     text-decoration: none;
     color: white;
 }
+
+.login_form {
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid silver;
+    border-radius: 10px;
+    width: 300px;
+    height: 225px;
+    font-weight: lighter;
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    margin-left: -150px;
+    margin-top: -125px;
+    padding: 10px;
+}
+
+input {
+    border-radius: 5px;
+    box-shadow: none;
+    border: none;
+    height: 40px;
+    font-size: larger;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 100;
+    text-align: center;
+}

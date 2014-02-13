@@ -14,12 +14,18 @@
     </head>
         <body>
             <%@ include file="/navigation_bar.jspf" %>
-            <form action="LoginServlet" method="post">
-                Username: <input type="text" name="user">
+            <div class ="login_form">
+                <form action="LoginServlet" method="post">
+                USERNAME 
                 <br>
-                Password: <input type="password" name="pwd">
+                <input type="text" name="user">
                 <br>
-                <input type="submit" value="Login">
+                PASSWORD 
+                <br>
+                <input type="password" name="pwd">
+                <br>
+                <input class="button" type="submit" value="LOGIN">
             </form>
+            </div>
         </body>
 </html>
