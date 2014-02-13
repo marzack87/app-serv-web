@@ -14,35 +14,27 @@
     </head>
     <body>
         <%@ include file="/navigation_bar.jspf" %>
-        <h1>Page Heading</h1>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
-        <p>Content placeholder ...</p>
+        <h1>Home</h1>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
     </body>
 </html>

@@ -2,16 +2,16 @@
 <div class="navbar">
     <ul>
         <li>
-            <a href="#" class="item">Sedere</a>
+            <a href="/index.jsp" class="item">Home</a>
         </li>
         <li>
-            <a href="#" class="item">Ano</a>
+            <a href="/cerca_alloggi.jsp" class="item">Cerca Alloggio</a>
         </li>
         <li>
-            <a href="#" class="item">Culo</a>
+            <a href="/contatti.jsp" class="item">Contatti</a>
         </li>
     </ul>
     <div class="login">
-        <a href="#" class="button">LOGIN</a>
+        <a href="/login.jsp" class="button">LOGIN</a>
     </div>
 </div>
