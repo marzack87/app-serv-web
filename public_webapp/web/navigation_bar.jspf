@@ -6,7 +6,7 @@
             <a href="/public_webapp/index.jsp" class="item">Home</a>
         </li>
         <li>
-            <a href="/public_webapp/cerca_alloggi.jsp" class="item">Cerca Alloggio</a>
+            <a href="/public_webapp/cerca.jsp" class="item">Cerca Alloggio</a>
         </li>
         <li>
             <a href="/public_webapp/contatti.jsp" class="item">Contatti</a>
