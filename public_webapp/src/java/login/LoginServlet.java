@@ -110,7 +110,7 @@ public class LoginServlet extends HttpServlet {
         DOMSource source = new DOMSource(doc);
         transformer.transform(source, result);
         String xmlString = sw.toString();
-        
+        //Scrivo il file
         File file = new File(pathToWrite+"newxml.xml");
         BufferedWriter bw = new BufferedWriter
                       (new OutputStreamWriter(new FileOutputStream(file)));
