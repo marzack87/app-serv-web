@@ -22,7 +22,7 @@
                 <br>
                 Cognome 
                 <br>
-                <input type="password" name="surname">
+                <input type="text" name="surname">
                 Telefono 
                 <br>
                 <input type="text" name="phone">
