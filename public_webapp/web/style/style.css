@@ -40,7 +40,7 @@ div.navbar img {
 }
 
 div.navbar ul {
-    width: 80%;
+    width: 60%;
     margin-left: -10px;
 }
 
@@ -50,7 +50,7 @@ div.navbar li {
 }
 
 div.navbar .login {
-    width: 10%;
+    width: 30%;
     text-align: right;
 }
 
@@ -61,6 +61,7 @@ div.navbar .login {
     text-align: center;
     text-decoration: none;
     color: white;
+    margin-left: 10px;
 }
 
 .item {

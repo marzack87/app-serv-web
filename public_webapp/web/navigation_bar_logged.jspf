@@ -14,6 +14,6 @@
     </ul>
     <div class="login">
         Ciao Granfrancioschio!
-        <a href="/public_webapp/login.jsp" class="button">LOGIN</a>
+        <a href="/public_webapp/login.jsp" class="button">LOGOUT</a>
     </div>
 </div>
