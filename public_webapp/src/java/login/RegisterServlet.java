@@ -8,64 +8,26 @@ package login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.*;
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;  
 
 /**
  *
  * @author Piero
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
+/**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -76,18 +38,41 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        response.setContentType("text/html");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+        PrintWriter out= response.getWriter();
+        
+        if ((request.getParameter("user") != null && !request.getParameter("user").isEmpty()) 
+                && (request.getParameter("pwd") != null && !request.getParameter("pwd").isEmpty()) 
+                && (request.getParameter("name") != null && !request.getParameter("name").isEmpty()) 
+                && (request.getParameter("surname") != null && !request.getParameter("surname").isEmpty())
+                && (request.getParameter("phone") != null && !request.getParameter("phone").isEmpty()))
+        {
+            String user = request.getParameter("user");
+            String pwd = request.getParameter("pwd");
+            String name = request.getParameter("name");
+            String surname = request.getParameter("surname");
+            String phone = request.getParameter("phone");
+            
+            String path = request.getSession().getServletContext().getRealPath("/");
+            
+            File f = new File(path);
+            if(f.exists() && !f.isDirectory())
+            {
+                //Esiste il database utenti, controllo se è presente l'utente
+            } else {
+                //Non esiste il database utenti, quindi l'utente andrà rimandanto alla registrazione
+                out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi registrati per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
+                rd.include(request, response);  
+            }
+                
+        } else {
+            
+            out.println("<div align=center><font color=red >Username or password is wrong.</font></div>");
+            rd.include(request, response);
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
 
