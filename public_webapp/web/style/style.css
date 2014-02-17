@@ -104,16 +104,58 @@ div.navbar .login {
 input {
     border-radius: 5px;
     box-shadow: none;
-    border: none;
+    border: 1px solid silver;
     height: 40px;
     font-size: larger;
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 100;
     text-align: center;
+    vertical-align: center;
+}
+
+input[type='radio']{   
+    height: 12px;
+ }
+
+input.larger {
+    width: 90%;
+}
+
+div.input_group {
+    text-align: left;
+}
+
+div.input_group label {
+    display: block;
+    font-size: small;
 }
 
 a {
     text-decoration: none;
     color: lightskyblue;
+}
+
+.text_small {
+    font-size: smaller;
+}
+
+.text_big {
+    font-size: larger;
+}
+
+.text_very_big {
+    font-size: xx-large;
+}
+
+.nuovo_annuncio {
+    border: 2px solid silver;
+    border-radius: 10px;
+    width: 800px;
+    font-weight: lighter;
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    padding: 10px;
+    text-align: center;
 }
