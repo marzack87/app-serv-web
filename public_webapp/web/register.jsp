@@ -14,7 +14,7 @@
     </head>
     <body>
         <%@ include file="/navigation_bar.jspf" %>
-        <div class ="cacca">
+        <div class ="register_form">
             <form action="RegisterServlet" method="post">
                 Nome 
                 <br>
