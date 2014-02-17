@@ -62,8 +62,36 @@ public class LoginServlet extends HttpServlet {
                 
         } else {
             
-            out.println("<div align=center><font color=red >Username or password is wrong.</font></div>");
+            out.println("<div align=center><font color=red >L'username o la password sono sbagliate.</font></div>");
             rd.include(request, response);
         }
     }
+    
+        private boolean check_user(String pathToWrite, String username, String pwd) throws Exception {
+            
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(pathToWrite);
+        
+            boolean user_exist = false;
+        
+            NodeList nList = document.getElementsByTagName("User");
+        
+            for (int temp = 0; temp < nList.getLength(); temp++)
+            {
+                Node nNode = nList.item(temp);
+            
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    System.out.println(eElement.getElementsByTagName("Password"));
+                    if ((eElement.getAttribute("user_name")).equals(username))
+                    {
+                        user_exist = false;
+                        break;
+                    }
+                }
+            }
+        
+            return user_exist;
+        }
 }
