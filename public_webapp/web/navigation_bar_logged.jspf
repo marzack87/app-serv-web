@@ -3,16 +3,17 @@
     <img src="/public_webapp/images/logo.png">
     <ul>
         <li>
-            <a href="/public_webapp/index.jsp" class="item">Home</a>
+            <a href="/public_webapp/index.jsp" class="item">Riepilogo</a>
         </li>
         <li>
-            <a href="/public_webapp/cerca.jsp" class="item">Cerca Alloggio</a>
+            <a href="/public_webapp/cerca.jsp" class="item">Inserisci Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/contatti.jsp" class="item">Contatti</a>
+            <a href="/public_webapp/contatti.jsp" class="item">Profilo</a>
         </li>
     </ul>
     <div class="login">
+        Ciao Granfrancioschio!
         <a href="/public_webapp/login.jsp" class="button">LOGIN</a>
     </div>
 </div>
