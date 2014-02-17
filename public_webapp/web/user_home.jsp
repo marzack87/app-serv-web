@@ -9,8 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
+        <title>User Home</title>
     </head>
     <body>
         <%@ include file="/navigation_bar_logged.jspf" %>
