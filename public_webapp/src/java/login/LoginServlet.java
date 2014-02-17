@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -49,11 +53,32 @@ public class LoginServlet extends HttpServlet {
             String pwd = request.getParameter("pwd");
             
             String path = request.getSession().getServletContext().getRealPath("/");
+            path = path+"users.xml";
             
             File f = new File(path);
             if(f.exists() && !f.isDirectory())
             {
-                //Esiste il database utenti, controllo se è presente l'utente
+                try {
+                    //Esiste il database utenti, controllo se è presente l'utente
+                    if (check_user(path, user, pwd))
+                    {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user", user);
+                        //setting session to expiry in 30 mins
+                        session.setMaxInactiveInterval(30*60);
+                        Cookie userName = new Cookie("user", user);
+                        userName.setMaxAge(30*60);
+                        response.addCookie(userName);
+                        response.sendRedirect("user_home.jsp");
+                        
+                    } else {
+                        out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi registrati per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
+                        rd.include(request, response);
+                    }
+                } catch (Exception ex) {
+                    out.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
+                    rd.include(request, response);
+                }
             } else {
                 //Non esiste il database utenti, quindi l'utente andrà rimandanto alla registrazione
                 out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi registrati per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
@@ -62,8 +87,38 @@ public class LoginServlet extends HttpServlet {
                 
         } else {
             
-            out.println("<div align=center><font color=red >Username or password is wrong.</font></div>");
+            out.println("<div align=center><font color=red >L'username o la password sono sbagliate.</font></div>");
             rd.include(request, response);
         }
     }
+    
+    private boolean check_user(String pathToWrite, String username, String pwd) throws Exception {
+            
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        Document document = documentBuilder.parse(pathToWrite);
+        
+        boolean user_exist = false;
+        
+        NodeList nList = document.getElementsByTagName("User");
+        
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node nNode = nList.item(temp);
+            
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                if ((eElement.getAttribute("user_name")).equals(username))
+                {
+                    if (eElement.getElementsByTagName("Password").item(0).getTextContent().equals(pwd))
+                    {
+                        user_exist = true;
+                        break;
+                    }
+                }
+            }
+        }
+        
+            return user_exist;
+        }
 }
