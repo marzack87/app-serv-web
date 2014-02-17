@@ -9,11 +9,11 @@
             <a href="/public_webapp/user_gestione.jsp" class="item">Gestione Annunci</a>
         </li>
         <li>
-            <a href="/public_webapp/contatti.jsp" class="item">Dati Utente</a>
+            <a href="/public_webapp/user_profilo.jsp" class="item">Profilo</a>
         </li>
     </ul>
     <div class="login">
         Ciao Granfrancioschio!
-        <a href="/public_webapp/login.jsp" class="button">LOGOUT</a>
+        <a href="/public_webapp/login.jsp" class="button">ESCI</a>
     </div>
 </div>
