@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
     </head>
     <body>
-        <%@ include file="/navigation_bar.jspf" %>
+        <%@ include file="/navigation_bar_logged.jspf" %>
         <h1>Home</h1>
         <p>bla bla bla</p>
         <p>bla bla bla</p>
