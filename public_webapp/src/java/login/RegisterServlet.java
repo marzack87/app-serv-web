@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -40,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/register.jsp");
         PrintWriter out= response.getWriter();
         
         if ((request.getParameter("user") != null && !request.getParameter("user").isEmpty()) 
@@ -56,93 +58,147 @@ public class RegisterServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             
             String path = request.getSession().getServletContext().getRealPath("/");
-            
-            File f = new File(path);
-            if(f.exists() && !f.isDirectory())
+            path = path+"users.xml";
+            if (checkDatabase(path))
             {
-                //Esiste il database utenti, controllo se è presente l'utente
+                try {
+                    //Controllo se l'utente esiste, se non esiste lo creo
+                    if (check_add_user(path, name, surname, phone, user, pwd))
+                    {
+                        out.println("<div align=center><font color=green >Utente creato correttamente.</font></div>");
+                        rd.include(request, response);
+                    } else {
+                        out.println("<div align=center><font color=red >Username già esistente.</font></div>");
+                        rd.include(request, response);
+                    }
+                    
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                    out.println("<div align=center><font color=red >Errore nella creazionde dell'utente.</font></div>");
+                    rd.include(request, response);
+                }
             } else {
-                //Non esiste il database utenti, quindi l'utente andrà rimandanto alla registrazione
-                out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi registrati per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
-                rd.include(request, response);  
+                out.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
+                rd.include(request, response);
             }
-                
         } else {
             
-            out.println("<div align=center><font color=red >Username or password is wrong.</font></div>");
+            out.println("<div align=center><font color=red >Tutti i campi sono obbligatori.</font></div>");
             rd.include(request, response);
         }
     }
+    
+    private boolean checkDatabase (String path)
+    {
+        File f = new File(path);
+        if(f.exists() && !f.isDirectory())
+        {
+            //Esiste il database utenti, controllo se è presente l'utente
+            return true;
+        } else {
+            //Non esiste il database quindi è la prima registrazione e va creato
+            try
+            {
+                DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+                Document doc = documentBuilder.newDocument();
+                Element root_users = doc.createElement("Users");
+                doc.appendChild(root_users);
 
-}
+                DOMSource source = new DOMSource(doc);
 
-/*
-try
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                StreamResult result = new StreamResult(path);
+                transformer.transform(source, result);
+                
+                return true;
+            }
+            catch(Exception e)
+            {
+               System.out.println(e);
+               return false;
+            }
+        }
+    }
+    
+    private boolean check_add_user(String pathToWrite, String name,
+            String surname, String phone, String username, String pwd) throws Exception {
+        
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        Document document = documentBuilder.parse(pathToWrite);
+        
+        boolean register_user = true;
+        
+        NodeList nList = document.getElementsByTagName("User");
+        
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node nNode = nList.item(temp);
+            
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                if ((eElement.getAttribute("user_name")).equals(username))
                 {
-                    DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder docBuilder = builderFactory.newDocumentBuilder();
-                    //creating a new instance of a DOM to build a DOM tree.
-                    Document doc = docBuilder.newDocument();
-                    new LoginServlet().createXmlTree(doc,path);
-                    out.println("<b>Xml File Created Successfully</b>");
-                    rd.include(request, response);
+                    register_user = false;
+                    break;
                 }
-                catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-
-private void createXmlTree(Document doc, String pathToWrite) throws Exception {
+            }
+        }
+        
+        if (!register_user)
+        {
+            return false;
+        }
+        
+        Element root = document.getDocumentElement();
         
         //This method creates an element node
-        Element root = doc.createElement("Company");
-        //adding a node after the last child node of the specified node.
-        doc.appendChild(root);
+        Element root_user = document.createElement("User");
+        root_user.setAttribute("user_name", username);
+        root.appendChild(root_user);
 
-        Element child = doc.createElement("Location");
-        root.appendChild(child);
+        Element username_child = document.createElement("Username");
+        root_user.appendChild(username_child);
 
-        Element child1 = doc.createElement("Companyname");
-        child.appendChild(child1);
+        Text text = document.createTextNode(username);
+        username_child.appendChild(text);
 
-        Text text = doc.createTextNode("Roseindia .Net");
-        child1.appendChild(text);
+        Element password_child = document.createElement("Password");
+        root_user.appendChild(password_child);
 
-        Comment comment = doc.createComment("Employee in roseindia");
-        child.appendChild(comment);
+        Text text1 = document.createTextNode(pwd);
+        password_child.appendChild(text1);
+        
+        Element name_element = document.createElement("Name");
+        root_user.appendChild(name_element);
 
-        Element element = doc.createElement("Employee");
-        child.appendChild(element);
+        Text text2 = document.createTextNode(name);
+        name_element.appendChild(text2);
+        
+        Element surname_element = document.createElement("Surname");
+        root_user.appendChild(surname_element);
 
-        Text text1 = doc.createTextNode("Vineett Bansal");
-        element.appendChild(text1);
+        Text text3 = document.createTextNode(surname);
+        surname_element.appendChild(text3);
+        
+        Element phone_element = document.createElement("Phone");
+        root_user.appendChild(phone_element);
 
-        Element chilE = doc.createElement("Id");
-        chilE.setAttribute("name", "Vineet");
-        root.appendChild(chilE);
+        Text text4 = document.createTextNode(phone);
+        phone_element.appendChild(text4);
+        
+        DOMSource source = new DOMSource(document);
 
-        Text text12 = doc.createTextNode("status");
-        chilE.appendChild(text12);
-       
-        //TransformerFactory instance is used to create Transformer objects. 
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Transformer transformer = factory.newTransformer();
-       
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-        // create string from xml tree
-        StringWriter sw = new StringWriter();
-        StreamResult result = new StreamResult(sw);
-        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(pathToWrite);
         transformer.transform(source, result);
-        String xmlString = sw.toString();
-        //Scrivo il file
-        File file = new File(pathToWrite+"newxml.xml");
-        BufferedWriter bw = new BufferedWriter
-                      (new OutputStreamWriter(new FileOutputStream(file)));
-        bw.write(xmlString);
-        bw.flush();
-        bw.close();
       
+        return register_user;
     }
-*/
+
+}
