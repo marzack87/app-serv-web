@@ -9,11 +9,33 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
+        <title>Register Page</title>
     </head>
     <body>
         <%@ include file="/navigation_bar.jspf" %>
-        <h1 align="center">BAZINGA!</h1>
+        <div class ="login_form">
+            <form action="RegisterServlet" method="post">
+                Nome 
+                <br>
+                <input type="text" name="name">
+                <br>
+                Cognome 
+                <br>
+                <input type="password" name="surname">
+                Telefono 
+                <br>
+                <input type="text" name="phone">
+                USERNAME 
+                <br>
+                <input type="text" name="user">
+                <br>
+                PASSWORD 
+                <br>
+                <input type="password" name="pwd">
+                <br>
+                <input class="button" type="submit" value="REGISTER">
+            </form>
+        </div>
     </body>
 </html>
