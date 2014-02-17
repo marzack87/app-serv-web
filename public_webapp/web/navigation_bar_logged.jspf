@@ -3,13 +3,13 @@
     <img src="/public_webapp/images/logo.png">
     <ul>
         <li>
-            <a href="/public_webapp/index.jsp" class="item">Riepilogo</a>
+            <a href="/public_webapp/user_home.jsp" class="item">Riepilogo</a>
         </li>
         <li>
-            <a href="/public_webapp/cerca.jsp" class="item">Inserisci Annuncio</a>
+            <a href="/public_webapp/user_gestione.jsp" class="item">Gestione Annunci</a>
         </li>
         <li>
-            <a href="/public_webapp/contatti.jsp" class="item">Profilo</a>
+            <a href="/public_webapp/contatti.jsp" class="item">Dati Utente</a>
         </li>
     </ul>
     <div class="login">
