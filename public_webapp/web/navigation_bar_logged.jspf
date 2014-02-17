@@ -6,14 +6,14 @@
             <a href="/public_webapp/user_home.jsp" class="item">Riepilogo</a>
         </li>
         <li>
-            <a href="/public_webapp/user_gestione.jsp" class="item">Gestione Annunci</a>
+            <a href="/public_webapp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/contatti.jsp" class="item">Dati Utente</a>
+            <a href="/public_webapp/user_modifica.jsp" class="item">Modifica Annunci</a>
         </li>
     </ul>
     <div class="login">
         Ciao Granfrancioschio!
-        <a href="/public_webapp/login.jsp" class="button">LOGOUT</a>
+        <a href="/public_webapp/index.jsp" class="button">ESCI</a>
     </div>
 </div>

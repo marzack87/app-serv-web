@@ -34,7 +34,7 @@
                 <br>
                 <input type="password" name="pwd">
                 <br>
-                <input class="button" type="submit" value="REGISTER">
+                <input class="button" type="submit" value="REGISTRATI">
             </form>
         </div>
     </body>

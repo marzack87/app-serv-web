@@ -13,6 +13,6 @@
         </li>
     </ul>
     <div class="login">
-        <a href="/public_webapp/login.jsp" class="button">LOGIN</a>
+        <a href="/public_webapp/login.jsp" class="button">ACCEDI</a>
     </div>
 </div>

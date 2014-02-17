@@ -24,7 +24,7 @@
                 <br>
                 <input type="password" name="pwd">
                 <br>
-                <input class="button" type="submit" value="LOGIN">
+                <input class="button" type="submit" value="ACCEDI">
             </form>
                 <br>
                 non hai un account? <a href="/public_webapp/register.jsp">REGISTRATI</a>
