@@ -6,10 +6,10 @@
             <a href="/public_webapp/user_home.jsp" class="item">Riepilogo</a>
         </li>
         <li>
-            <a href="/public_webapp/user_gestione.jsp" class="item">Gestione Annunci</a>
+            <a href="/public_webapp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/user_profilo.jsp" class="item">Profilo</a>
+            <a href="/public_webapp/user_modifica.jsp" class="item">Modifica Annunci</a>
         </li>
     </ul>
     <div class="login">
