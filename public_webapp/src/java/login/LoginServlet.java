@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("user_home.jsp");
                         
                     } else {
-                        out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi registrati per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
+                        out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi REGISTRATI per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
                         rd.include(request, response);
                     }
                 } catch (Exception ex) {
