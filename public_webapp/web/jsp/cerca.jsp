@@ -26,6 +26,8 @@
             var param = new Array();
             function getReq(Array array[]){
                 
+                param = array;
+                
                 var xmlhttp = new XMLHttpRequest();
                 //aggiungi i parametri
                 var String req = ""+"reqServlet?";
