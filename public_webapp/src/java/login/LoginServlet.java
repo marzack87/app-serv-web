@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/login.jsp");
         PrintWriter out= response.getWriter();
         
         if ((request.getParameter("user") != null && !request.getParameter("user").isEmpty()) 

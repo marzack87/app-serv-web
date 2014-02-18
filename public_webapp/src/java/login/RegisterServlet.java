@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/register.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/register.jsp");
         PrintWriter out= response.getWriter();
         
         if ((request.getParameter("user") != null && !request.getParameter("user").isEmpty()) 

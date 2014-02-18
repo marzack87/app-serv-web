@@ -15,7 +15,7 @@
         <body>
             <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
             <div class ="login_form">
-                <form action="LoginServlet" method="post">
+                <form action="/public_webapp/LoginServlet" method="post">
                 USERNAME 
                 <br>
                 <input type="text" name="user">
@@ -27,7 +27,7 @@
                 <input class="button" type="submit" value="ACCEDI">
             </form>
                 <br>
-                non hai un account? <a href="/public_webapp/register.jsp">REGISTRATI</a>
+                non hai un account? <a href="/public_webapp/jsp/register.jsp">REGISTRATI</a>
             </div>
         </body>
 </html>
