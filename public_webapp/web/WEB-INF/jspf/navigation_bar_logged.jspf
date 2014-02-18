@@ -18,16 +18,16 @@
         %>
 
 <div class="navbar">
-    <img src="/public_webapp/images/logo.png">
+    <img src="/public_webapp/multimedia/logo.png">
     <ul>
         <li>
-            <a href="/public_webapp/user_home.jsp" class="item">Riepilogo</a>
+            <a href="/public_webapp/jsp/user_home.jsp" class="item">Riepilogo</a>
         </li>
         <li>
-            <a href="/public_webapp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
+            <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/user_modifica.jsp" class="item">Modifica Annunci</a>
+            <a href="/public_webapp/jsp/user_modifica.jsp" class="item">Modifica Annunci</a>
         </li>
     </ul>
     <div class="login">

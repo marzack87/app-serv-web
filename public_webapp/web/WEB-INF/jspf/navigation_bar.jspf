@@ -1,0 +1,18 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="navbar">
+    <img src="/public_webapp/multimedia/logo.png">
+    <ul>
+        <li>
+            <a href="/public_webapp/index.jsp" class="item">Home</a>
+        </li>
+        <li>
+            <a href="/public_webapp/jsp/cerca.jsp" class="item">Cerca Alloggio</a>
+        </li>
+        <li>
+            <a href="/public_webapp/jsp/contatti.jsp" class="item">Contatti</a>
+        </li>
+    </ul>
+    <div class="login">
+        <a href="/public_webapp/jsp/login.jsp" class="button">ACCEDI</a>
+    </div>
+</div>

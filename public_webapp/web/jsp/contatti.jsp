@@ -10,10 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Contatti</title>
-        <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
+        <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>
-        <%@ include file="/navigation_bar.jspf" %>
+        <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
         <h1>Contatti</h1>
         <p>bla bla bla</p>
         <p>bla bla bla</p>

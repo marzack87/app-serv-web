@@ -10,10 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nuovo Annuncio</title>
-        <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
+        <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>
-        <%@ include file="/navigation_bar_logged.jspf" %>
+        <%@ include file="/WEB-INF/jspf/navigation_bar_logged.jspf" %>
         <div align="center" class="text_very_big">
             Nuovo Annuncio
         </div>

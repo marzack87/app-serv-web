@@ -9,11 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
+        <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
         <title>Login Page</title>
     </head>
         <body>
-            <%@ include file="/navigation_bar.jspf" %>
+            <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
             <div class ="login_form">
                 <form action="LoginServlet" method="post">
                 USERNAME 

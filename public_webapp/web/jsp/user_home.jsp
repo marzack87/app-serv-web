@@ -1,6 +1,6 @@
 <%-- 
-    Document   : user_modifica
-    Created on : 17-feb-2014, 12.26.48
+    Document   : user_home
+    Created on : 17-feb-2014, 11.49.19
     Author     : marco
 --%>
 
@@ -9,11 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="/public_webapp/style/style.css">
+        <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
+        <title>User Home</title>
     </head>
     <body>
-        <%@ include file="/navigation_bar_logged.jspf" %>
+        <%@ include file="/WEB-INF/jspf/navigation_bar_logged.jspf" %>
         <h1>Home</h1>
         <p>bla bla bla</p>
         <p>bla bla bla</p>
@@ -38,3 +38,4 @@
         <p>bla bla bla</p>
     </body>
 </html>
+
