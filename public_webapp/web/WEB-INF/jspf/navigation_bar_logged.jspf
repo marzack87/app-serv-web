@@ -32,6 +32,6 @@
     </ul>
     <div class="login">
         Ciao <%=user %>!
-        <a href="/LogoutServlet" class="button">ESCI</a>
+        <a href="/public_webapp/LogoutServlet" class="button">ESCI</a>
     </div>
 </div>

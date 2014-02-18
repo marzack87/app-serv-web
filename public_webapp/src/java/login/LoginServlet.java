@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                         Cookie userName = new Cookie("user", user);
                         userName.setMaxAge(30*60);
                         response.addCookie(userName);
-                        response.sendRedirect("user_home.jsp");
+                        response.sendRedirect("/public_webapp/jsp/user_home.jsp");
                         
                     } else {
                         out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi REGISTRATI per creare un account<br> o ricontrolla i tuoi dati.</font></div>");

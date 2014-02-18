@@ -32,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         Cookie[] cookies = request.getCookies();
@@ -50,7 +50,7 @@ public class LogoutServlet extends HttpServlet {
         if(session != null){
             session.invalidate();
         }
-        response.sendRedirect("/index.jsp");
+        response.sendRedirect("/public_webapp/index.jsp");
     }
 
 }

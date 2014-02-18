@@ -15,7 +15,7 @@
     <body>
         <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
         <div class ="register_form">
-            <form action="RegisterServlet" method="post">
+            <form action="/public_webapp/RegisterServlet" method="post">
                 Nome 
                 <br>
                 <input type="text" name="name">
