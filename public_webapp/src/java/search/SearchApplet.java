@@ -6,9 +6,14 @@
 
 package search;
 
-import java.awt.*;
 import static java.awt.FlowLayout.LEFT;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
+import java.util.logging.*;
 import javax.swing.*;
+import netscape.javascript.JSObject;
+
 
 /**
  *
@@ -20,224 +25,472 @@ public class SearchApplet extends JApplet {
      * Initialization method that will be called after the applet is loaded into
      * the browser.
      */
+    @Override
     public void init() {
-        
         //intestazione
-        JLabel label = new JLabel("Cerca un annuncio");
-        JPanel nord = new JPanel();
-        nord.add(label);
-        getContentPane().add(nord,BorderLayout.NORTH);
+        JLabel JL_cerca = new JLabel("Cerca un annuncio");
+        JPanel JP_nord = new JPanel();
+        JP_nord.add(JL_cerca);
+        getContentPane().add(JP_nord,BorderLayout.NORTH);
         
         //cerca indirizzo
-        JLabel address = new JLabel("Via: ");
-        JTextField txtaddress = new JTextField(20);
-        txtaddress.setBackground(Color.WHITE);
-        txtaddress.setEditable(true);
-        txtaddress.setVisible(true);
-        JLabel nro = new JLabel("n°: ");
-        JTextField txtnro = new JTextField(3);
-        txtnro.setBackground(Color.WHITE);
-        txtnro.setEditable(true);
-        txtnro.setVisible(true);
+        JLabel JL_address = new JLabel("Via: ");
+        JTextField JTF_address = new JTextField(20);
+        JTF_address.setBackground(Color.WHITE);
+        JTF_address.setEditable(true);
+        JTF_address.setVisible(true);
+        JLabel JL_nro = new JLabel("n°: ");
+        JTextField JTF_nro = new JTextField(3);
+        JTF_nro.setBackground(Color.WHITE);
+        JTF_nro.setEditable(true);
+        JTF_nro.setVisible(true);
         
-        JPanel  paddress = new JPanel();
+        JPanel  JP_address = new JPanel();
         
-        paddress.add(address);
-        paddress.add(txtaddress);
-        paddress.add(nro);
-        paddress.add(txtnro);
+        JP_address.add(JL_address);
+        JP_address.add(JTF_address);
+        JP_address.add(JL_nro);
+        JP_address.add(JTF_nro);
         LayoutManager inarow = new FlowLayout(LEFT);
-        paddress.setLayout(inarow);
+        JP_address.setLayout(inarow);
         
         
         //cerca nome prop
-        JLabel cognomeprop = new JLabel("Cognome Proprietario: ");
-        JTextField txtcognomeprop = new JTextField(10);
-        txtaddress.setBackground(Color.WHITE);
-        txtaddress.setEditable(true);
-        txtaddress.setVisible(true);
-        JLabel nomeprop = new JLabel("Nome Proprietario: ");
-        JTextField txtnomeprop = new JTextField(10);
-        txtaddress.setBackground(Color.WHITE);
-        txtaddress.setEditable(true);
-        txtaddress.setVisible(true);
+        JLabel JL_cognomeprop = new JLabel("Cognome Proprietario: ");
+        JTextField JTF_cognomeprop = new JTextField(10);
+        JTF_cognomeprop.setBackground(Color.WHITE);
+        JTF_cognomeprop.setEditable(true);
+        JTF_cognomeprop.setVisible(true);
+        JLabel JL_nomeprop = new JLabel("Nome Proprietario: ");
+        JTextField JTF_nomeprop = new JTextField(10);
+        JTF_nomeprop.setBackground(Color.WHITE);
+        JTF_nomeprop.setEditable(true);
+        JTF_nomeprop.setVisible(true);
         
-        JPanel pprop = new JPanel();
+        JPanel JP_prop = new JPanel();
         
-        pprop.add(cognomeprop);
-        pprop.add(txtcognomeprop);
-        pprop.add(nomeprop);
-        pprop.add(txtnomeprop);
-        pprop.setLayout(inarow);
+        JP_prop.add(JL_cognomeprop);
+        JP_prop.add(JTF_cognomeprop);
+        JP_prop.add(JL_nomeprop);
+        JP_prop.add(JTF_nomeprop);
+        JP_prop.setLayout(inarow);
         
         //cerca tipologia edificio
-        JLabel tipo = new JLabel("Tipologia: ");
-        JComboBox tipomenu = new JComboBox();
-        tipomenu.addItem("Seleziona");
-        tipomenu.addItem("Appartamento");
-        tipomenu.addItem("Villetta");
-        tipomenu.addItem("Casa Indipendente");
+        JLabel JL_tipo = new JLabel("Tipologia: ");
+        JComboBox JCB_tipomenu = new JComboBox();
+        JCB_tipomenu.addItem("Seleziona");
+        JCB_tipomenu.addItem("Appartamento");
+        JCB_tipomenu.addItem("Villetta");
+        JCB_tipomenu.addItem("Casa Indipendente");
         
-        JPanel ptipo = new JPanel();
+        JPanel JP_tipo = new JPanel();
         
-        ptipo.add(tipo);
-        ptipo.add(tipomenu);
-        ptipo.setLayout(inarow);
+        JP_tipo.add(JL_tipo);
+        JP_tipo.add(JCB_tipomenu);
+        JP_tipo.setLayout(inarow);
         
         //cerca per caratteristiche
-        JLabel nrobagni = new JLabel("n° bagni");
-        JComboBox nrobagnimenu = new JComboBox();
-        nrobagnimenu.addItem("Seleziona");
-        nrobagnimenu.addItem("1");
-        nrobagnimenu.addItem("2");
-        nrobagnimenu.addItem("3");
-        nrobagnimenu.addItem("4");
-        nrobagnimenu.addItem("5");
+        JLabel JL_nrobagni = new JLabel("n° bagni");
+        JComboBox JCB_nrobagnimenu = new JComboBox();
+        JCB_nrobagnimenu.addItem("Seleziona");
+        JCB_nrobagnimenu.addItem("1");
+        JCB_nrobagnimenu.addItem("2");
+        JCB_nrobagnimenu.addItem("3");
+        JCB_nrobagnimenu.addItem("4");
+        JCB_nrobagnimenu.addItem("5");
         
-        JLabel nrocamletto = new JLabel("n° camere da letto");
-        JComboBox nrocamlettomenu = new JComboBox();
-        nrocamlettomenu.addItem("Seleziona");
-        nrocamlettomenu.addItem("1");
-        nrocamlettomenu.addItem("2");
-        nrocamlettomenu.addItem("3");
-        nrocamlettomenu.addItem("4");
-        nrocamlettomenu.addItem("5");
+        JLabel JL_nrocamletto = new JLabel("n° camere da letto");
+        JComboBox JCB_nrocamlettomenu = new JComboBox();
+        JCB_nrocamlettomenu.addItem("Seleziona");
+        JCB_nrocamlettomenu.addItem("1");
+        JCB_nrocamlettomenu.addItem("2");
+        JCB_nrocamlettomenu.addItem("3");
+        JCB_nrocamlettomenu.addItem("4");
+        JCB_nrocamlettomenu.addItem("5");
         
-        JPanel pcarat = new JPanel();
-        pcarat.add(nrobagni);
-        pcarat.add(nrobagnimenu);
-        pcarat.add(nrocamletto);
-        pcarat.add(nrocamlettomenu);
-        pcarat.setLayout(inarow);
+        JPanel JP_carat = new JPanel();
+        JP_carat.add(JL_nrobagni);
+        JP_carat.add(JCB_nrobagnimenu);
+        JP_carat.add(JL_nrocamletto);
+        JP_carat.add(JCB_nrocamlettomenu);
+        JP_carat.setLayout(inarow);
         
         
         //carca per posti
-        JLabel postitot = new JLabel("Posti Totali");
-        JComboBox postitotalimenu = new JComboBox();
-        postitotalimenu.addItem("Seleziona");
-        postitotalimenu.addItem("1");
-        postitotalimenu.addItem("2");
-        postitotalimenu.addItem("3");
-        postitotalimenu.addItem("4");
-        postitotalimenu.addItem("5");
-        postitotalimenu.addItem("6");
-        postitotalimenu.addItem("7");
-        postitotalimenu.addItem("8");
-        postitotalimenu.addItem("9");
-        postitotalimenu.addItem("10");
+        JLabel JL_postitot = new JLabel("Posti Totali");
+        JComboBox JCB_postitotalimenu = new JComboBox();
+        JCB_postitotalimenu.addItem("Seleziona");
+        JCB_postitotalimenu.addItem("1");
+        JCB_postitotalimenu.addItem("2");
+        JCB_postitotalimenu.addItem("3");
+        JCB_postitotalimenu.addItem("4");
+        JCB_postitotalimenu.addItem("5");
+        JCB_postitotalimenu.addItem("6");
+        JCB_postitotalimenu.addItem("7");
+        JCB_postitotalimenu.addItem("8");
+        JCB_postitotalimenu.addItem("9");
+        JCB_postitotalimenu.addItem("10");
         
-        JLabel postilib = new JLabel("Posti Liberi");
-        JComboBox postiliberimenu = new JComboBox();
-        postiliberimenu.addItem("Seleziona");
-        postiliberimenu.addItem("1");
-        postiliberimenu.addItem("2");
-        postiliberimenu.addItem("3");
-        postiliberimenu.addItem("4");
-        postiliberimenu.addItem("5");
-        postiliberimenu.addItem("6");
-        postiliberimenu.addItem("7");
-        postiliberimenu.addItem("8");
-        postiliberimenu.addItem("9");
-        postiliberimenu.addItem("10");
+        JLabel JL_postilib = new JLabel("Posti Liberi");
+        JComboBox JCB_postiliberimenu = new JComboBox();
+        JCB_postiliberimenu.addItem("Seleziona");
+        JCB_postiliberimenu.addItem("1");
+        JCB_postiliberimenu.addItem("2");
+        JCB_postiliberimenu.addItem("3");
+        JCB_postiliberimenu.addItem("4");
+        JCB_postiliberimenu.addItem("5");
+        JCB_postiliberimenu.addItem("6");
+        JCB_postiliberimenu.addItem("7");
+        JCB_postiliberimenu.addItem("8");
+        JCB_postiliberimenu.addItem("9");
+        JCB_postiliberimenu.addItem("10");
         
-        JPanel pposti = new JPanel();
-        pposti.add(postitot);
-        pposti.add(postitotalimenu);
-        pposti.add(postilib);
-        pposti.add(postiliberimenu);
-        pposti.setLayout(inarow);
-        
+        JPanel JP_posti = new JPanel();
+        JP_posti.add(JL_postitot);
+        JP_posti.add(JCB_postitotalimenu);
+        JP_posti.add(JL_postilib);
+        JP_posti.add(JCB_postiliberimenu);
+        JP_posti.setLayout(inarow);
+       
         //cerca per extra
-        JLabel extra_garage = new JLabel("Garage:");
-        JCheckBox cb_garage = new JCheckBox();
-        JLabel extra_terrazzo = new JLabel("Terrazzo:");
-        JCheckBox cb_terrazzo = new JCheckBox();
+        JLabel JL_extra_garage = new JLabel("Garage:");
+        JCheckBox JCB_garage = new JCheckBox();
+        JLabel JL_extra_terrazzo = new JLabel("Terrazzo:");
+        JCheckBox JCB_terrazzo = new JCheckBox();
         
-        JPanel pextra = new JPanel();
-        pextra.add(extra_garage);
-        pextra.add(cb_garage);
-        pextra.add(extra_terrazzo);
-        pextra.add(cb_terrazzo);
-        pextra.setLayout(inarow);
+        JPanel JP_extra = new JPanel();
+        JP_extra.add(JL_extra_garage);
+        JP_extra.add(JCB_garage);
+        JP_extra.add(JL_extra_terrazzo);
+        JP_extra.add(JCB_terrazzo);
+        JP_extra.setLayout(inarow);
         
         //cerca per servizi
+        JCheckBox JCB_servizi_parabola = new JCheckBox("Parabola");
+        JCheckBox JCB_servizi_spacqua = new JCheckBox("Spese Acqua Incluse");
+        JCheckBox JCB_servizi_spluce = new JCheckBox("Spese Luce Incluse");
+        JCheckBox JCB_servizi_spcondominiali = new JCheckBox("Spese Condominiali Incluse");
         
-        JCheckBox servizi_parabola = new JCheckBox("Parabola");
-        JCheckBox servizi_spacqua = new JCheckBox("Spese Acqua Incluse");
-        JCheckBox servizi_spluce = new JCheckBox("Spese Luce Incluse");
-        JCheckBox servizi_spcondominiali = new JCheckBox("Spese Condominiali Incluse");
-        
-        JPanel pservizi = new JPanel();
-        pservizi.add(servizi_parabola);
-        pservizi.add(servizi_spacqua);
-        pservizi.add(servizi_spluce);
-        pservizi.add(servizi_spcondominiali);
-        pservizi.setLayout(new GridLayout(0,1));
+        JPanel JP_servizi = new JPanel();
+        JP_servizi.add(JCB_servizi_parabola);
+        JP_servizi.add(JCB_servizi_spacqua);
+        JP_servizi.add(JCB_servizi_spluce);
+        JP_servizi.add(JCB_servizi_spcondominiali);
+        JP_servizi.setLayout(new GridLayout(0,1));
         
         //cerca per costo
-        JLabel costomin = new JLabel("Costo minimo per persona");
-        JTextField txtcostomin = new JTextField(5);
-        txtcostomin.setEditable(true);
-        txtcostomin.setVisible(true);
+        JLabel JL_costomin = new JLabel("Costo minimo per persona");
+        JTextField JTF_costomin = new JTextField(5);
+        JTF_costomin.setEditable(true);
+        JTF_costomin.setVisible(true);
         
-        JLabel costomax = new JLabel("Costo massimo per persona");
-        JTextField txtcostomax = new JTextField(5);
-        txtcostomax.setEditable(true);
-        txtcostomax.setVisible(true);
+        JLabel JL_costomax = new JLabel("Costo massimo per persona");
+        JTextField JTF_costomax = new JTextField(5);
+        JTF_costomax.setEditable(true);
+        JTF_costomax.setVisible(true);
         
-        JPanel pcosto = new JPanel();
-        pcosto.add(costomin);
-        pcosto.add(txtcostomin);
-        pcosto.add(costomax);
-        pcosto.add(txtcostomax);
+        JPanel JP_costo = new JPanel();
+        JP_costo.add(JL_costomin);
+        JP_costo.add(JTF_costomin);
+        JP_costo.add(JL_costomax);
+        JP_costo.add(JTF_costomax);
         
+        //JTextArea JTA_control = new JTextArea();
         
         //panel generale
-        JPanel panel = new JPanel();
-        panel.add(paddress);
-        panel.add(pprop);
-        panel.add(ptipo);
-        panel.add(pcarat);
-        panel.add(pposti);
-        panel.add(pextra);
-        panel.add(pservizi);
-        panel.add(pcosto);
+        JPanel JP_generalpanel = new JPanel();
+        JP_generalpanel.add(JP_address);
+        JP_generalpanel.add(JP_prop);
+        JP_generalpanel.add(JP_tipo);
+        JP_generalpanel.add(JP_carat);
+        JP_generalpanel.add(JP_posti);
+        JP_generalpanel.add(JP_extra);
+        JP_generalpanel.add(JP_servizi);
+        JP_generalpanel.add(JP_costo);
+        //JP_generalpanel.add(JTA_control);
         
-        panel.setLayout(new GridLayout(0,1));
-        
-        
-        getContentPane().add(panel,BorderLayout.LINE_START);
+        JP_generalpanel.setLayout(new GridLayout(0,1));
         
         
-        
-        JButton b1 = new JButton("Primo");
-        //b1.addActionListener(new FirstButtonL(tx));
-        JButton b2 = new JButton("Secondo");
-        //b2.addActionListener(new SecondButtonL(tx));
-        JButton b3 = new JButton("Cancella");
-        //b3.addActionListener(new CancelButtonL(tx));
+        getContentPane().add(JP_generalpanel,BorderLayout.LINE_START);
         
         
-        //Container c = new Container();
-        //c.setLayout(new FlowLayout());
+        ButtonListener buttonL = new ButtonListener(JTF_address, JTF_nro, 
+                                                    JTF_cognomeprop, JTF_nomeprop,
+                                                    JCB_tipomenu,
+                                                    JCB_nrobagnimenu, JCB_nrocamlettomenu,
+                                                    JCB_postitotalimenu, JCB_postiliberimenu,
+                                                    JCB_garage, JCB_terrazzo,
+                                                    JCB_servizi_parabola, JCB_servizi_spacqua, JCB_servizi_spcondominiali, JCB_servizi_spluce,
+                                                    JTF_costomin, JTF_costomax);
         
+        JButton JB_back = new JButton("Indietro");
+        JB_back.addActionListener(buttonL);
+        JButton JB_new = new JButton("Nuova Ricerca");
+        JB_new.addActionListener(buttonL);
+        JButton JB_search = new JButton("Cerca");
+        JB_search.addActionListener(buttonL);
         
+        JPanel JP_buttonpanel = new JPanel();
         
-
-        //panel.add(tx, "Center");
+        JP_buttonpanel.add(JB_back);
+        JP_buttonpanel.add(JB_new);
+        JP_buttonpanel.add(JB_search);
+        JP_buttonpanel.setVisible(true);
         
-        
-        JPanel bpanel = new JPanel();
-        
-        bpanel.add(b1);
-        bpanel.add(b2);
-        bpanel.add(b3);
-        bpanel.setVisible(true);
-        
-        getContentPane().add(bpanel, BorderLayout.SOUTH);
+        getContentPane().add(JP_buttonpanel, BorderLayout.SOUTH);
 
         
     }
 
     // TODO overwrite start(), stop() and destroy() methods
+    
+    class ButtonListener implements ActionListener {
+       
+        private ResultPrinter printer;
+        private JTextField address;
+        private JTextField nro;
+        private JTextField cognomeprop;
+        private JTextField nomeprop;
+        private JComboBox tipomenu;
+        private JComboBox nrobagnimenu;
+        private JComboBox nrocamletto;
+        private JComboBox postitotalimenu;
+        private JComboBox postiliberimenu;
+        private JCheckBox garage;
+        private JCheckBox terrazzo;
+        private JCheckBox serv_parabola;
+        private JCheckBox serv_spacqua;
+        private JCheckBox serv_spcond;
+        private JCheckBox serv_spluce;
+        private JTextField costomin;
+        private JTextField costomax;
+//        private JTextArea control;
+        
+        private ButtonListener(JTextField JTF_address, JTextField JTF_nro, JTextField JTF_cognomeprop, 
+                               JTextField JTF_nomeprop, JComboBox JCB_tipomenu, JComboBox JCB_nrobagnimenu, 
+                               JComboBox JCB_nrocamlettomenu, JComboBox JCB_postitotalimenu, 
+                               JComboBox JCB_postiliberimenu, JCheckBox JCB_garage, JCheckBox JCB_terrazzo, 
+                               JCheckBox JCB_servizi_parabola, JCheckBox JCB_servizi_spacqua, 
+                               JCheckBox JCB_servizi_spcondominiali, JCheckBox JCB_servizi_spluce, 
+                               JTextField JTF_costomin, JTextField JTF_costomax) {
+            ResultPrinter printer;
+            address = JTF_address;
+            nro = JTF_nro;
+            cognomeprop = JTF_cognomeprop;
+            nomeprop = JTF_nomeprop;
+            tipomenu = JCB_tipomenu;
+            nrobagnimenu = JCB_nrobagnimenu;
+            nrocamletto = JCB_nrocamlettomenu;
+            postitotalimenu = JCB_postitotalimenu;
+            postiliberimenu = JCB_postiliberimenu;
+            garage = JCB_garage;
+            terrazzo = JCB_terrazzo;
+            serv_parabola = JCB_servizi_parabola;
+            serv_spacqua = JCB_servizi_spacqua;
+            serv_spcond = JCB_servizi_spcondominiali;
+            serv_spluce = JCB_servizi_spluce;
+            costomin = JTF_costomin;
+            costomax = JTF_costomax;
+            //control = JTA_control;
+        }
+        
+        
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        
+            //trova la sorgente dell'evento
+            JButton b = (JButton) e.getSource();
+            String selected = b.getText();
+            switch (selected) {
+                case ("Indietro"):
+                    //vai alla pagina precendente index
+                    try {
+                        String localhost = InetAddress.getLocalHost().getHostName() + "/index.jsp";
+                        URL currentHome = new URL(localhost);
+                        getAppletContext().showDocument(currentHome);
+                    } catch (        UnknownHostException | MalformedURLException ex) {
+                        Logger.getLogger(SearchApplet.class.getName()).log(Level.SEVERE, null, ex);
+                    }   break;
+                case ("Nuova Ricerca"):
+                    //azzera i campi e i risultati
+                    //eviterei di reloadare l'applet se possibile senza sbroccare
+                    break;
+                case ("Cerca"):
+                    //prendi i paramentri settati
+                    String parameter[] = new String[17];
+                    
+                    //recupero l'indirizzo
+                    if(address.getText() == null){
+                        parameter[0] = "";
+                    }else{
+                        parameter[0] = address.getText();
+                    }
+                    
+                    //recupero numero
+                    if(nro.getText() == null){
+                        parameter[1] = "";
+                    }else{
+                        parameter[1] = nro.getText();
+                    }
+                    
+                    //recupero cognomeprop
+                    if(cognomeprop.getText() == null){
+                        parameter[2] = "";
+                    }else{
+                        parameter[2] = cognomeprop.getText();
+                    }
+                    
+                    //recupero nomeprop
+                    if(nomeprop.getText() == null){
+                        parameter[3] = "";
+                    }else{
+                        parameter[3] = nomeprop.getText();
+                    }
+                    
+                    //recupero tipomenu
+                    if(tipomenu.getSelectedIndex() == -1 || tipomenu.getSelectedIndex() == 0){
+                        parameter[4] = "";
+                    }else{
+                        switch (tipomenu.getSelectedIndex()){
+                            case 1: parameter[4] = "Appartamento";
+                            case 2: parameter[4] = "Villetta";
+                            case 3: parameter[4] = "Casa Indipendente";
+                        }
+                    }
+                    //recupero nro bagni
+                    switch (nrobagnimenu.getSelectedIndex()){
+                        case (-1): parameter[5] = "";
+                        case (0):  parameter[5] = "";
+                        case 1: parameter[5] = "1";
+                        case 2: parameter[5] = "2";
+                        case 3: parameter[5] = "3";
+                        case 4: parameter[5] = "4";
+                        case 5: parameter[5] = "5";                    
+                    }
+                    
+                    //recupero nro cam letto
+                    switch (nrocamletto.getSelectedIndex()){
+                        case (-1): parameter[6] = "";
+                        case (0):  parameter[6] = "";
+                        case 1: parameter[6] = "1";
+                        case 2: parameter[6] = "2";
+                        case 3: parameter[6] = "3";
+                        case 4: parameter[6] = "4";
+                        case 5: parameter[6] = "5";                    
+                    }
+                    
+                     //recupero posti totali
+                    switch (postitotalimenu.getSelectedIndex()){
+                        case (-1): parameter[7] = "";
+                        case (0):  parameter[7] = "";
+                        case 1: parameter[7] = "1";
+                        case 2: parameter[7] = "2";
+                        case 3: parameter[7] = "3";
+                        case 4: parameter[7] = "4";
+                        case 5: parameter[7] = "5"; 
+                        case 6: parameter[7] = "6";
+                        case 7: parameter[7] = "7";
+                        case 8: parameter[7] = "8";
+                        case 9: parameter[7] = "9";
+                        case 10: parameter[7] = "10";
+                    }
+                    
+                     //recupero posti liberi
+                    switch (postiliberimenu.getSelectedIndex()){
+                        case (-1): parameter[8] = "";
+                        case (0):  parameter[8] = "";
+                        case 1: parameter[8] = "1";
+                        case 2: parameter[8] = "2";
+                        case 3: parameter[8] = "3";
+                        case 4: parameter[8] = "4";
+                        case 5: parameter[8] = "5"; 
+                        case 6: parameter[8] = "6";
+                        case 7: parameter[8] = "7";
+                        case 8: parameter[8] = "8";
+                        case 9: parameter[8] = "9";
+                        case 10: parameter[8] = "10";
+                    }
+                    
+                    //recupero garage
+                    if(garage.isSelected()){
+                        parameter[9] = "garage";
+                    }else{
+                        parameter[9] = "";
+                    }
+                    
+                    //recupero terrazzo
+                    if(terrazzo.isSelected()){
+                        parameter[10] = "terrazzo";
+                    }else{
+                        parameter[10] = "";
+                    }
+                    
+                    //recupero serv parabola
+                    if(serv_parabola.isSelected()){
+                        parameter[11] = "parabola";
+                    }else{
+                        parameter[11] = "";
+                    }
+                    
+                    //recupero serv sp acqua
+                    if(serv_spacqua.isSelected()){
+                        parameter[12] = "speseacqua";
+                    }else{
+                        parameter[12] = "";
+                    }
+                    
+                    //recupero spese condominiali
+                    if(serv_spcond.isSelected()){
+                        parameter[13] = "spesecond";
+                    }else{
+                        parameter[13] = "";
+                    }
+                    
+                    //recupero spese luce
+                    if(serv_spluce.isSelected()){
+                        parameter[14] = "speseluce";
+                    }else{
+                        parameter[14] = "";
+                    }
+                    
+                    //recupero costo min
+                    if(costomin.getText() == null){
+                        parameter[15] = "";
+                    }else{
+                        parameter[15] = costomin.getText();
+                    }
+                    
+                    //recupero costo max
+                    if(costomax.getText() == null){
+                        parameter[16] = "";
+                    }else{
+                        parameter[16] = costomax.getText();
+                    }
+                   
+                    printer = new ResultPrinter(parameter);
+                    printer.printRes();
+                    
+                    break;
+            }
+        
+       
+        }
+    }
+
+    class ResultPrinter{
+        
+        private String[] param;
+        
+        public ResultPrinter(String[] p){
+            param = p;
+        }
+        
+        public void printRes(){
+           
+//            JSObject.getWindow(this).eval();
+            
+        }
+    }
 }
