@@ -28,7 +28,7 @@ public class SearchApplet extends JApplet {
     @Override
     public void init() {
         //intestazione
-        JLabel JL_cerca = new JLabel("Cerca un annuncio");
+        JLabel JL_cerca = new JLabel("Cerca un annuncio culo");
         JPanel JP_nord = new JPanel();
         JP_nord.add(JL_cerca);
         getContentPane().add(JP_nord,BorderLayout.NORTH);
