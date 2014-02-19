@@ -25,6 +25,7 @@ div.navbar {
     color:white;
     background:#333;
     margin-top: -5px;
+    z-index: 1;
 }
 
 div.navbar * {
@@ -111,15 +112,22 @@ input {
     margin-bottom: 10px;
     font-weight: 100;
     text-align: center;
-    vertical-align: center;
 }
 
 input[type='radio']{   
     height: 12px;
  }
+ 
+ input[type='checkbox']{   
+    height: 12px;
+ }
 
 input.larger {
     width: 90%;
+}
+
+input.smaller {
+    width: 10%;
 }
 
 div.input_group {
@@ -148,14 +156,28 @@ a {
     font-size: xx-large;
 }
 
+.centered {
+    margin: 0 auto;
+}
+
+div.centered {
+    text-align: center;
+}
+
 .nuovo_annuncio {
     border: 2px solid silver;
     border-radius: 10px;
     width: 800px;
     font-weight: lighter;
-    position: absolute;
+    position: relative;
     left: 50%;
     margin-left: -400px;
     padding: 10px;
+    display: block;
     text-align: center;
+    padding-bottom: 10px;
+}
+
+span.space{
+    padding-right: 20px;
 }
