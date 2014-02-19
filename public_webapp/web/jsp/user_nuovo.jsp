@@ -34,7 +34,6 @@
                 <label><input type="radio" name="tipo_alloggio" value="Villetta"> Villetta</label>
                 <label><input type="radio" name="tipo_alloggio" value="Casa Indipendente"> Casa Indipendente</label>
             </div>
-            <br>
             <div class="input_group">
                 Cucina:
                 <label><input type="radio" name="tipo_cucina" value="Abitabile"> Abitabile</label>
