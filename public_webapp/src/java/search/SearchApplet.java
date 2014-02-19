@@ -12,7 +12,7 @@ import java.awt.event.*;
 import java.net.*;
 import java.util.logging.*;
 import javax.swing.*;
-import netscape.javascript.JSObject;
+//import netscape.javascript.JSObject;
 
 
 /**
@@ -313,64 +313,146 @@ public class SearchApplet extends JApplet implements ActionListener{
                     if(JCB_tipomenu.getSelectedIndex() == -1 || JCB_tipomenu.getSelectedIndex() == 0){
                         parameter[4] = "";
                     }else{
+                        System.out.println(JCB_tipomenu.getSelectedIndex());
                         switch (JCB_tipomenu.getSelectedIndex()){
-                            case 1: parameter[4] = "Appartamento";
-                            case 2: parameter[4] = "Villetta";
-                            case 3: parameter[4] = "Casa Indipendente";
+                            case 1: 
+                                parameter[4] = "Appartamento";
+                                break;
+                            case 2: 
+                                parameter[4] = "Villetta";
+                                break;
+                            case 3: 
+                                parameter[4] = "Casa Indipendente";
+                                break;
                         }
                     }
                     //recupero nro bagni
                     switch (JCB_nrobagnimenu.getSelectedIndex()){
-                        case (-1): parameter[5] = "";
-                        case (0):  parameter[5] = "";
-                        case 1: parameter[5] = "1";
-                        case 2: parameter[5] = "2";
-                        case 3: parameter[5] = "3";
-                        case 4: parameter[5] = "4";
-                        case 5: parameter[5] = "5";                    
+                        case (-1): 
+                            parameter[5] = "";
+                            break;
+                        case (0):
+                            parameter[5] = "";
+                            break;
+                        case 1: 
+                            parameter[5] = "1";
+                            break;
+                        case 2: 
+                            parameter[5] = "2";
+                            break;
+                        case 3: 
+                            parameter[5] = "3";
+                            break;
+                        case 4: 
+                            parameter[5] = "4";
+                            break;
+                        case 5:
+                            parameter[5] = "5";
+                            break;
                     }
                     
                     //recupero nro cam letto
                     switch (JCB_nrocamlettomenu.getSelectedIndex()){
-                        case (-1): parameter[6] = "";
-                        case (0):  parameter[6] = "";
-                        case 1: parameter[6] = "1";
-                        case 2: parameter[6] = "2";
-                        case 3: parameter[6] = "3";
-                        case 4: parameter[6] = "4";
-                        case 5: parameter[6] = "5";                    
+                        case (-1):
+                            parameter[6] = "";
+                            break;
+                        case (0):
+                            parameter[6] = "";
+                            break;
+                        case 1:
+                            parameter[6] = "1";
+                            break;
+                        case 2:
+                            parameter[6] = "2";
+                            break;
+                        case 3:
+                            parameter[6] = "3";
+                            break;
+                        case 4:
+                            parameter[6] = "4";
+                            break;
+                        case 5: parameter[6] = "5";
+                            break;
                     }
                     
                      //recupero posti totali
                     switch (JCB_postitotalimenu.getSelectedIndex()){
-                        case (-1): parameter[7] = "";
-                        case (0):  parameter[7] = "";
-                        case 1: parameter[7] = "1";
-                        case 2: parameter[7] = "2";
-                        case 3: parameter[7] = "3";
-                        case 4: parameter[7] = "4";
-                        case 5: parameter[7] = "5"; 
-                        case 6: parameter[7] = "6";
-                        case 7: parameter[7] = "7";
-                        case 8: parameter[7] = "8";
-                        case 9: parameter[7] = "9";
-                        case 10: parameter[7] = "10";
+                        case (-1):
+                            parameter[7] = "";
+                            break;
+                        case (0):
+                            parameter[7] = "";
+                            break;
+                        case 1:
+                            parameter[7] = "1";
+                            break;
+                        case 2:
+                            parameter[7] = "2";
+                            break;
+                        case 3:
+                            parameter[7] = "3";
+                            break;
+                        case 4:
+                            parameter[7] = "4";
+                            break;
+                        case 5:
+                            parameter[7] = "5";
+                            break;
+                        case 6:
+                            parameter[7] = "6";
+                            break;
+                        case 7:
+                            parameter[7] = "7";
+                            break;
+                        case 8:
+                            parameter[7] = "8";
+                            break;
+                        case 9:
+                            parameter[7] = "9";
+                            break;
+                        case 10:
+                            parameter[7] = "10";
+                            break;
                     }
                     
                      //recupero posti liberi
                     switch (JCB_postiliberimenu.getSelectedIndex()){
-                        case (-1): parameter[8] = "";
-                        case (0):  parameter[8] = "";
-                        case 1: parameter[8] = "1";
-                        case 2: parameter[8] = "2";
-                        case 3: parameter[8] = "3";
-                        case 4: parameter[8] = "4";
-                        case 5: parameter[8] = "5"; 
-                        case 6: parameter[8] = "6";
-                        case 7: parameter[8] = "7";
-                        case 8: parameter[8] = "8";
-                        case 9: parameter[8] = "9";
-                        case 10: parameter[8] = "10";
+                        case (-1):
+                            parameter[8] = "";
+                            break;
+                        case (0):
+                            parameter[8] = "";
+                            break;
+                        case 1:
+                            parameter[8] = "1";
+                            break;
+                        case 2:
+                            parameter[8] = "2";
+                            break;
+                        case 3:
+                            parameter[8] = "3";
+                            break;
+                        case 4:
+                            parameter[8] = "4";
+                            break;
+                        case 5:
+                            parameter[8] = "5";
+                            break;
+                        case 6:
+                            parameter[8] = "6";
+                            break;
+                        case 7:
+                            parameter[8] = "7";
+                            break;
+                        case 8:
+                            parameter[8] = "8";
+                            break;
+                        case 9:
+                            parameter[8] = "9";
+                            break;
+                        case 10:
+                            parameter[8] = "10";
+                            break;
                     }
                     
                     //recupero garage
@@ -435,248 +517,8 @@ public class SearchApplet extends JApplet implements ActionListener{
                     }
                     JTA_control.setText(stamp);
                     
-                    JSObject.getWindow(this).eval("getReq("+parameter+");");
+                    //JSObject.getWindow(this).eval("getReq("+parameter+");");
                     
             }
         }
 }
-/*
-    // TODO overwrite start(), stop() and destroy() methods
-    
-    class ButtonListener implements ActionListener {
-       
-        private ResultPrinter printer;
-        private JTextField address;
-        private JTextField nro;
-        private JTextField cognomeprop;
-        private JTextField nomeprop;
-        private JComboBox tipomenu;
-        private JComboBox nrobagnimenu;
-        private JComboBox nrocamletto;
-        private JComboBox postitotalimenu;
-        private JComboBox postiliberimenu;
-        private JCheckBox garage;
-        private JCheckBox terrazzo;
-        private JCheckBox serv_parabola;
-        private JCheckBox serv_spacqua;
-        private JCheckBox serv_spcond;
-        private JCheckBox serv_spluce;
-        private JTextField costomin;
-        private JTextField costomax;
-//        private JTextArea control;
-        
-        private ButtonListener(JTextField JTF_address, JTextField JTF_nro, JTextField JTF_cognomeprop, 
-                               JTextField JTF_nomeprop, JComboBox JCB_tipomenu, JComboBox JCB_nrobagnimenu, 
-                               JComboBox JCB_nrocamlettomenu, JComboBox JCB_postitotalimenu, 
-                               JComboBox JCB_postiliberimenu, JCheckBox JCB_garage, JCheckBox JCB_terrazzo, 
-                               JCheckBox JCB_servizi_parabola, JCheckBox JCB_servizi_spacqua, 
-                               JCheckBox JCB_servizi_spcondominiali, JCheckBox JCB_servizi_spluce, 
-                               JTextField JTF_costomin, JTextField JTF_costomax) {
-            ResultPrinter printer;
-            address = JTF_address;
-            nro = JTF_nro;
-            cognomeprop = JTF_cognomeprop;
-            nomeprop = JTF_nomeprop;
-            tipomenu = JCB_tipomenu;
-            nrobagnimenu = JCB_nrobagnimenu;
-            nrocamletto = JCB_nrocamlettomenu;
-            postitotalimenu = JCB_postitotalimenu;
-            postiliberimenu = JCB_postiliberimenu;
-            garage = JCB_garage;
-            terrazzo = JCB_terrazzo;
-            serv_parabola = JCB_servizi_parabola;
-            serv_spacqua = JCB_servizi_spacqua;
-            serv_spcond = JCB_servizi_spcondominiali;
-            serv_spluce = JCB_servizi_spluce;
-            costomin = JTF_costomin;
-            costomax = JTF_costomax;
-            //control = JTA_control;
-        }
-        
-        
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        
-            //trova la sorgente dell'evento
-            JButton b = (JButton) e.getSource();
-            String selected = b.getText();
-            if(selected == "Nuova Ricerca"){
-                    //azzera i campi e i risultati
-                    //eviterei di reloadare l'applet se possibile senza sbroccare
-            }else if(selected == "Cerca"){
-                    //prendi i paramentri settati
-                    String parameter[] = new String[17];
-                    
-                    //recupero l'indirizzo
-                    if(address.getText() == null){
-                        parameter[0] = "";
-                    }else{
-                        parameter[0] = address.getText();
-                    }
-                    
-                    //recupero numero
-                    if(nro.getText() == null){
-                        parameter[1] = "";
-                    }else{
-                        parameter[1] = nro.getText();
-                    }
-                    
-                    //recupero cognomeprop
-                    if(cognomeprop.getText() == null){
-                        parameter[2] = "";
-                    }else{
-                        parameter[2] = cognomeprop.getText();
-                    }
-                    
-                    //recupero nomeprop
-                    if(nomeprop.getText() == null){
-                        parameter[3] = "";
-                    }else{
-                        parameter[3] = nomeprop.getText();
-                    }
-                    
-                    //recupero tipomenu
-                    if(tipomenu.getSelectedIndex() == -1 || tipomenu.getSelectedIndex() == 0){
-                        parameter[4] = "";
-                    }else{
-                        switch (tipomenu.getSelectedIndex()){
-                            case 1: parameter[4] = "Appartamento";
-                            case 2: parameter[4] = "Villetta";
-                            case 3: parameter[4] = "Casa Indipendente";
-                        }
-                    }
-                    //recupero nro bagni
-                    switch (nrobagnimenu.getSelectedIndex()){
-                        case (-1): parameter[5] = "";
-                        case (0):  parameter[5] = "";
-                        case 1: parameter[5] = "1";
-                        case 2: parameter[5] = "2";
-                        case 3: parameter[5] = "3";
-                        case 4: parameter[5] = "4";
-                        case 5: parameter[5] = "5";                    
-                    }
-                    
-                    //recupero nro cam letto
-                    switch (nrocamletto.getSelectedIndex()){
-                        case (-1): parameter[6] = "";
-                        case (0):  parameter[6] = "";
-                        case 1: parameter[6] = "1";
-                        case 2: parameter[6] = "2";
-                        case 3: parameter[6] = "3";
-                        case 4: parameter[6] = "4";
-                        case 5: parameter[6] = "5";                    
-                    }
-                    
-                     //recupero posti totali
-                    switch (postitotalimenu.getSelectedIndex()){
-                        case (-1): parameter[7] = "";
-                        case (0):  parameter[7] = "";
-                        case 1: parameter[7] = "1";
-                        case 2: parameter[7] = "2";
-                        case 3: parameter[7] = "3";
-                        case 4: parameter[7] = "4";
-                        case 5: parameter[7] = "5"; 
-                        case 6: parameter[7] = "6";
-                        case 7: parameter[7] = "7";
-                        case 8: parameter[7] = "8";
-                        case 9: parameter[7] = "9";
-                        case 10: parameter[7] = "10";
-                    }
-                    
-                     //recupero posti liberi
-                    switch (postiliberimenu.getSelectedIndex()){
-                        case (-1): parameter[8] = "";
-                        case (0):  parameter[8] = "";
-                        case 1: parameter[8] = "1";
-                        case 2: parameter[8] = "2";
-                        case 3: parameter[8] = "3";
-                        case 4: parameter[8] = "4";
-                        case 5: parameter[8] = "5"; 
-                        case 6: parameter[8] = "6";
-                        case 7: parameter[8] = "7";
-                        case 8: parameter[8] = "8";
-                        case 9: parameter[8] = "9";
-                        case 10: parameter[8] = "10";
-                    }
-                    
-                    //recupero garage
-                    if(garage.isSelected()){
-                        parameter[9] = "garage";
-                    }else{
-                        parameter[9] = "";
-                    }
-                    
-                    //recupero terrazzo
-                    if(terrazzo.isSelected()){
-                        parameter[10] = "terrazzo";
-                    }else{
-                        parameter[10] = "";
-                    }
-                    
-                    //recupero serv parabola
-                    if(serv_parabola.isSelected()){
-                        parameter[11] = "parabola";
-                    }else{
-                        parameter[11] = "";
-                    }
-                    
-                    //recupero serv sp acqua
-                    if(serv_spacqua.isSelected()){
-                        parameter[12] = "speseacqua";
-                    }else{
-                        parameter[12] = "";
-                    }
-                    
-                    //recupero spese condominiali
-                    if(serv_spcond.isSelected()){
-                        parameter[13] = "spesecond";
-                    }else{
-                        parameter[13] = "";
-                    }
-                    
-                    //recupero spese luce
-                    if(serv_spluce.isSelected()){
-                        parameter[14] = "speseluce";
-                    }else{
-                        parameter[14] = "";
-                    }
-                    
-                    //recupero costo min
-                    if(costomin.getText() == null){
-                        parameter[15] = "";
-                    }else{
-                        parameter[15] = costomin.getText();
-                    }
-                    
-                    //recupero costo max
-                    if(costomax.getText() == null){
-                        parameter[16] = "";
-                    }else{
-                        parameter[16] = costomax.getText();
-                    }
-                   
-                    JSObject.getWindow(this).eval("getReq("+parameter+");");
-                    
-            }
-        
-       
-        }
-    }
-
-    class ResultPrinter{
-        
-        private String[] param;
-        
-        public ResultPrinter(String[] p){
-            param = p;
-        }
-        
-        public void printRes(){
-           
-            JSObject.getWindow(this).eval("getReq("+param+");");
-            
-        }
-    }
-}
-*/
