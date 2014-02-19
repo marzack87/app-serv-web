@@ -24,6 +24,9 @@
         <div class="centered">
             <form id="annuncio" class="nuovo_annuncio" action="/public_webapp/NuovoAnnuncioServlet" method="POST">
             <label>Indirizzo: <input class="larger" type="text" name="indirizzo"></label>
+            <span class='space'></span>
+            <label>Civico: <input type="text" class="smaller" name="civico"></label>
+            <br>
             <label>Città: <input type="text" name="citta"></label>
             <hr>
             INFORMAZIONI ALLOGGIO
@@ -48,6 +51,10 @@
             <label>N° Piano: <input type="number" class="smaller" min="-1" name="n_piano" onchange="check_floor()"></label>
             <span class='space'></span>
             <label style="display: inline"><input type="checkbox" name="ascensore" value="ascensore" disabled="true"> Ascensore</label>
+            <br>
+            <label style="display: inline"><input type="checkbox" name="garage" value="garage"> Garage</label>
+            <span class='space'></span>
+            <label style="display: inline"><input type="checkbox" name="terrazzo" value="terrazzo"> Terrazzo</label>
             <hr>
             <label>Posti letto totali: <input type="number" class="smaller" min="0" name="posti_totali"></label>
             <span class='space'></span>
