@@ -14,27 +14,26 @@
     </head>
     <body>
         <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
-        <h1>Cerca</h1>
-        
-    <APPLET codebase="classes/" code="SearchApplet.class" width=350 height=200>
-        eh no...
-    </APPLET>
-        
+        <div class="centered">
+            <h1>Cerca</h1>
+            <applet code="search.SearchApplet" archive="/public_webapp/applet/SearchApplet.jar" width="700" height="700"/>
+        </div>
+           
         <script> 
-            var param = new Array();
-            function getReq(Array array[]){
+            //var param = new Array();
+            //function getReq(Array array[]){
                 
-                param = array;
+              //  param = array;
                 
-                var xmlhttp = new XMLHttpRequest();
+               // var xmlhttp = new XMLHttpRequest();
                 //aggiungi i parametri
-                var String req = ""+"reqServlet?";
-                xmlhttp.open("GET",req, true);
+                //var String req = ""+"reqServlet?";
+                //xmlhttp.open("GET",req, true);
                 
-                xmlhttp.send();
+                //xmlhttp.send();
                 
-                console.log("richiesta fatta!");
-            }
+                //console.log("richiesta fatta!");
+            //}
         </script>
     </body>
 </html>
