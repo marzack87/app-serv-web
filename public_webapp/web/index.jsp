@@ -15,26 +15,6 @@
     <body>
         <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
         <h1>Home</h1>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
-        <p>bla bla bla</p>
+        <p>...sta roba fa schifo...</p>
     </body>
 </html>
