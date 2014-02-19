@@ -16,11 +16,9 @@
         <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
         <h1>Cerca</h1>
         
-        <APPLET codebase="build/web/WEB-INF" code="lib/SearchApplet.class" 
-                archive="SearchApplet.jar"
-                width=650 height=500>
-            Applet failed to run. No Java plug-in was found. 
-        </APPLET>
+    <APPLET codebase="classes/" code="SearchApplet.class" width=350 height=200>
+        eh no...
+    </APPLET>
         
         <script> 
             var param = new Array();
@@ -34,6 +32,7 @@
                 xmlhttp.open("GET",req, true);
                 
                 xmlhttp.send();
+                
                 console.log("richiesta fatta!");
             }
         </script>
