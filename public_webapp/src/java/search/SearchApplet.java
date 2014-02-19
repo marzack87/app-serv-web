@@ -15,6 +15,7 @@ import javax.swing.*;
 //import netscape.javascript.JSObject;
 
 
+
 /**
  *
  * @author andreabuscarini
@@ -515,9 +516,10 @@ public class SearchApplet extends JApplet implements ActionListener{
                     for(int i=0; i<parameter.length; i++){
                         stamp = stamp + parameter[i] + " - ";
                     }
+                    
                     JTA_control.setText(stamp);
                     
-                    //JSObject.getWindow(this).eval("getReq("+parameter+");");
+                    //JSObject.getWindow(this).call(getReq, parameter);
                     
             }
         }
