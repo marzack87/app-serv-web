@@ -63,6 +63,7 @@
                 <label><input type="checkbox" name="spese_incluse" value="acqua"> Spese Acqua</label>
                 <label><input type="checkbox" name="spese_incluse" value="gas"> Spese Gas</label>
                 <label><input type="checkbox" name="spese_incluse" value="luce"> Spese Luce</label>
+                <label><input type="checkbox" name="spese_incluse" value="condominiali"> Spese Condominiali</label>
             </div>
         </form>
     </body>
