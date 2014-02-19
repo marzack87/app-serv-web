@@ -25,6 +25,7 @@ div.navbar {
     color:white;
     background:#333;
     margin-top: -5px;
+    z-index: 1;
 }
 
 div.navbar * {
@@ -117,6 +118,10 @@ input {
 input[type='radio']{   
     height: 12px;
  }
+ 
+ input[type='checkbox']{   
+    height: 12px;
+ }
 
 input.larger {
     width: 90%;
@@ -158,4 +163,10 @@ a {
     margin-left: -400px;
     padding: 10px;
     text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+span.space{
+    padding-right: 20px;
 }
