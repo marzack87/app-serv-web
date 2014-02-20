@@ -23,6 +23,7 @@
         <br>
         <div class="centered">
             <form id="annuncio" class="nuovo_annuncio" action="/public_webapp/NuovoAnnuncioServlet" method="POST">
+                <input type=”hidden” name=”user_name” value=”<%=user %>”>
             <label>Indirizzo: <input class="larger" type="text" name="indirizzo"></label>
             <span class='space'></span>
             <label>Civico: <input type="text" class="smaller" name="civico"></label>
