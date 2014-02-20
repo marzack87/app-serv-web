@@ -28,16 +28,19 @@
         </div>
         <br>
         <div class="centered">
-            <form id="foto" class="nuovo_annuncio" action="/public_webapp/AggiungiFoto" method="POST">
+            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiungiFoto" method="POST">
                 <br>
                 <div class="centered">
-                    <a class="text_big button" href="#" onclick="return add_photo();">+ aggiungi foto</a>
+                    <a class="text_big button bg_grey" href="#" onclick="return add_photo();">+ aggiungi foto</a>
                 </div>
                 <div id='foto_input' class="centered">
                     
                 </div>
                 <br>
             </form>
+            <br>
+            <a class="text_big button inLine" href="#" onclick="save_photos();">Salva le foto selezionate</a>
+            <a class="text_big button inLine bg_red" href="/public_webapp/jsp/user_home.jsp">Continua senza salvare</a>
         </div>
         <br>
         <br>
@@ -65,6 +68,11 @@
         
         function remove_photo(number){
             document.getElementById('file_' + number).remove();
+            return false;
+        }
+        
+        function save_photos(){
+            document.getElementById('foto_form').submit;
         }
     </script>
     
