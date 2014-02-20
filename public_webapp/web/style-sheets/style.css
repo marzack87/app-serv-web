@@ -196,3 +196,11 @@ span.space{
 .bg_red {
     background: tomato;
 }
+
+.bg_grey {
+    background: silver;
+}
+
+.inLine {
+    display: inline-block;
+}
