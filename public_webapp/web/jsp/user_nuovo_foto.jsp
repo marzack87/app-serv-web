@@ -31,9 +31,9 @@
             <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiuntaFotoServlet" method="POST">
                 <br>
                 <%
-                    String 
+                    String id_annuncio = "";
                     if (request.getAttribute("") != null) {
-                        
+                        id_annuncio = request.getAttribute("");
                     }
                 %>
                 <div class="centered">
