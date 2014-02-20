@@ -53,7 +53,7 @@
         function add_photo(){
             photos++;
             
-            var photo_input = '<div id="file_' + photos + '"><input type="file" name="file_' + photos + '" />';
+            var photo_input = '<div id="foto_' + photos + '"><input type="file" name="foto[]" />';
             photo_input += '<a class="button bg_red text_small" href="#" onclick="return remove_photo(' + photos + ');">rimuovi</a>';
             photo_input += '<br></div>';
             
@@ -67,7 +67,7 @@
         }
         
         function remove_photo(number){
-            document.getElementById('file_' + number).remove();
+            document.getElementById('foto_' + number).remove();
             return false;
         }
         
