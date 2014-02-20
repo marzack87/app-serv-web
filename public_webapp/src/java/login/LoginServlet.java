@@ -52,8 +52,8 @@ public class LoginServlet extends HttpServlet {
             String user = request.getParameter("user");
             String pwd = request.getParameter("pwd");
             
-            String path = request.getSession().getServletContext().getRealPath("/");
-            path = path+"users.xml";
+            String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
+            path = path+"/users.xml";
             
             File f = new File(path);
             if(f.exists() && !f.isDirectory())

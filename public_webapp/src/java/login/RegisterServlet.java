@@ -57,8 +57,9 @@ public class RegisterServlet extends HttpServlet {
             String surname = request.getParameter("surname");
             String phone = request.getParameter("phone");
             
-            String path = request.getSession().getServletContext().getRealPath("/");
-            path = path+"users.xml";
+            String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
+            path = path+"/users.xml";
+            
             if (checkDatabase(path))
             {
                 try {

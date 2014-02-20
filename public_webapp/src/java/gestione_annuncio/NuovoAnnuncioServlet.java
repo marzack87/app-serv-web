@@ -51,8 +51,9 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/user_nuovo.jsp");
         PrintWriter out= response.getWriter();
         
-        String path = request.getSession().getServletContext().getRealPath("/");
-        path = path+"home_db.xml";
+        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
+        path = path+"/home_db.xml";
+        
         if (checkDatabase(path))
         {
             try 
@@ -106,10 +107,14 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                             break;
                     }
                 }
-//                if (check_add_user(path, name, surname, phone, user, pwd))
-//                {
+                if (add_apartment(path, user, indirizzo, civico, citta, tipo_alloggio,
+                        tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
+                        terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali))
+                {
                     //Annuncio inserito correttamente
-//                }
+                    out.println("<div align=center><font color=red >Annuncio inserito correttamente.</font></div>");
+                    rd.include(request, response);
+                }
                   
             } catch (Exception ex) {
                 System.out.println(ex);
@@ -158,7 +163,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         }
     }
     
-    private void add_apartment(String pathToWrite, String user,String indirizzo,String civico,String citta,
+    private boolean add_apartment(String pathToWrite, String user,String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -205,6 +210,84 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         Text text4 = document.createTextNode(tipo_cucina);
         tipo_cucina_el.appendChild(text4);
         
+        Element bagni_el = document.createElement("Bagni");
+        root_user.appendChild(bagni_el);
+
+        Text text5 = document.createTextNode(bagni);
+        bagni_el.appendChild(text5);
+        
+        Element camere_lett_el = document.createElement("Camere_Letto");
+        root_user.appendChild(camere_lett_el);
+
+        Text text6 = document.createTextNode(camere_da_letto);
+        camere_lett_el.appendChild(text6);
+        
+        Element n_piano_el = document.createElement("N_Piano");
+        root_user.appendChild(n_piano_el);
+
+        Text text7 = document.createTextNode(n_piano);
+        n_piano_el.appendChild(text7);
+        
+        Element ascensore_el = document.createElement("Ascensore");
+        root_user.appendChild(ascensore_el);
+
+        Text text8 = document.createTextNode(ascensore);
+        ascensore_el.appendChild(text8);
+        
+        Element garage_el = document.createElement("Garage");
+        root_user.appendChild(garage_el);
+
+        Text text9 = document.createTextNode(garage);
+        garage_el.appendChild(text9);
+        
+        Element terrazzo_el = document.createElement("Terrazzo");
+        root_user.appendChild(terrazzo_el);
+
+        Text text10 = document.createTextNode(terrazzo);
+        terrazzo_el.appendChild(text10);
+        
+        Element posti_totali_el = document.createElement("Posti_Totali");
+        root_user.appendChild(posti_totali_el);
+
+        Text text11 = document.createTextNode(posti_totali);
+        posti_totali_el.appendChild(text11);
+        
+        Element posti_liberi_el = document.createElement("Posti_Liberi");
+        root_user.appendChild(posti_liberi_el);
+
+        Text text12 = document.createTextNode(posti_liberi);
+        posti_liberi_el.appendChild(text12);
+        
+        Element prezzo_posto_el = document.createElement("Prezzo_Posto");
+        root_user.appendChild(prezzo_posto_el);
+
+        Text text13 = document.createTextNode(prezzo_posto);
+        prezzo_posto_el.appendChild(text13);
+        
+        Element acqua_el = document.createElement("Spese_Acqua");
+        root_user.appendChild(acqua_el);
+
+        Text text14 = document.createTextNode(acqua);
+        acqua_el.appendChild(text14);
+        
+        Element gas_el = document.createElement("Spese_Gas");
+        root_user.appendChild(gas_el);
+
+        Text text15 = document.createTextNode(gas);
+        gas_el.appendChild(text15);
+        
+        Element luce_el = document.createElement("Spese_Luce");
+        root_user.appendChild(luce_el);
+
+        Text text16 = document.createTextNode(luce);
+        luce_el.appendChild(text16);
+        
+        Element spese_cond_el = document.createElement("Spese_Condominiali");
+        root_user.appendChild(spese_cond_el);
+
+        Text text17 = document.createTextNode(condominiali);
+        spese_cond_el.appendChild(text17);
+        
         DOMSource source = new DOMSource(document);
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -213,5 +296,6 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         StreamResult result = new StreamResult(pathToWrite);
         transformer.transform(source, result);
         
+        return true;
     }
 }
