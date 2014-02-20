@@ -28,8 +28,15 @@
         </div>
         <br>
         <div class="centered">
-            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiuntaFoto" method="POST">
+            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiuntaFotoServlet" method="POST">
                 <br>
+                <%
+                    String id_annuncio = "";
+                    if (request.getAttribute("id_apartment") != null) {
+                        id_annuncio = (String) request.getAttribute("id_apartment");
+                    }
+                %>
+                <input type="hidden" name="id_annuncio" value="<%= id_annuncio %>"/>
                 <div class="centered">
                     <a class="text_big button bg_grey" href="#" onclick="return add_photo();">+ aggiungi foto</a>
                 </div>

@@ -20,6 +20,10 @@
         <servlet-name>AggiuntaFoto</servlet-name>
         <servlet-class>gestione_annuncio.AggiuntaFoto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AggiuntaFotoServlet</servlet-name>
+        <servlet-class>gestione_annuncio.AggiuntaFotoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>AggiuntaFoto</servlet-name>
         <url-pattern>/AggiuntaFoto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AggiuntaFotoServlet</servlet-name>
+        <url-pattern>/AggiuntaFotoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

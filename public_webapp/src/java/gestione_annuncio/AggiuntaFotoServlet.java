@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author marco
  */
-public class AggiuntaFoto extends HttpServlet {
+public class AggiuntaFotoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class AggiuntaFoto extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AggiuntaFoto</title>");            
+            out.println("<title>Servlet AggiuntaFotoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AggiuntaFoto at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AggiuntaFotoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
