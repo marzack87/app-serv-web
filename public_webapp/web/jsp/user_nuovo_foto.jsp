@@ -46,7 +46,7 @@
                 <br>
             </form>
             <br>
-            <a class="text_big button inLine" href="#" onclick="save_photos();">Salva le foto selezionate</a>
+            <a class="text_big button inLine" href="#" onclick="return save_photos();">Salva le foto selezionate</a>
             <a class="text_big button inLine bg_red" href="/public_webapp/jsp/user_home.jsp">Continua senza salvare</a>
         </div>
         <br>
@@ -80,6 +80,7 @@
         
         function save_photos(){
             document.getElementById('foto_form').submit;
+            return false;
         }
     </script>
     
