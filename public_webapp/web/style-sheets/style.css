@@ -122,6 +122,13 @@ input[type='radio']{
     height: 12px;
  }
 
+ input[type='file']{   
+    border: none;
+    border-bottom: 1px solid silver;
+    border-radius: 0px;
+    display: inline-block;
+ }
+ 
 input.larger {
     width: 70%;
 }
@@ -180,4 +187,12 @@ div.centered {
 
 span.space{
     padding-right: 20px;
+}
+
+.text_green {
+    color: limegreen;
+}
+
+.bg_red {
+    background: tomato;
 }
