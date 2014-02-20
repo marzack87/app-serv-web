@@ -9,6 +9,7 @@ package gestione_annuncio;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -107,17 +108,23 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                             break;
                     }
                 }
-                if (add_apartment(path, user, indirizzo, civico, citta, tipo_alloggio,
+                String id_apartment = add_apartment(path, user, indirizzo, civico, citta, tipo_alloggio,
                         tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
-                        terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali))
+                        terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali);
+                
+                if (id_apartment != null)
                 {
                     //Annuncio inserito correttamente
-                    out.println("<div align=center><font color=red >Annuncio inserito correttamente.</font></div>");
+                    request.setAttribute("id_apartment", id_apartment);
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_addphotos.jsp");
+                    rd_forward.forward(request, response);
+                    
+                } else {
+                    out.println("<div align=center><font color=red >Errore inserimento annuncio.</font></div>");
                     rd.include(request, response);
                 }
                   
             } catch (Exception ex) {
-                System.out.println(ex);
                 out.println("<div align=center><font color=red >Errore nella creazionde dell'annuncio.</font></div>");
                 rd.include(request, response);
             }
@@ -163,7 +170,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         }
     }
     
-    private boolean add_apartment(String pathToWrite, String user,String indirizzo,String civico,String citta,
+    private String add_apartment(String pathToWrite, String user,String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -179,7 +186,14 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         Element root_user = document.createElement("Apartment");
         root_user.setAttribute("user_name", user);
         root.appendChild(root_user);
+        
+        String id_apartment = String.valueOf(UUID.randomUUID());
+        Element id_apartment_el = document.createElement("ID");
+        root_user.appendChild(id_apartment_el);
 
+        Text text_id = document.createTextNode(id_apartment);
+        id_apartment_el.appendChild(text_id);
+        
         Element indirizzo_el = document.createElement("Indirizzo");
         root_user.appendChild(indirizzo_el);
 
@@ -296,6 +310,6 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         StreamResult result = new StreamResult(pathToWrite);
         transformer.transform(source, result);
         
-        return true;
+        return id_apartment;
     }
 }
