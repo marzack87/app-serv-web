@@ -28,7 +28,7 @@
         </div>
         <br>
         <div class="centered">
-            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiungiFoto" method="POST">
+            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiuntaFoto" method="POST">
                 <br>
                 <div class="centered">
                     <a class="text_big button bg_grey" href="#" onclick="return add_photo();">+ aggiungi foto</a>
