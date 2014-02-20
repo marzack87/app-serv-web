@@ -32,10 +32,11 @@
                 <br>
                 <%
                     String id_annuncio = "";
-                    if (request.getAttribute("") != null) {
-                        id_annuncio = request.getAttribute("");
+                    if (request.getAttribute("id_apartment") != null) {
+                        id_annuncio = (String) request.getAttribute("id_apartment");
                     }
                 %>
+                <input type="hidden" name="id_annuncio" value="<%= id_annuncio %>"/>
                 <div class="centered">
                     <a class="text_big button bg_grey" href="#" onclick="return add_photo();">+ aggiungi foto</a>
                 </div>
