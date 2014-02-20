@@ -35,15 +35,15 @@
             <br>
             <div class="input_group" id="tipo_alloggio">
                 Tipologia:
-                <label><input type="radio" name="tipo_alloggio" value="Appartamento"> Appartamento</label>
-                <label><input type="radio" name="tipo_alloggio" value="Villetta"> Villetta</label>
-                <label><input type="radio" name="tipo_alloggio" value="Casa Indipendente"> Casa Indipendente</label>
+                <label><input type="radio" name="tipo_alloggio" value="0"> Appartamento</label>
+                <label><input type="radio" name="tipo_alloggio" value="1"> Villetta</label>
+                <label><input type="radio" name="tipo_alloggio" value="2"> Casa Indipendente</label>
             </div>
             <br>
             <div class="input_group" id="tipo_cucina">
                 Cucina:
-                <label><input type="radio" name="tipo_cucina" value="Abitabile"> Abitabile</label>
-                <label><input type="radio" name="tipo_cucina" value="Cucinotto"> Cucinotto</label>
+                <label><input type="radio" name="tipo_cucina" value="0"> Abitabile</label>
+                <label><input type="radio" name="tipo_cucina" value="1"> Cucinotto</label>
             </div>
             <label>N° Bagni: <input type="number" class="smaller" min="0" name="bagni"></label>
             <span class='space'></span>
@@ -51,11 +51,11 @@
             <span class='space'></span>
             <label>N° Piano: <input type="number" class="smaller" min="-1" name="n_piano" onchange="check_floor()"></label>
             <span class='space'></span>
-            <label style="display: inline"><input type="checkbox" name="ascensore" value="ascensore" disabled="true"> Ascensore</label>
+            <label style="display: inline"><input type="checkbox" name="ascensore" value="1" disabled="true"> Ascensore</label>
             <br>
-            <label style="display: inline"><input type="checkbox" name="garage" value="garage"> Garage</label>
+            <label style="display: inline"><input type="checkbox" name="garage" value="1"> Garage</label>
             <span class='space'></span>
-            <label style="display: inline"><input type="checkbox" name="terrazzo" value="terrazzo"> Terrazzo</label>
+            <label style="display: inline"><input type="checkbox" name="terrazzo" value="1"> Terrazzo</label>
             <hr>
             <label>Posti letto totali: <input type="number" class="smaller" min="0" name="posti_totali"></label>
             <span class='space'></span>
@@ -65,10 +65,10 @@
             <hr>
             <div class="input_group" id="spese_incluse">
                 Spese Incluse:
-                <label><input type="checkbox" name="spese_incluse" value="acqua"> Spese Acqua</label>
-                <label><input type="checkbox" name="spese_incluse" value="gas"> Spese Gas</label>
-                <label><input type="checkbox" name="spese_incluse" value="luce"> Spese Luce</label>
-                <label><input type="checkbox" name="spese_incluse" value="condominiali"> Spese Condominiali</label>
+                <label><input type="checkbox" name="spese_incluse" value="0"> Spese Acqua</label>
+                <label><input type="checkbox" name="spese_incluse" value="1"> Spese Gas</label>
+                <label><input type="checkbox" name="spese_incluse" value="2"> Spese Luce</label>
+                <label><input type="checkbox" name="spese_incluse" value="3"> Spese Condominiali</label>
             </div>
         </form>
         </div>
