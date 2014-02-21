@@ -17,10 +17,6 @@
         <servlet-class>search.SearchServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AggiuntaFoto</servlet-name>
-        <servlet-class>gestione_annuncio.AggiuntaFoto</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AggiuntaFotoServlet</servlet-name>
         <servlet-class>gestione_annuncio.AggiuntaFotoServlet</servlet-class>
     </servlet>
@@ -39,10 +35,6 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AggiuntaFoto</servlet-name>
-        <url-pattern>/AggiuntaFoto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AggiuntaFotoServlet</servlet-name>

@@ -79,6 +79,7 @@
         }
         
         function save_photos(){
+            alert('ciao');
             document.getElementById('foto_form').submit;
             return false;
         }
