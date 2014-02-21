@@ -6,12 +6,19 @@
 
 package gestione_annuncio;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.output.*;
 
 /**
  *
@@ -19,50 +26,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AggiuntaFotoServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AggiuntaFotoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AggiuntaFotoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
+    private boolean isMultipart;
+    private String filePath;
+    private int maxFileSize = 50 * 1024;
+    private int maxMemSize = 4 * 1024;
+    private File file ;
+    
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -74,7 +44,76 @@ public class AggiuntaFotoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        isMultipart = ServletFileUpload.isMultipartContent(request);
+      response.setContentType("text/html");
+      java.io.PrintWriter out = response.getWriter( );
+      if( !isMultipart ){
+         out.println("<html>");
+         out.println("<head>");
+         out.println("<title>Servlet upload</title>");  
+         out.println("</head>");
+         out.println("<body>");
+         out.println("<p>No file uploaded</p>"); 
+         out.println("</body>");
+         out.println("</html>");
+         return;
+      }
+      DiskFileItemFactory factory = new DiskFileItemFactory();
+      // maximum size that will be stored in memory
+      factory.setSizeThreshold(maxMemSize);
+      // Location to save data that is larger than maxMemSize.
+      
+      String path = request.getSession().getServletContext().getRealPath("/multimedia/");
+      
+      factory.setRepository(new File(path));
+
+      // Create a new file upload handler
+      ServletFileUpload upload = new ServletFileUpload(factory);
+      // maximum file size to be uploaded.
+      upload.setSizeMax( maxFileSize );
+
+      try{ 
+      // Parse the request to get file items.
+      List fileItems = upload.parseRequest(request);
+	
+      // Process the uploaded file items
+      Iterator i = fileItems.iterator();
+
+      out.println("<html>");
+      out.println("<head>");
+      out.println("<title>Servlet upload</title>");  
+      out.println("</head>");
+      out.println("<body>");
+      while ( i.hasNext () ) 
+      {
+         FileItem fi = (FileItem)i.next();
+         if ( !fi.isFormField () )	
+         {
+            // Get the uploaded file parameters
+            String fieldName = fi.getFieldName();
+            String fileName = fi.getName();
+            String contentType = fi.getContentType();
+            boolean isInMemory = fi.isInMemory();
+            long sizeInBytes = fi.getSize();
+            // Write the file
+            if( fileName.lastIndexOf("\\") >= 0 ){
+               file = new File( filePath + 
+               fileName.substring( fileName.lastIndexOf("\\"))) ;
+            }else{
+               file = new File( filePath + 
+               fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+            }
+            fi.write( file ) ;
+            out.println("Uploaded Filename: " + fileName + "<br>");
+         }
+      }
+      out.println("</body>");
+      out.println("</html>");
+   }catch(Exception ex) {
+       System.out.println(ex);
+   }
+        
     }
 
     /**

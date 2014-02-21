@@ -116,7 +116,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                 {
                     //Annuncio inserito correttamente
                     request.setAttribute("id_apartment", id_apartment);
-                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_addphotos.jsp");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_nuovo_foto.jsp");
                     rd_forward.forward(request, response);
                     
                 } else {

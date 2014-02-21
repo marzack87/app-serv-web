@@ -69,6 +69,7 @@
                 <label><input type="checkbox" name="spese_incluse" value="1"> Spese Gas</label>
                 <label><input type="checkbox" name="spese_incluse" value="2"> Spese Luce</label>
                 <label><input type="checkbox" name="spese_incluse" value="3"> Spese Condominiali</label>
+                <label><input type="checkbox" name="spese_incluse" value="4" onchange="return no_spese();"> NESSUNA</label>
             </div>
         </form>
         </div>
@@ -144,6 +145,34 @@
         
         function submit_form(){
             document.getElementById('annuncio').submit();
+        }
+        
+        function no_spese(){
+            var spese = document.getElementsByName('spese_incluse');
+            
+            if (spese[4].checked == true){
+                
+                spese[0].checked = false;
+                spese[1].checked = false;
+                spese[2].checked = false;
+                spese[3].checked = false;
+                
+                spese[0].disabled = true;
+                spese[1].disabled = true;
+                spese[2].disabled = true;
+                spese[3].disabled = true;
+                
+            } else {
+                
+                spese[0].disabled = false;
+                spese[1].disabled = false;
+                spese[2].disabled = false;
+                spese[3].disabled = false;
+                
+            }
+            
+            return false;
+            
         }
     </script>
     
