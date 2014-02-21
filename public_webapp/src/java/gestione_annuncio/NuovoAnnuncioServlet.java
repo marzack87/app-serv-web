@@ -91,6 +91,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                 String gas = "0";
                 String luce = "0";
                 String condominiali = "0";
+                String nessune_spese = "0";
                 
                 for (int i = 0; i < spese_incluse.length; i++) {
                     switch (Integer.parseInt(spese_incluse[i])) {
@@ -106,11 +107,14 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                         case 3:
                             condominiali = "1";
                             break;
+                        case 4:
+                            nessune_spese = "1";
+                            break;
                     }
                 }
                 String id_apartment = add_apartment(path, user, indirizzo, civico, citta, tipo_alloggio,
                         tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
-                        terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali);
+                        terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali,nessune_spese);
                 
                 if (id_apartment != null)
                 {
@@ -174,7 +178,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
-            String acqua,String gas,String luce,String condominiali) throws Exception {
+            String acqua,String gas,String luce,String condominiali, String nessune_spese) throws Exception {
         
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -301,6 +305,12 @@ public class NuovoAnnuncioServlet extends HttpServlet {
 
         Text text17 = document.createTextNode(condominiali);
         spese_cond_el.appendChild(text17);
+        
+        Element nessune_spese_el = document.createElement("Nessune_Spese");
+        root_user.appendChild(nessune_spese_el);
+
+        Text text18 = document.createTextNode(nessune_spese);
+        nessune_spese_el.appendChild(text18);
         
         DOMSource source = new DOMSource(document);
 
