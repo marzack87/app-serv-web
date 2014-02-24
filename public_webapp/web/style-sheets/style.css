@@ -152,11 +152,15 @@ a {
 }
 
 .text_small {
-    font-size: smaller;
+    font-size: small;
 }
 
 .text_big {
-    font-size: larger;
+    font-size: large;
+}
+
+.text_very_small {
+    font-size: x-small;
 }
 
 .text_very_big {

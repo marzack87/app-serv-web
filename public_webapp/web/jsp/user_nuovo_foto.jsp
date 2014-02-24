@@ -27,6 +27,10 @@
             Vuoi aggiungere qualche immagine all'annuncio?
         </div>
         <br>
+        <div class="text_very_small centered">
+            (N.B. è possibile caricare solo immagini di dimensione inferiore o uguale a 1 MB)
+        </div>
+        <br>
         <div class="centered">
             <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiuntaFotoServlet" method="POST" enctype="multipart/form-data">
                 <br>
@@ -60,15 +64,21 @@
         function add_photo(){
             photos++;
             
-            var photo_input = '<div id="foto_' + photos + '"><input type="file" name="foto[]" />';
-            photo_input += '<a class="button bg_red text_small" href="#" onclick="return remove_photo(' + photos + ');">rimuovi</a>';
-            photo_input += '<br></div>';
+            var new_div = document.createElement('div');
+            new_div.id = "foto_" + photos;
             
-            if (photos === 1) {
-                photo_input = '<br>' + photo_input;
-            }
+            var new_input = document.createElement('input');
+            new_input.type = "file";
+            new_input.name = "foto";
+            new_input.accept = "image/*";
             
-            document.getElementById("foto_input").innerHTML += photo_input;
+            var remove_input = document.createElement('span');
+            remove_input.innerHTML = '<a class="button bg_red text_small" href="#" onclick="return remove_photo(' + photos + ');">rimuovi</a>';
+            
+            new_div.appendChild(document.createElement('br'));
+            new_div.appendChild(new_input);
+            new_div.appendChild(remove_input);
+            document.getElementById("foto_input").appendChild(new_div);
             
             return false;
         }
