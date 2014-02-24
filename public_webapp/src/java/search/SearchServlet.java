@@ -15,13 +15,13 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
-import java.util.jar.Attributes;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -120,7 +120,7 @@ public class SearchServlet extends HttpServlet {
                     } else if (qName.equals("ID") && !jump_element)
                     {
                         ap_id = true;
-                    } else if (qName.equals("Address") && !jump_element)
+                    } else if (qName.equals("Indirizzo") && !jump_element)
                     {
                         ap_address = true;
                     } else if (qName.equals("Prezzo_Posto") && !jump_element)
@@ -157,7 +157,7 @@ public class SearchServlet extends HttpServlet {
                    }
                    if (ap_prezzo_posto){
                        int prezzo_apt = Integer.parseInt(new String(ch, start, length));
-                       int prezzo_search = Integer.parseInt(parameters[1]);
+                       int prezzo_search = (!parameters[1].equals("")) ? Integer.parseInt(parameters[1]) : 0;
                        aprt.prezzo = new String(ch, start, length);
                        ap_prezzo_posto = false;
                        if(!parameters[1].equals("") && prezzo_apt > prezzo_search)
@@ -167,7 +167,7 @@ public class SearchServlet extends HttpServlet {
                    }
                    if (ap_posti_liberi){
                        int posti_apt = Integer.parseInt(new String(ch, start, length));
-                       int posti_search = Integer.parseInt(parameters[2]);
+                       int posti_search = (!parameters[2].equals("")) ? Integer.parseInt(parameters[2]) : 0;
                        aprt.posti_liberi = new String(ch, start, length);
                        ap_posti_liberi = false;
                        if (!parameters[2].equals("") && posti_apt < posti_search)
@@ -177,7 +177,7 @@ public class SearchServlet extends HttpServlet {
                    }
                    if (ap_tipo_alloggio){
                        aprt.tipologia = new String(ch, start, length);
-                       ap_citta = false;
+                       ap_tipo_alloggio = false;
                        if (!parameters[3].equals("") && !parameters[3].equals(aprt.tipologia))
                        {
                            jump_element = true;

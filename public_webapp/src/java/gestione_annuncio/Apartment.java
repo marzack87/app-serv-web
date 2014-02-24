@@ -10,7 +10,7 @@ package gestione_annuncio;
  *
  * @author Piero
  */
-public class Apartment {
+public class Apartment implements java.io.Serializable {
     public String id_apartment;
     public String user_owner;
     public String address;
