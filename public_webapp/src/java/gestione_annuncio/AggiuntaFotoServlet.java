@@ -94,6 +94,8 @@ public class AggiuntaFotoServlet extends HttpServlet {
             String id_annuncio = "";
             String now = "";
             
+            ArrayList <String> images = new ArrayList<String>();
+            
             while ( i.hasNext () ) 
             {
                FileItem fi = (FileItem)i.next();
@@ -120,6 +122,9 @@ public class AggiuntaFotoServlet extends HttpServlet {
                   }
                   fi.write( file ) ;
                   out.println("Uploaded Filename: " + fileName + "<br>");
+                  
+                  images.add(filePath + "/" + fileName);
+                  
                } else {
                    if (fi.getFieldName().equals("id_annuncio")){
                       id_annuncio = fi.getString();
