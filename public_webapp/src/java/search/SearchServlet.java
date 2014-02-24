@@ -115,6 +115,7 @@ public class SearchServlet extends HttpServlet {
                     {
                         aprt = new Apartment();
                         aprt.user_owner = attributes.getValue("user_name");
+                        aprt.img_url = "";
                         jump_element = false;
                         
                     } else if (qName.equals("ID") && !jump_element)
@@ -150,7 +151,8 @@ public class SearchServlet extends HttpServlet {
                    if (ap_address){
                        aprt.address = new String(ch, start, length);
                        ap_address = false;
-                       if (!parameters[0].equals("") && !aprt.address.equalsIgnoreCase(parameters[0]))
+                       
+                       if (!parameters[0].equals("") && !aprt.address.toLowerCase().contains(parameters[0].toLowerCase()))
                        {
                            jump_element = true;
                        }
