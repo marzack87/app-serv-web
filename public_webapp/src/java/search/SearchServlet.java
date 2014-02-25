@@ -87,6 +87,7 @@ public class SearchServlet extends HttpServlet {
                 boolean ap_posti_liberi = false;
                 boolean ap_prezzo_posto = false;
                 boolean ap_tipo_alloggio = false;
+                boolean ap_image = false;
                 
                 /*
                 boolean ap_tipo_cucina = false;
@@ -115,6 +116,7 @@ public class SearchServlet extends HttpServlet {
                     {
                         aprt = new Apartment();
                         aprt.user_owner = attributes.getValue("user_name");
+                        aprt.img_url = new ArrayList<String> ();
                         jump_element = false;
                         
                     } else if (qName.equals("ID") && !jump_element)
@@ -138,7 +140,10 @@ public class SearchServlet extends HttpServlet {
                     } else if (qName.equals("Tipo_Alloggio") && !jump_element)
                     {
                         ap_tipo_alloggio = true;
-                    }
+                    } else if (qName.equals("Image") && !jump_element)
+                    {
+                        ap_image = true;
+                    } 
                 }
 
                public void characters(char ch[], int start, int length) throws SAXException {
@@ -193,12 +198,19 @@ public class SearchServlet extends HttpServlet {
                        aprt.citta = new String(ch, start, length);
                        ap_citta = false;
                    }
+                   if (ap_image){
+                       aprt.img_url.add(new String(ch, start, length));
+                   }
                 }
                                 
                 public void endElement(String uri, String localName,
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
+                    if (qName.equals("Images"))
+                    {
+                        ap_image = false;
+                    }
                     if (qName.equals("Apartment"))
                     {
                        if (!jump_element)
