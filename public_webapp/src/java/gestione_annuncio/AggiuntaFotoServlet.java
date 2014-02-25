@@ -123,7 +123,8 @@ public class AggiuntaFotoServlet extends HttpServlet {
                   
                   java.util.Date date= new java.util.Date();
                   now = new Timestamp(date.getTime()).toString();
-                  // Get the uploaded file parameters
+                  now = now.replace(" ", "_"); 
+                 // Get the uploaded file parameters
                   String fieldName = fi.getFieldName();
                   String fileExt = FilenameUtils.getExtension(fi.getName());
                   String fileName =  id_annuncio + "_" + index + "_" + now + "." + fileExt;
