@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home Page</title>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>
@@ -36,7 +36,7 @@
         </p>
         <br>
         <div class='centered'>
-            <a href="/public_webapp/jsp/login.jsp" class="button inLine fixed_size">
+            <a href="/public_webapp/jsp/cerca.jsp" class="button inLine fixed_size">
                 <span class="text_very_big">CERCA</span>
                 <br> un annuncio
             </a>
