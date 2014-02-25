@@ -9,11 +9,22 @@ package gestione_annuncio;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
+import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -21,6 +32,13 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.output.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -133,6 +151,37 @@ public class AggiuntaFotoServlet extends HttpServlet {
             }
             out.println("</body>");
             out.println("</html>");
+            
+            //Se è arrivato qui vuol dire che è riuscito a caricare correttamente le foto
+            //Quindi ora le aggiungo nel rispettivo annuncio
+            String pathApartment_db = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
+            pathApartment_db = pathApartment_db+"/home_db.xml";
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/user_nuovo_foto.jsp");
+            PrintWriter out_response = response.getWriter();
+            
+            if (checkDatabase(pathApartment_db))
+            {
+                int added = addImages(images, pathApartment_db, id_annuncio);
+                if (added == 0)
+                {
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_home.jsp");
+                    rd_forward.forward(request, response);
+                    
+                } else if (added == 1)
+                {
+                    out_response.println("<div align=center><font color=red >Nessun annuncio trovato con quell'id.</font></div>");
+                    rd.include(request, response);
+                } else if (added == 2)
+                {
+                    out_response.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
+                    rd.include(request, response);
+                }
+            } else {
+                out_response.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
+                rd.include(request, response);
+            }
+            
+            
          }catch(Exception ex) {
              out.println("<html>");
              out.println("<head>");
@@ -145,15 +194,78 @@ public class AggiuntaFotoServlet extends HttpServlet {
          }
         
     }
+    
+    private int addImages(ArrayList <String> images, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException 
+    {
+        try
+        {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(pathToWrite);
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+            //Prendo tutti gli apartment:
+            NodeList apartments = document.getElementsByTagName("Apartment");
+
+            for (int i = 0; i < apartments.getLength(); i++)
+            {
+                Node node = apartments.item(i);
+                NodeList list = node.getChildNodes();
+                boolean find = false;
+                for (int k = 0; k < list.getLength(); k++)
+                {
+                    if ("ID".equals(node.getNodeName()))
+                    {
+                        if (node.getTextContent().equals(apartment_id))
+                        {
+                            find = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (find)
+                {
+                    Element imges_node = document.createElement("Images");
+                    node.appendChild(imges_node);
+
+                    for (int j = 0; j < images.size(); j++)
+                    {
+                        Element img = document.createElement("Image");
+                        imges_node.appendChild(img);
+                        Text text_img = document.createTextNode(images.get(j));
+                        img.appendChild(text_img);
+                    }
+
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(document);
+                    StreamResult result = new StreamResult(new File(pathToWrite));
+                    transformer.transform(source, result);
+                    
+                    return 0;
+                }
+            }
+            
+            return 1;
+        
+        } catch (Exception ex)
+        {
+            return 2;
+        }
+        
+    }
+    
+    private boolean checkDatabase (String path)
+    {
+        File f = new File(path);
+        if(f.exists() && !f.isDirectory())
+        {
+            //Esiste il database utenti, controllo se è presente l'utente
+            return true;
+        } else {
+            //Non esiste il database quindi è la prima registrazione e va creato
+            return false;
+        }
+    }
 
 }
