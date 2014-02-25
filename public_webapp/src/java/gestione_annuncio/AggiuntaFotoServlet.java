@@ -213,11 +213,14 @@ public class AggiuntaFotoServlet extends HttpServlet {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    if ("ID".equals(node.getNodeName()))
+                    System.out.println(list.item(k).getNodeName());
+                    if ("ID".equals(list.item(k).getNodeName()))
                     {
-                        if (node.getTextContent().equals(apartment_id))
+                        if (list.item(k).getTextContent().equals(apartment_id))
                         {
                             find = true;
+                            break;
+                        } else {
                             break;
                         }
                     }
@@ -238,6 +241,7 @@ public class AggiuntaFotoServlet extends HttpServlet {
 
                     TransformerFactory transformerFactory = TransformerFactory.newInstance();
                     Transformer transformer = transformerFactory.newTransformer();
+                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                     DOMSource source = new DOMSource(document);
                     StreamResult result = new StreamResult(new File(pathToWrite));
                     transformer.transform(source, result);
