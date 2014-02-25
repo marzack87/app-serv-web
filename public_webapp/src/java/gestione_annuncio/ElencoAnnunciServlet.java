@@ -41,7 +41,9 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         
                         ArrayList<Apartment> apartments = searchXMLForUser(path,(String) session.getAttribute("user"));
                         
-                        
+                        request.setAttribute("apartments_list", apartments);
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_elenco_annunci.jsp");
+                        rd_forward.forward(request, response);
                         
 		} catch (Exception e) {
 			e.printStackTrace();
