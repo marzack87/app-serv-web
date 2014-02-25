@@ -36,18 +36,4 @@ public class Apartment implements java.io.Serializable {
     public String spese_cond;
     public String ness_spesa;
     
-    
-    
-    //Le immagini andranno messe in un array di stringhe
 }
-
-/*
-<Apartments>
-
-
-<Images>
-<Image>/Users/Piero/NetBeansProjects/app-serv-web_website/public_webapp/build/web/multimedia/photos/ea7b9b93-2bfc-4c68-8768-1ba878bae9a5_1_2014-02-25 16:14:57.867.png</Image>
-</Images>
-</Apartment>
-</Apartments>
-*/
