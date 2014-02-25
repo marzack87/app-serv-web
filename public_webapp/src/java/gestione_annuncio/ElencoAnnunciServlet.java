@@ -44,6 +44,8 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         if (apartments.size() > 0)
                         {
                             //
+                        } else {
+                            
                         }
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -19,11 +19,11 @@
         </div>
         <p class="italic">
             Sei un giovane teenager che è appena scappato di casa perchè i tuoi genitori sono
-            cattivi e si rifiutano di comprarti l'iPhone 5S e si ostinano a dirti cosa devi fare?    
+            cattivi perchè si rifiutano di comprarti l'iPhone 5S e si ostinano a dirti cosa devi fare?    
         </p>
         <p>
             Questo è il sito giusto per te! Qui potrai trovare tantissimi annunci di posti immaginari
-            dove ti puoi rifugiare per cercare di farti una vita tutta tua, senza vecchiacci che ti
+            dove ti puoi rifugiare per cercare di farti una vita tutta tua, senza i vecchiacci che ti
             rompono!
         </p>
         <p class="italic">
