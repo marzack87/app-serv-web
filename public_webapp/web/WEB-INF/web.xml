@@ -24,6 +24,10 @@
         <servlet-name>ElencoAnnunciServlet</servlet-name>
         <servlet-class>gestione_annuncio.ElencoAnnunciServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AnnuncioServlet</servlet-name>
+        <servlet-class>search.AnnuncioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ElencoAnnunciServlet</servlet-name>
         <url-pattern>/ElencoAnnunciServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnnuncioServlet</servlet-name>
+        <url-pattern>/AnnuncioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
