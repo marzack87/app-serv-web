@@ -175,6 +175,15 @@ div.centered {
     text-align: center;
 }
 
+p {
+    text-align: justify;
+    padding: 10px 200px 10px 200px;
+}
+
+.italic {
+    font-style: italic;
+}
+
 .nuovo_annuncio {
     border: 2px solid silver;
     border-radius: 10px;
@@ -207,4 +216,8 @@ span.space{
 
 .inLine {
     display: inline-block;
+}
+
+.fixed_size {
+    width: 250px;
 }
