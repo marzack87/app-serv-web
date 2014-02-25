@@ -4,16 +4,14 @@
  * and open the template in the editor.
  */
 
-package search;
+package gestione_annuncio;
 
-import gestione_annuncio.Apartment;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,42 +27,30 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @author Piero
  */
-public class SearchServlet extends HttpServlet {
+public class ElencoAnnunciServlet extends HttpServlet {
     
-    /**
-	 * Get a String-object from the applet and send it back.
-	 */
-	public void doPost(
+    	public void doGet(
 		HttpServletRequest request,
 		HttpServletResponse response)
 		throws ServletException, IOException {
 		try {
-			response.setContentType("application/x-java-serialized-object");
-
-			// read a String-object from applet
-			// instead of a String-object, you can transmit any object, which
-			// is known to the servlet and to the applet
-			InputStream in = request.getInputStream();
-			ObjectInputStream inputFromApplet = new ObjectInputStream(in);
-                        
+			response.setContentType("text/html");
+       
                         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
                         path = path+"/home_db.xml";
-			String[] parameter = (String[]) inputFromApplet.readObject();
                         
-                        ArrayList<Apartment> apartments = searchXML(path,parameter);
-			// echo it to the applet
-			OutputStream outstr = response.getOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(outstr);
-			oos.writeObject(apartments);
-			oos.flush();
-			oos.close();
-
+                        ArrayList<Apartment> apartments = searchXMLForUser(path,request.getParameter("user"));
+                        
+                        if (apartments.size() > 0)
+                        {
+                            //
+                        }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
         
-        public ArrayList<Apartment> searchXML (String path,final String [] parameters)
+    public ArrayList<Apartment> searchXMLForUser (String path, final String user_name)
         {
             final ArrayList<Apartment> list = new ArrayList<Apartment>();
             
@@ -87,8 +73,6 @@ public class SearchServlet extends HttpServlet {
                 boolean ap_posti_liberi = false;
                 boolean ap_prezzo_posto = false;
                 boolean ap_tipo_alloggio = false;
-                
-                /*
                 boolean ap_tipo_cucina = false;
                 boolean ap_bagni = false;
                 boolean ap_cam_letto = false;
@@ -102,7 +86,7 @@ public class SearchServlet extends HttpServlet {
                 boolean ap_spese_luce = false;
                 boolean ap_spese_cond = false;
                 boolean ap_nessuna_spesa = false;
-                */
+                boolean ap_image = false;
                 
                 boolean jump_element = false;
                 
@@ -115,7 +99,13 @@ public class SearchServlet extends HttpServlet {
                     {
                         aprt = new Apartment();
                         aprt.user_owner = attributes.getValue("user_name");
+                        aprt.img_url = new ArrayList<String> ();
                         jump_element = false;
+                        if (!attributes.getValue("user_name").equals(user_name))
+                        {
+                            jump_element = true;
+                        }
+                        
                         
                     } else if (qName.equals("ID") && !jump_element)
                     {
@@ -138,6 +128,49 @@ public class SearchServlet extends HttpServlet {
                     } else if (qName.equals("Tipo_Alloggio") && !jump_element)
                     {
                         ap_tipo_alloggio = true;
+                    } else if (qName.equals("Tipo_Cucina") && !jump_element)
+                    {
+                        ap_tipo_cucina = true;
+                    } else if (qName.equals("Bagni") && !jump_element)
+                    {
+                        ap_bagni = true;
+                    } else if (qName.equals("Camere_Letto") && !jump_element)
+                    {
+                        ap_cam_letto = true;
+                    } else if (qName.equals("N_Piano") && !jump_element)
+                    {
+                        ap_piano = true;
+                    } else if (qName.equals("Ascensore") && !jump_element)
+                    {
+                        ap_ascensore = true;
+                    } else if (qName.equals("Garage") && !jump_element)
+                    {
+                        ap_garage = true;
+                    } else if (qName.equals("Terrazzo") && !jump_element)
+                    {
+                        ap_terrazzo = true;
+                    } else if (qName.equals("Posti_Totali") && !jump_element)
+                    {
+                        ap_posti_tot = true;
+                    } else if (qName.equals("Spese_Acqua") && !jump_element)
+                    {
+                        ap_spese_acqua = true;
+                    } else if (qName.equals("Spese_Gas") && !jump_element)
+                    {
+                        ap_spese_gas = true;
+                    } else if (qName.equals("Spese_Luce") && !jump_element)
+                    {
+                        ap_spese_luce = true;
+                    } else if (qName.equals("Spese_Condominiali") && !jump_element)
+                    {
+                        ap_spese_cond = true;
+                    }
+                    else if (qName.equals("Nessune_Spese") && !jump_element)
+                    {
+                        ap_nessuna_spesa = true;
+                    } else if (qName.equals("Image") && !jump_element)
+                    {
+                        ap_image = true;
                     }
                 }
 
@@ -150,39 +183,18 @@ public class SearchServlet extends HttpServlet {
                    if (ap_address){
                        aprt.address = new String(ch, start, length);
                        ap_address = false;
-                       
-                       if (!parameters[0].equals("") && !aprt.address.toLowerCase().contains(parameters[0].toLowerCase()))
-                       {
-                           jump_element = true;
-                       }
                    }
                    if (ap_prezzo_posto){
-                       int prezzo_apt = Integer.parseInt(new String(ch, start, length));
-                       int prezzo_search = (!parameters[1].equals("")) ? Integer.parseInt(parameters[1]) : 0;
                        aprt.prezzo = new String(ch, start, length);
                        ap_prezzo_posto = false;
-                       if(!parameters[1].equals("") && prezzo_apt > prezzo_search)
-                       {
-                           jump_element = true;
-                       }
                    }
                    if (ap_posti_liberi){
-                       int posti_apt = Integer.parseInt(new String(ch, start, length));
-                       int posti_search = (!parameters[2].equals("")) ? Integer.parseInt(parameters[2]) : 0;
                        aprt.posti_liberi = new String(ch, start, length);
                        ap_posti_liberi = false;
-                       if (!parameters[2].equals("") && posti_apt < posti_search)
-                       {
-                           jump_element = true;
-                       }
                    }
                    if (ap_tipo_alloggio){
                        aprt.tipologia = new String(ch, start, length);
                        ap_tipo_alloggio = false;
-                       if (!parameters[3].equals("") && !parameters[3].equals(aprt.tipologia))
-                       {
-                           jump_element = true;
-                       }
                        
                    }
                    if (ap_civico){
@@ -193,12 +205,71 @@ public class SearchServlet extends HttpServlet {
                        aprt.citta = new String(ch, start, length);
                        ap_citta = false;
                    }
+                   if (ap_tipo_cucina){
+                       aprt.tipo_cucina = new String(ch, start, length);
+                       ap_tipo_cucina = false;
+                   }
+                   if (ap_bagni){
+                       aprt.bagni = new String(ch, start, length);
+                       ap_bagni = false;
+                   }
+                   if (ap_cam_letto){
+                       aprt.camere_letto = new String(ch, start, length);
+                       ap_cam_letto = false;
+                   }
+                   if (ap_piano){
+                       aprt.n_piano = new String(ch, start, length);
+                       ap_piano = false;
+                   }
+                   if (ap_ascensore){
+                       aprt.ascensore = new String(ch, start, length);
+                       ap_ascensore = false;
+                   }
+                   if (ap_garage){
+                       aprt.garage = new String(ch, start, length);
+                       ap_garage = false;
+                   }
+                   if (ap_terrazzo){
+                       aprt.terrazzo = new String(ch, start, length);
+                       ap_terrazzo = false;
+                   }
+                   if (ap_posti_tot){
+                       aprt.posti_totali = new String(ch, start, length);
+                       ap_posti_tot = false;
+                   }
+                   if (ap_spese_acqua){
+                       aprt.spese_acqua = new String(ch, start, length);
+                       ap_spese_acqua = false;
+                   }
+                   if (ap_spese_gas){
+                       aprt.spese_gas = new String(ch, start, length);
+                       ap_spese_gas = false;
+                   }
+                   if (ap_spese_luce){
+                       aprt.spese_luce = new String(ch, start, length);
+                       ap_spese_luce = false;
+                   }
+                   if (ap_spese_cond){
+                       aprt.spese_cond = new String(ch, start, length);
+                       ap_spese_cond = false;
+                   }
+                   if (ap_nessuna_spesa){
+                       aprt.ness_spesa = new String(ch, start, length);
+                       ap_nessuna_spesa = false;
+                   }
+                   if (ap_image){
+                       aprt.img_url.add(new String(ch, start, length));
+                   }
                 }
                                 
                 public void endElement(String uri, String localName,
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
+                    if (qName.equals("Images"))
+                    {
+                        ap_image = false;
+                    }
                     if (qName.equals("Apartment"))
                     {
                        if (!jump_element)
@@ -220,9 +291,9 @@ public class SearchServlet extends HttpServlet {
 
             } catch (Exception e) {
               e.printStackTrace();
+              System.out.println("erroe: "+e);
             }
             
               return list;
         }
-
 }

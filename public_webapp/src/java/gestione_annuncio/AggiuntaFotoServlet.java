@@ -213,7 +213,6 @@ public class AggiuntaFotoServlet extends HttpServlet {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    System.out.println(list.item(k).getNodeName());
                     if ("ID".equals(list.item(k).getNodeName()))
                     {
                         if (list.item(k).getTextContent().equals(apartment_id))

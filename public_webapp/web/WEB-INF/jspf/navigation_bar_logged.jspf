@@ -27,7 +27,7 @@
             <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/jsp/user_modifica.jsp" class="item">Modifica Annunci</a>
+            <a href="/public_webapp/ElencoAnnunciServlet?user=<%=user %>" class="item">Modifica Annunci</a>
         </li>
     </ul>
     <div class="login">
