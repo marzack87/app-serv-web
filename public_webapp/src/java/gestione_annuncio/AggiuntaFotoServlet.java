@@ -141,7 +141,7 @@ public class AggiuntaFotoServlet extends HttpServlet {
                   fi.write( file ) ;
                   out.println("Uploaded Filename: " + fileName + "<br>");
                   
-                  images.add(filePath + "/" + fileName);
+                  images.add(fileName);
                   
                } else {
                    if (fi.getFieldName().equals("id_annuncio")){
