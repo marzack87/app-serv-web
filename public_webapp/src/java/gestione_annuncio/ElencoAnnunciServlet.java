@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -36,7 +37,9 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
                         path = path+"/home_db.xml";
                         
-                        ArrayList<Apartment> apartments = searchXMLForUser(path,request.getParameter("user"));
+                        HttpSession session = request.getSession();
+                        
+                        ArrayList<Apartment> apartments = searchXMLForUser(path,session.getAttribute("user"));
                         
                         
                         
