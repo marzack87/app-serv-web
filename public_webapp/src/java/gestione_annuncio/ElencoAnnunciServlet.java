@@ -6,13 +6,10 @@
 
 package gestione_annuncio;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,12 +38,8 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         
                         ArrayList<Apartment> apartments = searchXMLForUser(path,request.getParameter("user"));
                         
-                        if (apartments.size() > 0)
-                        {
-                            //
-                        } else {
-                            
-                        }
+                        
+                        
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
