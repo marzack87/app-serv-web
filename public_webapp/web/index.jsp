@@ -42,7 +42,7 @@
             </a>
             <a href="/public_webapp/jsp/login.jsp" class="button inLine fixed_size">
                 <span class="text_very_big">ACCEDI</span>
-                <br> e inserisci/modifica i tuoi annunci
+                <br> per gestire i tuoi annunci
             </a>
         </div>
         
