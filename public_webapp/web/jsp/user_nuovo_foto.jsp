@@ -36,8 +36,8 @@
                 <br>
                 <%
                     String id_annuncio = "";
-                    if (request.getParameter("id_apartment") != null) {
-                        id_annuncio = request.getParameter("id_apartment");
+                    if (request.getAttribute("id_apartment") != null) {
+                        id_annuncio = (String) request.getAttribute("id_apartment");
                     }
                 %>
                 <input type="hidden" name="id_annuncio" value="<%= id_annuncio %>"/>
