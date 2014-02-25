@@ -39,7 +39,7 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         
                         HttpSession session = request.getSession();
                         
-                        ArrayList<Apartment> apartments = searchXMLForUser(path,session.getAttribute("user"));
+                        ArrayList<Apartment> apartments = searchXMLForUser(path,(String) session.getAttribute("user"));
                         
                         
                         
