@@ -40,6 +40,7 @@ public class AnnuncioServlet extends HttpServlet {
                         ArrayList<Apartment> apartments = searchApartmentForID(path,request.getParameter("id_apartment"));
                         
                         request.setAttribute("apartments_list", apartments);
+                        request.setAttribute("from", "search");
                         RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_elenco_annunci.jsp");
                         rd_forward.forward(request, response);
                         

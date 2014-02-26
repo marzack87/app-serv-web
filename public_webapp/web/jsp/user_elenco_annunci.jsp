@@ -7,15 +7,34 @@
 <%@page import="gestione_annuncio.Apartment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+            String from = "";
+            if (request.getAttribute("from") != null) {
+                from = (String) request.getAttribute("from");
+            }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Elenco Annunci</title>
+        <% if (from.equals("search")){ %>
+            <title>Scheda Annuncio</title>
+        <% } else if (from.equals("user")){ %>
+            <title>Elenco Annunci</title>
+        <% } %>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>
-        <%@ include file="/WEB-INF/jspf/navigation_bar_logged.jspf" %>
+        
+        <% if (from.equals("search")){ %>
+            <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
+        <% } else if (from.equals("user")){ %>
+            <%@ include file="/WEB-INF/jspf/navigation_bar_logged.jspf" %>
+        <% } %>
+        
+        
         
         <% 
             
@@ -196,8 +215,12 @@
             <% } %>
             
             <br>
+            <% if (from.equals("user")){ %>
+            
             <a class="text_big button inLine" href="#">Modifica</a>
             <a class="text_big button inLine bg_red" href="#">Elimina</a>
+            
+            <% } %>
             <br>
             <br>
             
