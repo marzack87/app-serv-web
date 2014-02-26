@@ -50,8 +50,8 @@
                 <br>
             </form>
             <br>
-            <a class="text_big button inLine" href="#" onclick="return save_photos();">Salva le foto selezionate</a>
-            <a class="text_big button inLine bg_red" href="/public_webapp/jsp/user_home.jsp">Continua senza salvare</a>
+            <a class="text_big button inLine" href="#" onclick="return save_photos();">Aggiungi le foto selezionate</a>
+            <a class="text_big button inLine bg_red" href="/public_webapp/jsp/user_home.jsp">Prosegui senza inserire foto</a>
         </div>
         <br>
         <br>
