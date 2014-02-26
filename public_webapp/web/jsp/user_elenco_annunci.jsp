@@ -27,7 +27,12 @@
             if (apartments_list.size() == 0){
                 
             %>
-            <p>Non sono presenti annunci per questo utente.</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="centered text_big">NESSUN ANNUNCIO PRESENTE</div>
             <%
                 
             } else {
@@ -143,6 +148,19 @@
                     } else {
                         spese = "SPESE INCLUSE:" + spese;
                     }
+                    
+                    String images = "";
+                    boolean first = true;
+                    for (String image : apartments_list.get(i).img_url)
+                    {
+                        if (image.equals("\n")) continue;
+                        if (first){
+                            first = false;
+                        } else {
+                            images += "#";
+                        }
+                        images += image;
+                    }
         %>
         
         <div class="centered">
@@ -161,6 +179,22 @@
             <div class="text_small">
                 <%= spese %>
             </div>
+            
+            
+            <% if (apartments_list.get(i).img_url.size() > 0){ %>
+            
+            <br>
+            <applet code="visione_foto.viewApplet" archive="/public_webapp/applet/viewApplet.jar" width="400" height="400">
+                <param name="parameter" value="<%= images %>">
+                <div class="text_red text_big">Attenzione! Java non supportato dal browser</div>
+            </applet>
+            
+            <% } else { %>
+            
+            <img class="no_photo" src ="/public_webapp/multimedia/photos/no_foto.png">
+            
+            <% } %>
+            
             <br>
             <a class="text_big button inLine" href="#">Modifica</a>
             <a class="text_big button inLine bg_red" href="#">Elimina</a>

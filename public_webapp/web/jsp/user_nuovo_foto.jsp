@@ -28,7 +28,7 @@
         </div>
         <br>
         <div class="text_very_small centered">
-            (N.B. è possibile caricare solo immagini di dimensione inferiore o uguale a 1 MB)
+            (N.B. è possibile caricare solo immagini di dimensione inferiore o uguale a 10 MB)
         </div>
         <br>
         <div class="centered">

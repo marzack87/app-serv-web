@@ -10,6 +10,7 @@ import gestione_annuncio.Apartment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,13 +39,10 @@ public class AnnuncioServlet extends HttpServlet {
                         
                         ArrayList<Apartment> apartments = searchApartmentForID(path,request.getParameter("id_apartment"));
                         
-                        if (apartments.size() > 0)
-                        {
-                            Apartment apartment = apartments.get(0);
-                            System.out.println(apartment.address);
-                        } else {
-                            //Annuncio non trovato;
-                        }
+                        request.setAttribute("apartments_list", apartments);
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_elenco_annunci.jsp");
+                        rd_forward.forward(request, response);
+                        
 		} catch (Exception e) {
 			e.printStackTrace();
                         System.out.println("erroe: "+e);
