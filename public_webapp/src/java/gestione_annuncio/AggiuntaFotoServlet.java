@@ -67,17 +67,10 @@ public class AggiuntaFotoServlet extends HttpServlet {
         
         isMultipart = ServletFileUpload.isMultipartContent(request);
         response.setContentType("text/html");
-        java.io.PrintWriter out = response.getWriter( );
         if( !isMultipart ){
-           out.println("<html>");
-           out.println("<head>");
-           out.println("<title>Servlet upload</title>");  
-           out.println("</head>");
-           out.println("<body>");
-           out.println("<p>No file uploaded</p>"); 
-           out.println("</body>");
-           out.println("</html>");
-           return;
+            request.setAttribute("msg", "Errore nel caricamento delle foto");
+            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+            rd_forward.forward(request, response);
         }
         
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -101,12 +94,6 @@ public class AggiuntaFotoServlet extends HttpServlet {
             // Process the uploaded file items
             Iterator i = fileItems.iterator();
 
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet upload</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            
             filePath = path;
             int index = 0;
             String id_annuncio = "";
@@ -140,7 +127,6 @@ public class AggiuntaFotoServlet extends HttpServlet {
                      fileName.substring(fileName.lastIndexOf("\\")+1)) ;
                   }
                   fi.write( file ) ;
-                  out.println("Uploaded Filename: " + fileName + "<br>");
                   
                   images.add(fileName);
                   
@@ -150,8 +136,6 @@ public class AggiuntaFotoServlet extends HttpServlet {
                   }
                }
             }
-            out.println("</body>");
-            out.println("</html>");
             
             //Se è arrivato qui vuol dire che è riuscito a caricare correttamente le foto
             //Quindi ora le aggiungo nel rispettivo annuncio
@@ -184,14 +168,9 @@ public class AggiuntaFotoServlet extends HttpServlet {
             
             
          }catch(Exception ex) {
-             out.println("<html>");
-             out.println("<head>");
-             out.println("<title>Servlet upload</title>");  
-             out.println("</head>");
-             out.println("<body>");
-             out.println("<p>" + ex + "</p>"); 
-             out.println("</body>");
-             out.println("</html>");
+            request.setAttribute("msg", ex);
+            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+            rd_forward.forward(request, response);
          }
         
     }
