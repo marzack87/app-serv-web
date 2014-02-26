@@ -115,7 +115,7 @@
                     } else {
                         posti += " liberi. ";
                     }
-                    posti += apartments_list.get(i).prezzo + " € per posto letto.";
+                    posti += apartments_list.get(i).prezzo + " €/mese per posto letto.";
                     
                     String spese = "";
                     

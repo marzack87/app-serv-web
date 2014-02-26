@@ -61,7 +61,7 @@
             <span class='space'></span>
             <label>Posti Liberi: <input type="number" class="smaller" min="0" name="posti_liberi"></label>
             <span class='space'></span>
-            <label>Prezzo per posto letto: <input type="number" class="smaller" min="0" name="prezzo_posto"> €</label>
+            <label>Prezzo per posto letto: <input type="number" class="smaller" min="0" name="prezzo_posto"> € al mese</label>
             <hr>
             <div class="input_group" id="spese_incluse">
                 Spese Incluse:
