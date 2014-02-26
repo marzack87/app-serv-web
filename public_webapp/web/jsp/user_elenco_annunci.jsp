@@ -165,6 +165,8 @@
             <a class="text_big button inLine" href="#">Modifica</a>
             <a class="text_big button inLine bg_red" href="#">Elimina</a>
             <br>
+            <br>
+            
         </div>
             
         <hr>
