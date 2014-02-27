@@ -260,6 +260,7 @@ public class ElencoAnnunciServlet extends HttpServlet {
                    }
                    if (ap_image){
                        aprt.img_url.add(new String(ch, start, length));
+                       ap_image = false;
                    }
                 }
                                 
@@ -267,10 +268,6 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
-                    if (qName.equals("Images"))
-                    {
-                        ap_image = false;
-                    }
                     if (qName.equals("Apartment"))
                     {
                        if (!jump_element)
