@@ -167,6 +167,10 @@ a {
     font-size: xx-large;
 }
 
+.text_normal {
+    font-size: medium;
+}
+
 .centered {
     margin: 0 auto;
 }
@@ -229,4 +233,14 @@ span.space{
 img.no_photo {
     width: 300px;
     height: 150px;
+}
+
+img.error {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.error_msg {
+    margin: 150px 150px 150px 400px;
 }
