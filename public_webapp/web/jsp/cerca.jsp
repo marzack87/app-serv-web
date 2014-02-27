@@ -16,7 +16,7 @@
         <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
         <div class="centered">
             <h1>Cerca</h1>
-            <applet code="gestione_annuncio.SearchApplet" archive="/public_webapp/applet/SearchApplet.jar" width="600" height="700"/>
+            <applet code="gestione_annuncio.SearchApplet" archive="/public_webapp/applet/SearchApplet.jar" width="650" height="900"/>
         </div>
            
         <script> 
