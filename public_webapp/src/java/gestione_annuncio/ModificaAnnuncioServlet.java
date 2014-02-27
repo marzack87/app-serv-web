@@ -117,12 +117,21 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                 if (annuncioedited == 0)
                 {
                     //Modificato correttamente
+                    request.setAttribute("msg", "modificato");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_messaggio.jsp");
+                    rd_forward.forward(request, response);
                 } else if (annuncioedited == 1)
                 {
                     //Annuncio non trovato con quell'id
+                    request.setAttribute("msg", "nessun annuncio trovato con l'ID indicato");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 } else if (annuncioedited == 2)
                 {
                     //Errore nella modifica dell'annuncio
+                    request.setAttribute("msg", "si è verificato un problema durante la modifica dell'annuncio");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 }
                   
             } catch (Exception ex) {

@@ -19,7 +19,18 @@
         <br>
         <br>
         <div class="centered text_very_big text_green">
+            <%
+            String msg = "";
+            if (request.getAttribute("msg") != null) {
+                msg = (String) request.getAttribute("msg");
+            }
+            
+            if (msg.equals("eliminato")){
+            %>
             L'annuncio è stato correttamente cancellato!
+            <% } else if (msg.equals("modificato")) {%>
+            L'annuncio è stato correttamente modificato!
+            <% } %>
             <br>
             <br>
             <br>

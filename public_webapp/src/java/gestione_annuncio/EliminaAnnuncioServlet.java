@@ -53,7 +53,8 @@ public class EliminaAnnuncioServlet extends HttpServlet {
                         if (annunciodeleted == 0)
                         {
                             //Eliminato corretamente
-                            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_annuncio_cancellato.jsp");
+                            request.setAttribute("msg", "eliminato");
+                            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_messaggio.jsp");
                             rd_forward.forward(request, response);
                         } else if (annunciodeleted == 1) {
                             //Nessun annucio con quell'ID trovato
