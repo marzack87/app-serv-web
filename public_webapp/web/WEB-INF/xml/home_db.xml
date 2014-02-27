@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Apartments>
+<Apartment user_name="admin">
+<ID>fb37e337-754b-47cb-8bef-0aac6cc38b1d</ID>
+<Indirizzo>Negra Arroyo Lane</Indirizzo>
+<Civico>308</Civico>
+<Citta>Albuquerque</Citta>
+<Tipo_Alloggio>2</Tipo_Alloggio>
+<Tipo_Cucina>0</Tipo_Cucina>
+<Bagni>1</Bagni>
+<Camere_Letto>3</Camere_Letto>
+<N_Piano>0</N_Piano>
+<Ascensore>0</Ascensore>
+<Garage>1</Garage>
+<Terrazzo>0</Terrazzo>
+<Posti_Totali>4</Posti_Totali>
+<Posti_Liberi>4</Posti_Liberi>
+<Prezzo_Posto>250</Prezzo_Posto>
+<Spese_Acqua>0</Spese_Acqua>
+<Spese_Gas>0</Spese_Gas>
+<Spese_Luce>0</Spese_Luce>
+<Spese_Condominiali>0</Spese_Condominiali>
+<Nessune_Spese>1</Nessune_Spese>
+<Images>
+<Image>fb37e337-754b-47cb-8bef-0aac6cc38b1d_1_2014-02-27_15:59:52.283.png</Image>
+<Image>fb37e337-754b-47cb-8bef-0aac6cc38b1d_2_2014-02-27_15:59:52.285.jpg</Image>
+<Image>fb37e337-754b-47cb-8bef-0aac6cc38b1d_3_2014-02-27_15:59:52.285.png</Image>
+<Image>fb37e337-754b-47cb-8bef-0aac6cc38b1d_4_2014-02-27_15:59:52.285.PNG</Image>
+</Images>
+</Apartment>
+<Apartment user_name="admin">
+<ID>4bc0c4d0-d8e6-4a84-9b6c-c5b7afd22a04</ID>
+<Indirizzo>Evergreen Terrace</Indirizzo>
+<Civico>724</Civico>
+<Citta>Springfield</Citta>
+<Tipo_Alloggio>2</Tipo_Alloggio>
+<Tipo_Cucina>0</Tipo_Cucina>
+<Bagni>1</Bagni>
+<Camere_Letto>4</Camere_Letto>
+<N_Piano>0</N_Piano>
+<Ascensore>0</Ascensore>
+<Garage>1</Garage>
+<Terrazzo>0</Terrazzo>
+<Posti_Totali>5</Posti_Totali>
+<Posti_Liberi>0</Posti_Liberi>
+<Prezzo_Posto>1000</Prezzo_Posto>
+<Spese_Acqua>0</Spese_Acqua>
+<Spese_Gas>0</Spese_Gas>
+<Spese_Luce>0</Spese_Luce>
+<Spese_Condominiali>0</Spese_Condominiali>
+<Nessune_Spese>1</Nessune_Spese>
+<Images>
+<Image>4bc0c4d0-d8e6-4a84-9b6c-c5b7afd22a04_1_2014-02-27_16:04:03.727.jpg</Image>
+<Image>4bc0c4d0-d8e6-4a84-9b6c-c5b7afd22a04_2_2014-02-27_16:04:03.727.jpg</Image>
+<Image>4bc0c4d0-d8e6-4a84-9b6c-c5b7afd22a04_3_2014-02-27_16:04:03.728.jpg</Image>
+</Images>
+</Apartment>
+<Apartment user_name="admin">
+<ID>bf2670e0-dff7-471c-a98b-5c51f40fd3b8</ID>
+<Indirizzo>Los Robles Avenue</Indirizzo>
+<Civico>2311</Civico>
+<Citta>Pasadena</Citta>
+<Tipo_Alloggio>0</Tipo_Alloggio>
+<Tipo_Cucina>1</Tipo_Cucina>
+<Bagni>1</Bagni>
+<Camere_Letto>2</Camere_Letto>
+<N_Piano>4</N_Piano>
+<Ascensore>0</Ascensore>
+<Garage>0</Garage>
+<Terrazzo>0</Terrazzo>
+<Posti_Totali>2</Posti_Totali>
+<Posti_Liberi>0</Posti_Liberi>
+<Prezzo_Posto>1500</Prezzo_Posto>
+<Spese_Acqua>1</Spese_Acqua>
+<Spese_Gas>1</Spese_Gas>
+<Spese_Luce>1</Spese_Luce>
+<Spese_Condominiali>1</Spese_Condominiali>
+<Nessune_Spese>0</Nessune_Spese>
+<Images>
+<Image>bf2670e0-dff7-471c-a98b-5c51f40fd3b8_1_2014-02-27_16:06:04.011.jpg</Image>
+<Image>bf2670e0-dff7-471c-a98b-5c51f40fd3b8_2_2014-02-27_16:06:04.011.jpg</Image>
+<Image>bf2670e0-dff7-471c-a98b-5c51f40fd3b8_3_2014-02-27_16:06:04.011.jpg</Image>
+</Images>
+</Apartment>
+<Apartment user_name="admin">
+<ID>02f00615-b93e-45e8-aef9-16146d6974d2</ID>
+<Indirizzo>Viale Accademia</Indirizzo>
+<Civico>6</Civico>
+<Citta>Monopoli</Citta>
+<Tipo_Alloggio>1</Tipo_Alloggio>
+<Tipo_Cucina>0</Tipo_Cucina>
+<Bagni>2</Bagni>
+<Camere_Letto>2</Camere_Letto>
+<N_Piano>0</N_Piano>
+<Ascensore>0</Ascensore>
+<Garage>0</Garage>
+<Terrazzo>0</Terrazzo>
+<Posti_Totali>4</Posti_Totali>
+<Posti_Liberi>4</Posti_Liberi>
+<Prezzo_Posto>150</Prezzo_Posto>
+<Spese_Acqua>0</Spese_Acqua>
+<Spese_Gas>0</Spese_Gas>
+<Spese_Luce>0</Spese_Luce>
+<Spese_Condominiali>0</Spese_Condominiali>
+<Nessune_Spese>1</Nessune_Spese>
+</Apartment>
+</Apartments>
