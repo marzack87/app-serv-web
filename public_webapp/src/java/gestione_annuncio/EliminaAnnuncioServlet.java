@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,14 +53,23 @@ public class EliminaAnnuncioServlet extends HttpServlet {
                         if (annunciodeleted == 0)
                         {
                             //Eliminato corretamente
+                            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_annuncio_cancellato.jsp");
+                            rd_forward.forward(request, response);
                         } else if (annunciodeleted == 1) {
                             //Nessun annucio con quell'ID trovato
+                            request.setAttribute("msg", "nessun annuncio trovato con l'ID indicato");
+                            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                            rd_forward.forward(request, response);
                         } else if (annunciodeleted == 2) {
                             //Errore nell'eliminazione
+                            request.setAttribute("msg", "c'è stato un problema durante l'eliminazione dell'annuncio");
+                            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                            rd_forward.forward(request, response);
                         }
 		} catch (Exception e) {
-			e.printStackTrace();
-                        System.out.println("erroe: "+e);
+			request.setAttribute("msg", e);
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                        rd_forward.forward(request, response);
 
 		}
 	}

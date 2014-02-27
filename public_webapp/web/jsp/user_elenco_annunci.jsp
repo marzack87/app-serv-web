@@ -217,8 +217,8 @@
             <br>
             <% if (from.equals("user")){ %>
             
-            <a class="text_big button inLine" href="#">Modifica</a>
-            <a class="text_big button inLine bg_red" href="#">Elimina</a>
+            <a class="text_big button inLine" href="/public_webapp/ModificaAnnuncioServlet">Modifica</a>
+            <a class="text_big button inLine bg_red" href="/public_webapp/EliminaAnnuncioServlet?id_apartment=<%= apartments_list.get(i).id_apartment %>">Elimina</a>
             
             <% } %>
             <br>
