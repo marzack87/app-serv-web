@@ -55,7 +55,7 @@
             <%
                 
             } else {
-            
+                
                 for(int i = 0; i < apartments_list.size(); i++){
                     String indirizzo = apartments_list.get(i).address;
                     indirizzo += ", " + apartments_list.get(i).civico;
@@ -217,7 +217,7 @@
             <br>
             <% if (from.equals("user")){ %>
             
-            <a class="text_big button inLine" href="/public_webapp/ModificaAnnuncioServlet">Modifica</a>
+            <a class="text_big button inLine" href="/public_webapp/AnnuncioServlet?edit=1&id_apartment=<%= apartments_list.get(i).id_apartment %>">Modifica</a>
             <a class="text_big button inLine bg_red" href="/public_webapp/EliminaAnnuncioServlet?id_apartment=<%= apartments_list.get(i).id_apartment %>">Elimina</a>
             
             <% } %>

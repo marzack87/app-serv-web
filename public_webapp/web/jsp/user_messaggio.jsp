@@ -30,11 +30,13 @@
             L'annuncio è stato correttamente cancellato!
             <% } else if (msg.equals("modificato")) {%>
             L'annuncio è stato correttamente modificato!
-            <% } %>
+            <% } else {
+                    out.println(msg);
+               } %>
             <br>
             <br>
             <br>
-            <a class="text_normal button bg_grey" href="/public_webapp/ElencoAnnunciServlet">torna all'elenco degli annunci</a>
+            <a class="text_normal button bg_grey" href="/public_webapp/ElencoAnnunciServlet">Vai all'elenco degli annunci inseriti</a>
         </div>
     </body>
 </html>

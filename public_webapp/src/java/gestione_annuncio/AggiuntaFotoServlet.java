@@ -149,21 +149,25 @@ public class AggiuntaFotoServlet extends HttpServlet {
                 int added = addImages(images, pathApartment_db, id_annuncio);
                 if (added == 0)
                 {
-                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_home.jsp");
+                    request.setAttribute("msg", "Foto inserite correttamente!");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_messaggio.jsp");
                     rd_forward.forward(request, response);
                     
                 } else if (added == 1)
                 {
-                    out_response.println("<div align=center><font color=red >Nessun annuncio trovato con quell'id.</font></div>");
-                    rd.include(request, response);
+                    request.setAttribute("msg", "nessun annuncio trovato con l'ID indicato");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 } else if (added == 2)
                 {
-                    out_response.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
-                    rd.include(request, response);
+                    request.setAttribute("msg", "c'è stato un problema nella lettura del DataBase");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 }
             } else {
-                out_response.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
-                rd.include(request, response);
+                request.setAttribute("msg", "c'è stato un problema nella lettura del DataBase");
+                RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                rd_forward.forward(request, response);
             }
             
             

@@ -117,8 +117,11 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                 if (annuncioedited == 0)
                 {
                     //Modificato correttamente
-                    request.setAttribute("msg", "modificato");
-                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_messaggio.jsp");
+                    
+                    // PER MODIFICARE LE FOTO HO BISOGNO DI AVERE L'ELENCO DEI LORO NOMI, DOVE LI PRENDO?
+                    
+                    //request.setAttribute("msg", "modificato");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_modifica_foto.jsp");
                     rd_forward.forward(request, response);
                 } else if (annuncioedited == 1)
                 {
