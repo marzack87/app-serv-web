@@ -3,8 +3,41 @@
 <User user_name="admin">
 <Username>admin</Username>
 <Password>admin</Password>
-<Name>admin</Name>
-<Surname>admin</Surname>
-<Phone>12345</Phone>
+<Name>Amministratore</Name>
+<Surname>Del Mondo</Surname>
+<Phone>7777777</Phone>
+<Admin>1</Admin>
+</User>
+<User user_name="walt">
+<Username>walt</Username>
+<Password>heisenberg</Password>
+<Name>Walter</Name>
+<Surname>White</Surname>
+<Phone>(505) 555-1258</Phone>
+<Admin>0</Admin>
+</User>
+<User user_name="homer">
+<Username>homer</Username>
+<Password>password</Password>
+<Name>Homer</Name>
+<Surname>Simpson</Surname>
+<Phone>(939) 555-0113</Phone>
+<Admin>0</Admin>
+</User>
+<User user_name="sheldon">
+<Username>shelly</Username>
+<Password>bazinga</Password>
+<Name>Sheldon</Name>
+<Surname>Cooper</Surname>
+<Phone>(294) 555-9264</Phone>
+<Admin>0</Admin>
+</User>
+<User user_name="monopoli">
+<Username>monopoli</Username>
+<Password>monopoli</Password>
+<Name>Signor</Name>
+<Surname>Monopoli</Surname>
+<Phone>(+39) 01-1738634</Phone>
+<Admin>0</Admin>
 </User>
 </Users>

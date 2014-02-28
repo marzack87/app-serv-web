@@ -172,7 +172,7 @@ public class AggiuntaFotoServlet extends HttpServlet {
             
             
          }catch(Exception ex) {
-            request.setAttribute("msg", ex);
+            request.setAttribute("msg", ex.getMessage());
             RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
             rd_forward.forward(request, response);
          }

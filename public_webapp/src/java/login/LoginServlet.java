@@ -60,10 +60,13 @@ public class LoginServlet extends HttpServlet {
             {
                 try {
                     //Esiste il database utenti, controllo se è presente l'utente
-                    if (check_user(path, user, pwd))
+                    int user_type = check_user(path, user, pwd);
+                    if ( user_type == 1)
                     {
+                        //UTENTE NORMALE
                         HttpSession session = request.getSession();
                         session.setAttribute("user", user);
+                        session.setAttribute("admin", "0");
                         //setting session to expiry in 30 mins
                         session.setMaxInactiveInterval(30*60);
                         Cookie userName = new Cookie("user", user);
@@ -71,7 +74,22 @@ public class LoginServlet extends HttpServlet {
                         response.addCookie(userName);
                         response.sendRedirect("/public_webapp/ElencoAnnunciServlet");
                         
-                    } else {
+                    } else if (user_type == 2) 
+                    {
+                        // ADMIN
+                        //UTENTE NORMALE
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user", user);
+                        session.setAttribute("admin", "1");
+                        //setting session to expiry in 30 mins
+                        session.setMaxInactiveInterval(30*60);
+                        Cookie userName = new Cookie("user", user);
+                        userName.setMaxAge(30*60);
+                        response.addCookie(userName);
+                        response.sendRedirect("/public_webapp/ElencoAnnunciServlet");
+                        
+                    }else 
+                    {
                         out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi REGISTRATI per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
                         rd.include(request, response);
                     }
@@ -93,13 +111,11 @@ public class LoginServlet extends HttpServlet {
         }
     }
     
-    private boolean check_user(String pathToWrite, String username, String pwd) throws Exception {
+    private int check_user(String pathToWrite, String username, String pwd) throws Exception {
             
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         Document document = documentBuilder.parse(pathToWrite);
-        
-        boolean user_exist = false;
         
         NodeList nList = document.getElementsByTagName("User");
         
@@ -113,13 +129,16 @@ public class LoginServlet extends HttpServlet {
                 {
                     if (eElement.getElementsByTagName("Password").item(0).getTextContent().equals(pwd))
                     {
-                        user_exist = true;
-                        break;
+                        if (eElement.getElementsByTagName("Admin").item(0).getTextContent().equals("1"))
+                        {
+                            return 2;
+                        }
+                        return 1;
                     }
                 }
             }
         }
         
-            return user_exist;
+            return 0;
         }
 }

@@ -70,7 +70,7 @@
                 <br>
                 <hr>
             <br>
-            <a class="text_big button inLine" href="#" onclick="">Applica le modifiche alle foto</a>
+            <a class="text_big button inLine" href="#" onclick="return save_photos();">Applica le modifiche alle foto</a>
             <a class="text_big button inLine bg_red" href="/public_webapp/ElencoAnnunciServlet">Annulla le modifiche alle foto</a>
         </div>
         <br>
@@ -126,6 +126,7 @@
             
             document.getElementById('foto_form').submit();
             return false;
+            
         }
     </script>
     

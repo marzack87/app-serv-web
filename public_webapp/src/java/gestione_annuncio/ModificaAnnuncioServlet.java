@@ -120,6 +120,7 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                 {
                     //Modificato correttamente
                     request.setAttribute("images", images);
+                    request.setAttribute("id_apartment", apartment_id);
                     RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_modifica_foto.jsp");
                     rd_forward.forward(request, response);
                 } else if (annuncioedited == 1)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Apartments>
-<Apartment user_name="admin">
+<Apartment user_name="walt">
 <ID>1cd1f8ff-a718-4d45-86e4-4188d316d8a4</ID>
 <Indirizzo>Negra Arroyo Lane</Indirizzo>
 <Civico>308</Civico>
@@ -28,7 +28,7 @@
 <Image>1cd1f8ff-a718-4d45-86e4-4188d316d8a4_4_2014-02-27_16:47:12.023.png</Image>
 </Images>
 </Apartment>
-<Apartment user_name="admin">
+<Apartment user_name="homer">
 <ID>03554389-63e7-41b3-a798-b24ada6cc127</ID>
 <Indirizzo>Evergreen Terrace</Indirizzo>
 <Civico>724</Civico>
@@ -55,7 +55,7 @@
 <Image>03554389-63e7-41b3-a798-b24ada6cc127_3_2014-02-27_16:48:53.131.jpg</Image>
 </Images>
 </Apartment>
-<Apartment user_name="admin">
+<Apartment user_name="shelly">
 <ID>98afa79a-3ea0-4abb-ad6a-a5823a9dab2b</ID>
 <Indirizzo>Los Robles Avenue</Indirizzo>
 <Civico>2311</Civico>
@@ -82,7 +82,7 @@
 <Image>98afa79a-3ea0-4abb-ad6a-a5823a9dab2b_3_2014-02-27_16:50:18.548.jpg</Image>
 </Images>
 </Apartment>
-<Apartment user_name="admin">
+<Apartment user_name="monopoli">
 <ID>f6daefa4-d1f5-428f-8b18-50817be83a6c</ID>
 <Indirizzo>Viale Accademia</Indirizzo>
 <Civico>8</Civico>

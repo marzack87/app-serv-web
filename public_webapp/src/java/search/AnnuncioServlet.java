@@ -39,7 +39,7 @@ public class AnnuncioServlet extends HttpServlet {
                         
                         ArrayList<Apartment> apartments = searchApartmentForID(path,request.getParameter("id_apartment"));
                         
-                        if (request.getParameter("edit").equals("1")){
+                        if (request.getParameter("edit") != null){
                             request.setAttribute("apartments_list", apartments);
                             RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_modifica.jsp");
                             rd_forward.forward(request, response);
@@ -51,8 +51,9 @@ public class AnnuncioServlet extends HttpServlet {
                         }
                         
 		} catch (Exception e) {
-			e.printStackTrace();
-                        System.out.println("erroe: "+e);
+			request.setAttribute("msg", e.getMessage());
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                        rd_forward.forward(request, response);
 
 		}
 	}

@@ -39,19 +39,28 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         
                         HttpSession session = request.getSession();
                         
-                        ArrayList<Apartment> apartments = searchXMLForUser(path,(String) session.getAttribute("user"));
+                        boolean admin = false;
                         
+                        if (session.getAttribute("admin").equals("1")) {
+                            admin = true;
+                        }
+                        
+                        ArrayList<Apartment> apartments = searchXMLForUser(path,(String) session.getAttribute("user"), admin);
+                        
+                        if (admin) request.setAttribute("admin", "1");
                         request.setAttribute("apartments_list", apartments);
                         request.setAttribute("from", "user");
                         RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_elenco_annunci.jsp");
                         rd_forward.forward(request, response);
                         
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute("msg", e.getMessage());
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                        rd_forward.forward(request, response);
 		}
 	}
         
-    public ArrayList<Apartment> searchXMLForUser (String path, final String user_name)
+    public ArrayList<Apartment> searchXMLForUser (String path, final String user_name, final boolean admin)
         {
             final ArrayList<Apartment> list = new ArrayList<Apartment>();
             
@@ -102,9 +111,11 @@ public class ElencoAnnunciServlet extends HttpServlet {
                         aprt.user_owner = attributes.getValue("user_name");
                         aprt.img_url = new ArrayList<String> ();
                         jump_element = false;
-                        if (!attributes.getValue("user_name").equals(user_name))
-                        {
-                            jump_element = true;
+                        if (!admin) {
+                            if (!attributes.getValue("user_name").equals(user_name))
+                            {
+                                jump_element = true;
+                            }
                         }
                         
                         

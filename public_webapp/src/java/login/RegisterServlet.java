@@ -192,6 +192,12 @@ public class RegisterServlet extends HttpServlet {
         Text text4 = document.createTextNode(phone);
         phone_element.appendChild(text4);
         
+        Element admin_element = document.createElement("Admin");
+        root_user.appendChild(admin_element);
+
+        Text text5 = document.createTextNode("0");
+        admin_element.appendChild(text5);
+        
         DOMSource source = new DOMSource(document);
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();

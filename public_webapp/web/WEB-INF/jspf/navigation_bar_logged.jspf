@@ -15,6 +15,8 @@
                 if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
             }
         }
+        
+        if (session.getAttribute("admin").equals("0")){
         %>
 
 <div class="navbar">
@@ -27,7 +29,7 @@
             <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/jsp/user_home.jsp" class="item">Informazioni Utente</a>
+            <a href="/public_webapp/jsp/user_info.jsp" class="item">Informazioni Utente</a>
         </li>
     </ul>
     <div class="login">
@@ -35,3 +37,23 @@
         <a href="/public_webapp/LogoutServlet" class="button">ESCI</a>
     </div>
 </div>
+
+        <% } else { %>
+        
+<div class="navbar">
+    <img src="/public_webapp/multimedia/logo.png">
+    <ul>
+        <li>
+            <a href="/public_webapp/jsp/admin_utenti.jsp" class="item">Gestione Utenti</a>
+        </li>
+        <li>
+            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Gestione Annunci</a>
+        </li>
+    </ul>
+    <div class="login">
+        Ave <%=user %>!
+        <a href="/public_webapp/LogoutServlet" class="button">ESCI</a>
+    </div>
+</div>
+        
+        <% } %>

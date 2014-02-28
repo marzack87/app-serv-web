@@ -13,17 +13,27 @@
             if (request.getAttribute("from") != null) {
                 from = (String) request.getAttribute("from");
             }
+            
+            boolean admin = false;
+            if (from.equals("user")){
+                if (session.getAttribute("admin").equals("1")) {
+                    admin = true;
+                }
+            }
+            
+            String title = "";
+            if (from.equals("search")){
+                title = "Scheda Annuncio";
+            } else if (from.equals("user")){
+                title = "Elenco Annunci";
+            }
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <% if (from.equals("search")){ %>
-            <title>Scheda Annuncio</title>
-        <% } else if (from.equals("user")){ %>
-            <title>Elenco Annunci</title>
-        <% } %>
+        <title><%=title%></title>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>
@@ -34,10 +44,11 @@
             <%@ include file="/WEB-INF/jspf/navigation_bar_logged.jspf" %>
         <% } %>
         
-        
-        
+        <% if (admin) { %>
+        <div class="centered text_big text_green">In quanto Amministratore del sito hai la possibilità di MODIFICARE o ELIMINARE ogni annuncio</div>
+        <hr>
+        <% } %>   
         <% 
-            
             ArrayList<Apartment> apartments_list = new ArrayList<Apartment>();
             if (request.getAttribute("apartments_list") != null) {
                 apartments_list = (ArrayList<Apartment>) request.getAttribute("apartments_list");
