@@ -69,19 +69,20 @@ public class LoginServlet extends HttpServlet {
                         Cookie userName = new Cookie("user", user);
                         userName.setMaxAge(30*60);
                         response.addCookie(userName);
-                        response.sendRedirect("/public_webapp/jsp/user_home.jsp");
+                        response.sendRedirect("/public_webapp/ElencoAnnunciServlet");
                         
                     } else {
                         out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi REGISTRATI per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
                         rd.include(request, response);
                     }
                 } catch (Exception ex) {
-                    out.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
-                    rd.include(request, response);
+                    request.setAttribute("msg", "Errore nella lettura del Database");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 }
             } else {
                 //Non esiste il database utenti, quindi l'utente andrà rimandanto alla registrazione
-                out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi registrati per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
+                out.println("<div align=center><font color=red >Non ci sono utenti con queste credenziali,<br> premi REGISTRATI per creare un account<br> o ricontrolla i tuoi dati.</font></div>");
                 rd.include(request, response);  
             }
                 

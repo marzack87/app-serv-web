@@ -74,13 +74,14 @@ public class RegisterServlet extends HttpServlet {
                     }
                     
                 } catch (Exception ex) {
-                    System.out.println(ex);
-                    out.println("<div align=center><font color=red >Errore nella creazionde dell'utente.</font></div>");
-                    rd.include(request, response);
+                    request.setAttribute("msg", "Errore nella creazione dell'utente");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 }
             } else {
-                out.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
-                rd.include(request, response);
+                request.setAttribute("msg", "Errore nella lettura del Database");
+                RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                rd_forward.forward(request, response);
             }
         } else {
             

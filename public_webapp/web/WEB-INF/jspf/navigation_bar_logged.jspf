@@ -21,10 +21,10 @@
     <img src="/public_webapp/multimedia/logo.png">
     <ul>
         <li>
-            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Elenco Annunci Inseriti</a>
+            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Annunci Inseriti</a>
         </li>
         <li>
-            <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Inserisci Nuovo Annuncio</a>
+            <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
             <a href="/public_webapp/jsp/user_home.jsp" class="item">Informazioni Utente</a>
