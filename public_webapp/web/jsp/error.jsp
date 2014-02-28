@@ -27,8 +27,8 @@
             
             <img class="error" src="/public_webapp/multimedia/error.png">
             
-            <div class="text_very_big error_msg centered">
-                ERRORE:
+            <div class="error_msg centered">
+                <div class="text_very_big"> ERRORE: </div>
                 <br>
                 <br>
                 <br>
@@ -36,7 +36,7 @@
                 <br>
                 <br>
                 <br>
-                <a class="text_normal button bg_grey" href="/index.jsp">torna alla Home</a>
+                <a class="text_normal button bg_grey" href="/public_webapp/index.jsp">torna alla Home</a>
             </div>
         </body>
 </html>

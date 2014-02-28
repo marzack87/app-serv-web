@@ -91,6 +91,8 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                 String condominiali = "0";
                 String nessune_spese = "0";
                 
+                String images = request.getParameter("images");
+                
                 for (int i = 0; i < spese_incluse.length; i++) {
                     switch (Integer.parseInt(spese_incluse[i])) {
                         case 0:
@@ -117,10 +119,7 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                 if (annuncioedited == 0)
                 {
                     //Modificato correttamente
-                    
-                    // PER MODIFICARE LE FOTO HO BISOGNO DI AVERE L'ELENCO DEI LORO NOMI, DOVE LI PRENDO?
-                    
-                    //request.setAttribute("msg", "modificato");
+                    request.setAttribute("images", images);
                     RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_modifica_foto.jsp");
                     rd_forward.forward(request, response);
                 } else if (annuncioedited == 1)

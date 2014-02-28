@@ -25,6 +25,19 @@
             }
             
             Apartment ap = apartments_list.get(0);
+            
+            String images = "";
+            boolean first = true;
+            for (String image : ap.img_url)
+            {
+                if (image.equals("\n")) continue;
+                if (first){
+                    first = false;
+                } else {
+                    images += "#";
+                }
+                images += image;
+            }
         %>
         
         <div class="centered text_very_big">
@@ -36,8 +49,8 @@
         <br>
         <div class="centered">
             <form id="annuncio" class="nuovo_annuncio" action="/public_webapp/ModificaAnnuncioServlet" method="POST">
-                <input type="hidden" name="user_name" value="<%=user %>">
                 <input type="hidden" name="id_apartment" value="<%=ap.id_apartment %>">
+                <input type="hidden" name="images" value="<%=images %>">
             <label>Indirizzo: <input class="larger" type="text" name="indirizzo" value="<%= ap.address %>"></label>
             <span class='space'></span>
             <label>Civico: <input type="text" class="smaller" name="civico" value="<%= ap.civico %>"></label>

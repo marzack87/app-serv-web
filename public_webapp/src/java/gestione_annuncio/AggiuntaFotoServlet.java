@@ -133,7 +133,7 @@ public class AggiuntaFotoServlet extends HttpServlet {
                } else {
                    if (fi.getFieldName().equals("id_annuncio")){
                       id_annuncio = fi.getString();
-                  }
+                   }
                }
             }
             

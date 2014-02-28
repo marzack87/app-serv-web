@@ -235,6 +235,15 @@ img.no_photo {
     height: 150px;
 }
 
+img.preview {
+    height: 200px;
+}
+
+.vertically_centered {
+    position: relative;
+    top: -100px;
+}
+
 img.error {
     position: absolute;
     left: 0px;

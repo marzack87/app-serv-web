@@ -21,13 +21,13 @@
     <img src="/public_webapp/multimedia/logo.png">
     <ul>
         <li>
-            <a href="/public_webapp/jsp/user_home.jsp" class="item">Informazioni Utente</a>
+            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Elenco Annunci Inseriti</a>
         </li>
         <li>
             <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Inserisci Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Elenco Annunci Inseriti</a>
+            <a href="/public_webapp/jsp/user_home.jsp" class="item">Informazioni Utente</a>
         </li>
     </ul>
     <div class="login">

@@ -51,7 +51,22 @@
             </form>
                 <br>
                 <hr>
-                QUI CI VANNO LE FOTO GIA' PRESENTI
+                <br>
+                <%
+                    String images = "";
+                    if (request.getAttribute("images") != null) {
+                        images = (String) request.getAttribute("images");
+                    }
+                    
+                    String[] photos = images.split("#");
+                    
+                    for (String photo : photos){
+                %>
+                <div id="<%=photo%>">
+                    <img class="preview inLine" src ="/public_webapp/multimedia/photos/<%=photo%>">
+                    <a class="button bg_red text_small inLine vertically_centered" href="#" onclick="return remove_photo_saved('<%=photo%>');">rimuovi</a>
+                </div>
+                <%  } %>
                 <br>
                 <hr>
             <br>
@@ -65,6 +80,7 @@
     <script type="text/javascript">
         
         var photos = 0;
+        var remove = 0;
         
         function add_photo(){
             photos++;
@@ -93,7 +109,21 @@
             return false;
         }
         
+        function remove_photo_saved(name){
+            remove++;
+            var new_input = document.createElement('input');
+            new_input.type = "hidden";
+            new_input.name = "foto_da_cancellare_" + remove;
+            new_input.value = name;
+            document.getElementById("foto_form").appendChild(new_input);
+            
+            var element = document.getElementById(name);
+            element.parentNode.removeChild(element);
+            return false;
+        }
+        
         function save_photos(){
+            
             document.getElementById('foto_form').submit();
             return false;
         }
