@@ -18,23 +18,23 @@
     </servlet>
     <servlet>
         <servlet-name>AggiuntaFotoServlet</servlet-name>
-        <servlet-class>gestione_annuncio.AggiuntaFotoServlet</servlet-class>
+        <servlet-class>gestione_annunci.AggiuntaFotoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ElencoAnnunciServlet</servlet-name>
-        <servlet-class>gestione_annuncio.ElencoAnnunciServlet</servlet-class>
+        <servlet-class>gestione_annunci.ElencoAnnunciServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EliminaAnnuncioServlet</servlet-name>
-        <servlet-class>gestione_annuncio.EliminaAnnuncioServlet</servlet-class>
+        <servlet-class>gestione_annunci.EliminaAnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ModificaAnnuncioServlet</servlet-name>
-        <servlet-class>gestione_annuncio.ModificaAnnuncioServlet</servlet-class>
+        <servlet-class>gestione_annunci.ModificaAnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NuovoAnnuncioServlet</servlet-name>
-        <servlet-class>gestione_annuncio.NuovoAnnuncioServlet</servlet-class>
+        <servlet-class>gestione_annunci.NuovoAnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AnnuncioServlet</servlet-name>

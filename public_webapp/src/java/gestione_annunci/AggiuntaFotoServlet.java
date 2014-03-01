@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gestione_annuncio;
+package gestione_annunci;
 
 import java.io.*;
 import java.sql.Timestamp;
@@ -100,6 +100,7 @@ public class AggiuntaFotoServlet extends HttpServlet {
             String now = "";
             
             ArrayList <String> images = new ArrayList<String>();
+            ArrayList <String> images_to_delete = new ArrayList<String>();
             
             while ( i.hasNext () ) 
             {
@@ -133,6 +134,8 @@ public class AggiuntaFotoServlet extends HttpServlet {
                } else {
                    if (fi.getFieldName().equals("id_annuncio")){
                       id_annuncio = fi.getString();
+                   } else {
+                       images_to_delete.add(fi.getString());
                    }
                }
             }
@@ -146,10 +149,10 @@ public class AggiuntaFotoServlet extends HttpServlet {
             
             if (checkDatabase(pathApartment_db))
             {
-                int added = addImages(images, pathApartment_db, id_annuncio);
+                int added = handleImages(images,images_to_delete, pathApartment_db, id_annuncio);
                 if (added == 0)
                 {
-                    request.setAttribute("msg", "Foto inserite correttamente!");
+                    request.setAttribute("msg", "Operazione eseguita correttamente!");
                     RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_messaggio.jsp");
                     rd_forward.forward(request, response);
                     
@@ -172,14 +175,14 @@ public class AggiuntaFotoServlet extends HttpServlet {
             
             
          }catch(Exception ex) {
-            request.setAttribute("msg", ex.getMessage());
+            request.setAttribute("msg", ex);
             RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
             rd_forward.forward(request, response);
          }
         
     }
     
-    private int addImages(ArrayList <String> images, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException 
+    private int handleImages(ArrayList <String> images,ArrayList <String> images_to_delete, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException 
     {
         try
         {
@@ -211,15 +214,65 @@ public class AggiuntaFotoServlet extends HttpServlet {
 
                 if (find)
                 {
-                    Element imges_node = document.createElement("Images");
-                    node.appendChild(imges_node);
-
-                    for (int j = 0; j < images.size(); j++)
+                    if (images_to_delete.size() > 0)
+                    {   
+                        boolean delete_done = false;
+                        
+                        for (int n = 0; n < list.getLength(); n++)
+                        {
+                            if ("Images".equals(list.item(n).getNodeName()))
+                            {
+                                delete_done = true;
+                                NodeList all_images = list.item(n).getChildNodes();
+                                for (int m = 0; m < all_images.getLength(); m++)
+                                {
+                                    if (images_to_delete.contains(all_images.item(m).getTextContent()))
+                                    {
+                                        list.item(n).removeChild(all_images.item(m));
+                                    }
+                                }
+                            }
+                            if (delete_done == true)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    
+                    boolean exist_images = false;
+                    
+                    for (int n = 0; n < list.getLength(); n++)
                     {
-                        Element img = document.createElement("Image");
-                        imges_node.appendChild(img);
-                        Text text_img = document.createTextNode(images.get(j));
-                        img.appendChild(text_img);
+                        if ("Images".equals(list.item(n).getNodeName()))
+                        {
+                             exist_images = true;
+                             for (int j = 0; j < images.size(); j++)
+                             {
+                                Element img = document.createElement("Image");
+                                list.item(n).appendChild(img);
+                                Text text_img = document.createTextNode(images.get(j));
+                                img.appendChild(text_img);
+                             }
+                        }
+                        
+                        if(exist_images == true)
+                        {
+                            break;
+                        }
+                    }
+                    
+                    if (exist_images == false)
+                    {
+                        Element imges_node = document.createElement("Images");
+                        node.appendChild(imges_node);
+
+                        for (int j = 0; j < images.size(); j++)
+                        {
+                            Element img = document.createElement("Image");
+                            imges_node.appendChild(img);
+                            Text text_img = document.createTextNode(images.get(j));
+                            img.appendChild(text_img);
+                        } 
                     }
 
                     TransformerFactory transformerFactory = TransformerFactory.newInstance();

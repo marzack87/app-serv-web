@@ -6,7 +6,7 @@
 
 package search;
 
-import gestione_annuncio.Apartment;
+import gestione_annunci.Apartment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
