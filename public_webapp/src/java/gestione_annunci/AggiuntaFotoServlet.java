@@ -150,8 +150,7 @@ public class AggiuntaFotoServlet extends HttpServlet {
             
             if (checkDatabase(pathApartment_db))
             {
-                GestioneAnnunci gest = new GestioneAnnunci();
-                int added = gest.gestioneImmagini(images,images_to_delete, pathApartment_db, id_annuncio);
+                int added = GestioneAnnunci.gestioneImmagini(images,images_to_delete, pathApartment_db, id_annuncio);
                 if (added == 0)
                 {
                     request.setAttribute("msg", "Operazione eseguita correttamente!");

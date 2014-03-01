@@ -114,9 +114,7 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                     }
                 }
                 
-                GestioneAnnunci gest = new GestioneAnnunci();
-                
-                int annuncioedited = gest.modificaAnnuncio(path, apartment_id, user, indirizzo, civico, citta, tipo_alloggio,
+                int annuncioedited = GestioneAnnunci.modificaAnnuncio(path, apartment_id, user, indirizzo, civico, citta, tipo_alloggio,
                         tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
                         terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali,nessune_spese);
                 

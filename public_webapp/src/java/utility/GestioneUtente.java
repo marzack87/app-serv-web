@@ -35,7 +35,11 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class GestioneUtente {
     
-    public User getUserInfo (String path, String usr_name)
+    private GestioneUtente(){
+        
+    }
+    
+    public static User getUserInfo (String path, String usr_name)
     {
         ArrayList<User> usr_list = userInfoList(path,usr_name);
         
@@ -52,14 +56,14 @@ public class GestioneUtente {
         
     }
     
-    public ArrayList<User> getAllUser (String path)
+    public static ArrayList<User> getAllUser (String path)
     {
         ArrayList<User> usr_list = userInfoList(path,"");
         
         return usr_list;
     }
     
-    public int editUser (String path, String usr, String pwd, String name, String surname, String phone, String admin) throws Exception
+    public static int editUser (String path, String usr, String pwd, String name, String surname, String phone, String admin) throws Exception
     {
         int result = editUserInfoWithUsrName(path, usr, pwd, name, surname, phone, admin);
         //0 - successo;
@@ -68,7 +72,7 @@ public class GestioneUtente {
         return result;
     }
     
-    public int deleteUser (String path, String usr) throws ParserConfigurationException, SAXException, IOException, TransformerException
+    public static int deleteUser (String path, String usr) throws ParserConfigurationException, SAXException, IOException, TransformerException
     {
         int result = deleteUserWithUserName(path, usr);
         //0 - successo;
@@ -77,7 +81,7 @@ public class GestioneUtente {
         return result;
     }
     
-    private ArrayList<User> userInfoList (String path, final String usr)
+    private static ArrayList<User> userInfoList (String path, final String usr)
     {
         final ArrayList<User> usr_list = new ArrayList<User> ();
             
@@ -188,7 +192,7 @@ public class GestioneUtente {
               return usr_list;
         }
     
-    private int editUserInfoWithUsrName (String pathToWrite, String usr,String pwd, String name,String surname,String phone,String admin) throws Exception
+    private static int editUserInfoWithUsrName (String pathToWrite, String usr,String pwd, String name,String surname,String phone,String admin) throws Exception
     {
         try
         {
@@ -258,7 +262,7 @@ public class GestioneUtente {
         }
     }
     
-    private int deleteUserWithUserName (String pathToWrite, String usr) throws ParserConfigurationException, SAXException,
+    private static int deleteUserWithUserName (String pathToWrite, String usr) throws ParserConfigurationException, SAXException,
             IOException, TransformerConfigurationException, TransformerException 
     {
         try
@@ -302,6 +306,11 @@ public class GestioneUtente {
                     DOMSource source = new DOMSource(document);
                     StreamResult result = new StreamResult(new File(pathToWrite));
                     transformer.transform(source, result);
+                    
+                    String annunci_path = pathToWrite.replaceAll("/users.xml", "");
+                    annunci_path += "/home_db.xml";
+                    
+                    GestioneAnnunci.eliminaAnnunciUtente(annunci_path, usr);
                     
                     return 0;
                 }

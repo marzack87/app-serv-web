@@ -52,9 +52,7 @@ public class SearchServlet extends HttpServlet {
                         path = path+"/home_db.xml";
 			String[] parameter = (String[]) inputFromApplet.readObject();
                         
-                        GestioneAnnunci gest = new GestioneAnnunci();
-                        
-                        ArrayList<Map> apartments = gest.cercaAppartamento(path,parameter);
+                        ArrayList<Map> apartments = GestioneAnnunci.cercaAppartamento(path,parameter);
 			// echo it to the applet
 			OutputStream outstr = response.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(outstr);

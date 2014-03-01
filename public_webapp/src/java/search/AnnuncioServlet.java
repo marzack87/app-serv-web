@@ -38,9 +38,7 @@ public class AnnuncioServlet extends HttpServlet {
                         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
                         path = path+"/home_db.xml";
                         
-                        GestioneAnnunci gest = new GestioneAnnunci();
-                        
-                        ArrayList<Apartment> apartments = gest.cercaAppartamentoPerID(path,request.getParameter("id_apartment"));
+                        ArrayList<Apartment> apartments = GestioneAnnunci.cercaAppartamentoPerID(path,request.getParameter("id_apartment"));
                         
                         if (request.getParameter("edit") != null){
                             request.setAttribute("apartments_list", apartments);

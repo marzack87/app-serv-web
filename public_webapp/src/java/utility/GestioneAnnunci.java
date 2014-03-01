@@ -39,21 +39,39 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class GestioneAnnunci {
     
-    public ArrayList<Apartment> listAnnunci (String path, final String user_name, final boolean admin)
+    private GestioneAnnunci(){
+        
+    }
+    
+    public static ArrayList<Apartment> listAnnunci (String path, final String user_name, final boolean admin)
     {
         ArrayList<Apartment> list = cercaAnnunciPerUtente(path,user_name,admin);
         
         return list;
     }
     
-    public int eliminaAnnuncio (String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerException
+    public static int eliminaAnnuncio (String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerException
     {
         int result = deleteAnnuncio(pathToWrite,apartment_id);
         
         return result;
     }
     
-    public int modificaAnnuncio (String pathToWrite, String apartment_id, String user,String indirizzo,String civico,String citta,
+    public static int eliminaAnnunciUtente (String path, String user_name) throws ParserConfigurationException, SAXException, IOException, TransformerException{
+        
+        ArrayList<Apartment> annunci_utente = cercaAnnunciPerUtente(path, user_name, false);
+        
+        int result = 0;
+        
+        for (Apartment ap : annunci_utente) {
+            result = deleteAnnuncio(path, ap.id_apartment);
+            if (result == 2) return 2;
+        }
+        
+        return 0;
+    }
+    
+    public static int modificaAnnuncio (String pathToWrite, String apartment_id, String user,String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -68,7 +86,7 @@ public class GestioneAnnunci {
         
     }
     
-    public String aggiungiAnnuncio (String pathToWrite, String user,String indirizzo,String civico,String citta,
+    public static String aggiungiAnnuncio (String pathToWrite, String user,String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -80,21 +98,21 @@ public class GestioneAnnunci {
         return id_annuncio;
     }
     
-    public int gestioneImmagini (ArrayList <String> images,ArrayList <String> images_to_delete, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerException
+    public static int gestioneImmagini (ArrayList <String> images,ArrayList <String> images_to_delete, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerException
     {
         int result = handleImages(images, images_to_delete, pathToWrite, apartment_id);
         
         return result;
     }
     
-    public ArrayList<Apartment> cercaAppartamentoPerID (String path, final String apartment_id)
+    public static ArrayList<Apartment> cercaAppartamentoPerID (String path, final String apartment_id)
     {
         ArrayList<Apartment> list = searchApartmentForID(path, apartment_id);
         
         return list;
     }
     
-    public ArrayList<Map> cercaAppartamento (String path,final String [] parameters)
+    public static ArrayList<Map> cercaAppartamento (String path,final String [] parameters)
     {
         ArrayList<Apartment> list = searchApartment(path, parameters);
         
@@ -133,7 +151,7 @@ public class GestioneAnnunci {
         return array_map;
     }
     
-    private ArrayList<Apartment> searchApartment (String path,final String [] parameters)
+    private static ArrayList<Apartment> searchApartment (String path,final String [] parameters)
         {
             final ArrayList<Apartment> list = new ArrayList<Apartment>();
             
@@ -288,7 +306,7 @@ public class GestioneAnnunci {
               return list;
         }
     
-    private ArrayList<Apartment> searchApartmentForID (String path, final String apartment_id)
+    private static ArrayList<Apartment> searchApartmentForID (String path, final String apartment_id)
         {   
             final ArrayList<Apartment> list = new ArrayList<Apartment>();
             
@@ -531,7 +549,7 @@ public class GestioneAnnunci {
               return list;
         }
     
-    private int handleImages(ArrayList <String> images,ArrayList <String> images_to_delete, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException 
+    private static int handleImages(ArrayList <String> images,ArrayList <String> images_to_delete, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException 
     {
         try
         {
@@ -644,7 +662,7 @@ public class GestioneAnnunci {
         
     }
     
-    private String add_apartment(String pathToWrite, String user,String indirizzo,String civico,String citta,
+    private static String add_apartment(String pathToWrite, String user,String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -793,7 +811,7 @@ public class GestioneAnnunci {
         return id_apartment;
     }
     
-    private int editAnnuncio (String pathToWrite, String apartment_id, String user,String indirizzo,String civico,String citta,
+    private static int editAnnuncio (String pathToWrite, String apartment_id, String user,String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -910,7 +928,7 @@ public class GestioneAnnunci {
         }
     }
     
-    private int deleteAnnuncio(String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException,
+    private static int deleteAnnuncio(String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException,
             IOException, TransformerConfigurationException, TransformerException 
     {
         try
@@ -968,7 +986,7 @@ public class GestioneAnnunci {
         
     }
     
-    private ArrayList<Apartment> cercaAnnunciPerUtente (String path, final String user_name, final boolean admin)
+    private static ArrayList<Apartment> cercaAnnunciPerUtente (String path, final String user_name, final boolean admin)
         {
             final ArrayList<Apartment> list = new ArrayList<Apartment>();
             

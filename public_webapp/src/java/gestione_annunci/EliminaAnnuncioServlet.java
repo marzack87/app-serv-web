@@ -49,9 +49,7 @@ public class EliminaAnnuncioServlet extends HttpServlet {
                         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
                         path = path+"/home_db.xml";
                         
-                        GestioneAnnunci gest = new GestioneAnnunci();
-                        
-                        int annunciodeleted = gest.eliminaAnnuncio(path,request.getParameter("id_apartment"));
+                        int annunciodeleted = GestioneAnnunci.eliminaAnnuncio(path,request.getParameter("id_apartment"));
                         
                         if (annunciodeleted == 0)
                         {

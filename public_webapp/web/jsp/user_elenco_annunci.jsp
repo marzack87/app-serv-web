@@ -4,6 +4,7 @@
     Author     : marco
 --%>
 
+<%@page import="utility.GestioneUtente"%>
 <%@page import="utility.Apartment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -191,6 +192,8 @@
                         }
                         images += image;
                     }
+                    
+                    String owner = apartments_list.get(i).user_owner;
         %>
         
         <div class="centered">
@@ -210,6 +213,14 @@
                 <%= spese %>
             </div>
             
+            <% if (from.equals("search") || admin){ 
+                    String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
+                    path = path+"/users.xml";
+            %>
+            <br>
+                per info telefonare a <%=GestioneUtente.getUserInfo(path, owner).phone%>
+            <br>
+            <% } %>
             
             <% if (apartments_list.get(i).img_url.size() > 0){ %>
             

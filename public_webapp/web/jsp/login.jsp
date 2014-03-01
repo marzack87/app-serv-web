@@ -16,16 +16,16 @@
             <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>
             <div class ="login_form">
                 <form action="/public_webapp/LoginServlet" method="post">
-                USERNAME 
-                <br>
-                <input type="text" name="user">
-                <br>
-                PASSWORD 
-                <br>
-                <input type="password" name="pwd">
-                <br>
-                <input class="button" type="submit" value="ACCEDI">
-            </form>
+                    USERNAME 
+                    <br>
+                    <input type="text" name="user">
+                    <br>
+                    PASSWORD 
+                    <br>
+                    <input type="password" name="pwd">
+                    <br>
+                    <input class="button" type="submit" value="ACCEDI">
+                </form>
                 <br>
                 non hai un account? <a href="/public_webapp/jsp/register.jsp">REGISTRATI</a>
             </div>

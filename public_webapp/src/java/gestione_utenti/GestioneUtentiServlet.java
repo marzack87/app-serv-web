@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utility.GestioneUtente;
+import utility.User;
 
 /**
  *
@@ -31,20 +33,119 @@ public class GestioneUtentiServlet extends HttpServlet {
                         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
                         path = path+"/users.xml";
                         
-                        //getUserInfo ha bisogno del path qui sopra e del nome utente e ritorna un oggetto User
-                        //getAllUser ha bisogno del path qui sopra e basta e ritorna un array list di utenti
-                        //editUser ha bisogno del path qui sopra e di tutti i dati utente e ritorna un int guarda nel metodo in user per sapere i valori
-                        //deleteUser ha bisogno del path qui sopra e dell'username e ritorna un int come sopra guarda nel metodo per sapere i valori
+                        String query = request.getParameter("q");
                         
-                        //Questi qui decidi tu come scriverli e cosa ti serve
-                        //request.setAttribute("users_list", users);
-                        //request.setAttribute("from", "user");
-                        //RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_elenco_annunci.jsp");
-                        //rd_forward.forward(request, response);
+                        if (query.equals("user_info")){
+                            
+                            String user_name = (String) request.getSession().getAttribute("user");
+                            User user = GestioneUtente.getUserInfo(path, user_name);
+                            
+                            request.setAttribute("utente", user);
+                            RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_info.jsp");
+                            rd_forward.forward(request, response);
+                        
+                        } else if (query.equals("users_list")){
+                            
+                            String user_name = (String) request.getSession().getAttribute("user");
+                            
+                            if (GestioneUtente.getUserInfo(path, user_name).isAdmin()){
+                            
+                                ArrayList<User> users = GestioneUtente.getAllUser(path);
+                            
+                                request.setAttribute("lista_utenti", users);
+                                RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/admin_utenti.jsp");
+                                rd_forward.forward(request, response);
+                            
+                            } else {
+                            
+                                request.setAttribute("msg", "non hai i diritti necessari per accedere alla lista di tutti gli utenti");
+                                RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                                rd_forward.forward(request, response);
+                            
+                            }
+                        } else if (query.equals("delete_user")) {
+                            
+                            String user_to_delete = request.getParameter("user");
+                            if (user_to_delete != null) {
+                                int result = GestioneUtente.deleteUser(path, user_to_delete);
+                                
+                                if (result == 0){
+                                    response.sendRedirect("/public_webapp/GestioneUtentiServlet?q=users_list");
+                                } else if (result == 1) {
+                                    request.setAttribute("msg", "L'username " + user_to_delete + " non corrisponde a nessun utente");
+                                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                                    rd_forward.forward(request, response);
+                                } else {
+                                    request.setAttribute("msg", "Si è verificato un problema durante l'eliminazione dell'utente");
+                                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                                    rd_forward.forward(request, response);
+                                }
+                                
+                            } else {
+                                response.sendRedirect("/public_webapp/index.jsp");
+                            }
+                            
+                        } else {
+                                response.sendRedirect("/public_webapp/index.jsp");
+                        }
                         
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute("msg", e.getMessage());
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                        rd_forward.forward(request, response);
 		}
+                
 	}
+                
+                public void doPost(
+		HttpServletRequest request,
+		HttpServletResponse response)
+		throws ServletException, IOException {
+		try {
+			response.setContentType("text/html");
+       
+                        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
+                        path = path+"/users.xml";
+                        
+                        String query = request.getParameter("q");
+                        
+                        if (query.equals("edit_user")) {
+                            
+                            String user_to_edit = request.getParameter("username");
+                            if (user_to_edit != null) {
+                                
+                                String name = request.getParameter("name");
+                                String surname = request.getParameter("surname");
+                                String phone = request.getParameter("phone");
+                                String password = request.getParameter("password");
+                                
+                                int result = GestioneUtente.editUser(path, user_to_edit, password, name, surname, phone, "0");
+                                
+                                if (result == 0){
+                                    response.sendRedirect("/public_webapp/GestioneUtentiServlet?q=user_info");
+                                } else if (result == 1) {
+                                    request.setAttribute("msg", "L'username " + user_to_edit + " non corrisponde a nessun utente");
+                                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                                    rd_forward.forward(request, response);
+                                } else {
+                                    request.setAttribute("msg", "Si è verificato un problema durante l'eliminazione dell'utente");
+                                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                                    rd_forward.forward(request, response);
+                                }
+                                
+                            } else {
+                                response.sendRedirect("/public_webapp/index.jsp");
+                            }
+                            
+                        } else {
+                                response.sendRedirect("/public_webapp/index.jsp");
+                        }
+                        
+		} catch (Exception e) {
+			request.setAttribute("msg", e.getMessage());
+                        RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                        rd_forward.forward(request, response);
+		}
+        }
 
 }

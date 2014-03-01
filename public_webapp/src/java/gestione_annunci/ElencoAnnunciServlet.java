@@ -47,9 +47,7 @@ public class ElencoAnnunciServlet extends HttpServlet {
                             admin = true;
                         }
                         
-                        GestioneAnnunci gest = new GestioneAnnunci();
-                        
-                        ArrayList<Apartment> apartments = gest.listAnnunci(path,(String) session.getAttribute("user"), admin);
+                        ArrayList<Apartment> apartments = GestioneAnnunci.listAnnunci(path,(String) session.getAttribute("user"), admin);
                         
                         if (admin) request.setAttribute("admin", "1");
                         request.setAttribute("apartments_list", apartments);

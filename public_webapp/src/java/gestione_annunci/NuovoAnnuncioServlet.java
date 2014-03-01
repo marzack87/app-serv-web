@@ -114,9 +114,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                     }
                 }
                 
-                GestioneAnnunci gest = new GestioneAnnunci();
-                
-                String id_apartment = gest.aggiungiAnnuncio(path, user, indirizzo, civico, citta, tipo_alloggio,
+                String id_apartment = GestioneAnnunci.aggiungiAnnuncio(path, user, indirizzo, civico, citta, tipo_alloggio,
                         tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
                         terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali,nessune_spese);
                 

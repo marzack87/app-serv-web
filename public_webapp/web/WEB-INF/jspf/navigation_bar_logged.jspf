@@ -29,7 +29,7 @@
             <a href="/public_webapp/jsp/user_nuovo.jsp" class="item">Nuovo Annuncio</a>
         </li>
         <li>
-            <a href="/public_webapp/jsp/user_info.jsp" class="item">Informazioni Utente</a>
+            <a href="/public_webapp/GestioneUtentiServlet?q=user_info" class="item">Informazioni Utente</a>
         </li>
     </ul>
     <div class="login">
@@ -44,10 +44,10 @@
     <img src="/public_webapp/multimedia/logo.png">
     <ul>
         <li>
-            <a href="/public_webapp/jsp/admin_utenti.jsp" class="item">Gestione Utenti</a>
+            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Gestione Annunci</a>
         </li>
         <li>
-            <a href="/public_webapp/ElencoAnnunciServlet" class="item">Gestione Annunci</a>
+            <a href="/public_webapp/GestioneUtentiServlet?q=users_list" class="item">Gestione Utenti</a>
         </li>
     </ul>
     <div class="login">
