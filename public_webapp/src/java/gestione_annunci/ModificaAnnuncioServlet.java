@@ -26,6 +26,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+import utility.GestioneAnnunci;
 
 /**
  *
@@ -112,7 +113,10 @@ public class ModificaAnnuncioServlet extends HttpServlet {
                             break;
                     }
                 }
-                int annuncioedited = editAnnuncio(path, apartment_id, user, indirizzo, civico, citta, tipo_alloggio,
+                
+                GestioneAnnunci gest = new GestioneAnnunci();
+                
+                int annuncioedited = gest.modificaAnnuncio(path, apartment_id, user, indirizzo, civico, citta, tipo_alloggio,
                         tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
                         terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali,nessune_spese);
                 
@@ -148,122 +152,6 @@ public class ModificaAnnuncioServlet extends HttpServlet {
         }
     }
     
-    private int editAnnuncio (String pathToWrite, String apartment_id, String user,String indirizzo,String civico,String citta,
-            String tipo_alloggio,String tipo_cucina,String bagni,
-            String camere_da_letto,String n_piano,String ascensore,String garage,
-            String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
-            String acqua,String gas,String luce,String condominiali, String nessune_spese) throws Exception
-    {
-        try
-        {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(pathToWrite);
-
-            //Prendo tutti gli apartment:
-            NodeList apartments = document.getElementsByTagName("Apartment");
-
-            for (int i = 0; i < apartments.getLength(); i++)
-            {
-                Node node = apartments.item(i);
-                NodeList list = node.getChildNodes();
-                boolean find = false;
-                for (int k = 0; k < list.getLength(); k++)
-                {
-                    if ("ID".equals(list.item(k).getNodeName()))
-                    {
-                        if (list.item(k).getTextContent().equals(apartment_id))
-                        {
-                            find = true;
-                            break;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-
-                if (find)
-                {
-                    for (int n = 0; n < list.getLength(); n++)
-                    {
-                        if (list.item(n).getNodeName().equals("Indirizzo"))
-                        {
-                            list.item(n).setTextContent(indirizzo);
-                        } else if (list.item(n).getNodeName().equals("Prezzo_Posto"))
-                        {
-                            list.item(n).setTextContent(prezzo_posto);
-                        } else if (list.item(n).getNodeName().equals("Posti_Liberi"))
-                        {
-                            list.item(n).setTextContent(posti_liberi);
-                        } else if (list.item(n).getNodeName().equals("Civico"))
-                        {
-                            list.item(n).setTextContent(civico);
-                        } else if (list.item(n).getNodeName().equals("Citta"))
-                        {
-                            list.item(n).setTextContent(citta);
-                        } else if (list.item(n).getNodeName().equals("Tipo_Alloggio"))
-                        {
-                            list.item(n).setTextContent(tipo_alloggio);
-                        } else if (list.item(n).getNodeName().equals("Tipo_Cucina"))
-                        {
-                            list.item(n).setTextContent(tipo_cucina);
-                        } else if (list.item(n).getNodeName().equals("Bagni"))
-                        {
-                            list.item(n).setTextContent(bagni);
-                        } else if (list.item(n).getNodeName().equals("Camere_Letto"))
-                        {
-                            list.item(n).setTextContent(camere_da_letto);
-                        } else if (list.item(n).getNodeName().equals("N_Piano"))
-                        {
-                            list.item(n).setTextContent(n_piano);
-                        } else if (list.item(n).getNodeName().equals("Ascensore"))
-                        {
-                            list.item(n).setTextContent(ascensore);
-                        } else if (list.item(n).getNodeName().equals("Garage"))
-                        {
-                            list.item(n).setTextContent(garage);
-                        } else if (list.item(n).getNodeName().equals("Terrazzo"))
-                        {
-                            list.item(n).setTextContent(terrazzo);
-                        } else if (list.item(n).getNodeName().equals("Posti_Totali"))
-                        {
-                            list.item(n).setTextContent(posti_totali);
-                        } else if (list.item(n).getNodeName().equals("Spese_Acqua"))
-                        {
-                            list.item(n).setTextContent(acqua);
-                        } else if (list.item(n).getNodeName().equals("Spese_Gas"))
-                        {
-                            list.item(n).setTextContent(gas);
-                        } else if (list.item(n).getNodeName().equals("Spese_Luce"))
-                        {
-                            list.item(n).setTextContent(luce);
-                        } else if (list.item(n).getNodeName().equals("Spese_Condominiali"))
-                        {
-                            list.item(n).setTextContent(condominiali);
-                        }
-                        else if (list.item(n).getNodeName().equals("Nessune_Spese"))
-                        {
-                            list.item(n).setTextContent(nessune_spese);
-                        }
-                    }
-                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                    Transformer transformer = transformerFactory.newTransformer();
-                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                    DOMSource source = new DOMSource(document);
-                    StreamResult result = new StreamResult(new File(pathToWrite));
-                    transformer.transform(source, result);
-                    
-                    return 0;
-                }
-            }
-            
-            return 1;
-        
-        } catch (Exception ex)
-        {
-            return 2;
-        }
-    }
     private boolean checkDatabase (String path)
     {
         File f = new File(path);

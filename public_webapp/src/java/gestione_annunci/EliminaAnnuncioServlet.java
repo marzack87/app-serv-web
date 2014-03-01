@@ -31,6 +31,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
+import utility.GestioneAnnunci;
 
 /**
  *
@@ -48,7 +49,9 @@ public class EliminaAnnuncioServlet extends HttpServlet {
                         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
                         path = path+"/home_db.xml";
                         
-                        int annunciodeleted = deleteAnnuncio(path,request.getParameter("id_apartment"));
+                        GestioneAnnunci gest = new GestioneAnnunci();
+                        
+                        int annunciodeleted = gest.eliminaAnnuncio(path,request.getParameter("id_apartment"));
                         
                         if (annunciodeleted == 0)
                         {
@@ -74,64 +77,4 @@ public class EliminaAnnuncioServlet extends HttpServlet {
 
 		}
 	}
-    
-    private int deleteAnnuncio(String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException,
-            IOException, TransformerConfigurationException, TransformerException 
-    {
-        try
-        {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(pathToWrite);
-            
-            Element root = document.getDocumentElement();
-            
-            //Prendo tutti gli apartment:
-            NodeList apartments = document.getElementsByTagName("Apartment");
-
-            for (int i = 0; i < apartments.getLength(); i++)
-            {
-                Node node = apartments.item(i);
-                NodeList list = node.getChildNodes();
-                boolean find = false;
-                for (int k = 0; k < list.getLength(); k++)
-                {
-                    if ("ID".equals(list.item(k).getNodeName()))
-                    {
-                        if (list.item(k).getTextContent().equals(apartment_id))
-                        {
-                            find = true;
-                            break;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-
-                if (find)
-                {
-                    
-                    root.removeChild(node);
-                    
-                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                    Transformer transformer = transformerFactory.newTransformer();
-                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                    DOMSource source = new DOMSource(document);
-                    StreamResult result = new StreamResult(new File(pathToWrite));
-                    transformer.transform(source, result);
-                    
-                    return 0;
-                }
-            }
-            
-            return 1;
-        
-        } catch (Exception ex)
-        {
-            return 2;
-        }
-        
-    }
-
-
 }

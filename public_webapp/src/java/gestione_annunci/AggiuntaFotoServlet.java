@@ -39,6 +39,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
+import utility.GestioneAnnunci;
 
 /**
  *
@@ -149,7 +150,8 @@ public class AggiuntaFotoServlet extends HttpServlet {
             
             if (checkDatabase(pathApartment_db))
             {
-                int added = handleImages(images,images_to_delete, pathApartment_db, id_annuncio);
+                GestioneAnnunci gest = new GestioneAnnunci();
+                int added = gest.gestioneImmagini(images,images_to_delete, pathApartment_db, id_annuncio);
                 if (added == 0)
                 {
                     request.setAttribute("msg", "Operazione eseguita correttamente!");
@@ -179,119 +181,6 @@ public class AggiuntaFotoServlet extends HttpServlet {
             RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
             rd_forward.forward(request, response);
          }
-        
-    }
-    
-    private int handleImages(ArrayList <String> images,ArrayList <String> images_to_delete, String pathToWrite, String apartment_id) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException 
-    {
-        try
-        {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(pathToWrite);
-
-            //Prendo tutti gli apartment:
-            NodeList apartments = document.getElementsByTagName("Apartment");
-
-            for (int i = 0; i < apartments.getLength(); i++)
-            {
-                Node node = apartments.item(i);
-                NodeList list = node.getChildNodes();
-                boolean find = false;
-                for (int k = 0; k < list.getLength(); k++)
-                {
-                    if ("ID".equals(list.item(k).getNodeName()))
-                    {
-                        if (list.item(k).getTextContent().equals(apartment_id))
-                        {
-                            find = true;
-                            break;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-
-                if (find)
-                {
-                    if (images_to_delete.size() > 0)
-                    {   
-                        boolean delete_done = false;
-                        
-                        for (int n = 0; n < list.getLength(); n++)
-                        {
-                            if ("Images".equals(list.item(n).getNodeName()))
-                            {
-                                delete_done = true;
-                                NodeList all_images = list.item(n).getChildNodes();
-                                for (int m = 0; m < all_images.getLength(); m++)
-                                {
-                                    if (images_to_delete.contains(all_images.item(m).getTextContent()))
-                                    {
-                                        list.item(n).removeChild(all_images.item(m));
-                                    }
-                                }
-                            }
-                            if (delete_done == true)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    
-                    boolean exist_images = false;
-                    
-                    for (int n = 0; n < list.getLength(); n++)
-                    {
-                        if ("Images".equals(list.item(n).getNodeName()))
-                        {
-                             exist_images = true;
-                             for (int j = 0; j < images.size(); j++)
-                             {
-                                Element img = document.createElement("Image");
-                                list.item(n).appendChild(img);
-                                Text text_img = document.createTextNode(images.get(j));
-                                img.appendChild(text_img);
-                             }
-                        }
-                        
-                        if(exist_images == true)
-                        {
-                            break;
-                        }
-                    }
-                    
-                    if (exist_images == false)
-                    {
-                        Element imges_node = document.createElement("Images");
-                        node.appendChild(imges_node);
-
-                        for (int j = 0; j < images.size(); j++)
-                        {
-                            Element img = document.createElement("Image");
-                            imges_node.appendChild(img);
-                            Text text_img = document.createTextNode(images.get(j));
-                            img.appendChild(text_img);
-                        } 
-                    }
-
-                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                    Transformer transformer = transformerFactory.newTransformer();
-                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                    DOMSource source = new DOMSource(document);
-                    StreamResult result = new StreamResult(new File(pathToWrite));
-                    transformer.transform(source, result);
-                    
-                    return 0;
-                }
-            }
-            
-            return 1;
-        
-        } catch (Exception ex)
-        {
-            return 2;
-        }
         
     }
     
