@@ -22,9 +22,8 @@
             path = path+"/users.xml";
             User user_info = GestioneUtente.getUserInfo(path, (String) session.getAttribute("user"));
         %>
-        
-        <div class ="register_form">
-            <form action="/public_webapp/GestioneUtentiServlet" method="post">
+        <div class="register_form">
+            <form action="/public_webapp/GestioneUtentiServlet" method="post" id="user_info_form">
                 <input type="hidden" name="q" value="edit_user">
                 <input type="hidden" name="username" value="<%= user_info.user_name %>">
                 Nome 
@@ -45,8 +44,40 @@
                 <br>
                 <input type="password" name="password" value="<%= user_info.password %>">
                 <br>
-                <input class="button" type="submit" value="MODIFICA">
+                <br>
+                <a class="button" href="#" onclick="check_form()">MODIFICA</a>
             </form>
         </div>
+                
+        <script type="text/javascript">
+            function check_form(){
+                var ok = true;
+                ok = ok & check_input_field('name');
+                ok = ok & check_input_field('surname');
+                ok = ok & check_input_field('phone');
+                ok = ok & check_input_field('user_name');
+                ok = ok & check_input_field('password');
+                if (ok){
+                    submit_form();
+                }
+
+            }
+
+            function check_input_field(name){
+                var element = document.getElementsByName(name)[0];
+                if (element.value != ''){
+                    element.style["border"] = "1px solid silver" ;
+                    return true;
+                } else {
+                    element.style["border"] = "2px solid red" ;
+                    return false;
+                }
+            }
+
+            function submit_form(){
+                document.getElementById('user_info_form').submit();
+            }
+        </script>
+                
     </body>
 </html>

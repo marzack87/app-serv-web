@@ -78,8 +78,7 @@
             <a class="text_very_big button" href="#" onclick="check_form()">INSERISCI ANNUNCIO</a>
         </div>
         <br>
-    </body>
-    
+        
     <script type="text/javascript">
         function check_floor(){
             var floor = document.getElementsByName("n_piano")[0];
@@ -175,5 +174,7 @@
             
         }
     </script>
+        
+    </body>
     
 </html>
