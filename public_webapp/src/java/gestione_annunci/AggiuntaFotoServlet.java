@@ -145,8 +145,6 @@ public class AggiuntaFotoServlet extends HttpServlet {
             //Quindi ora le aggiungo nel rispettivo annuncio
             String pathApartment_db = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
             pathApartment_db = pathApartment_db+"/home_db.xml";
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/user_nuovo_foto.jsp");
-            PrintWriter out_response = response.getWriter();
             
             if (checkDatabase(pathApartment_db))
             {
