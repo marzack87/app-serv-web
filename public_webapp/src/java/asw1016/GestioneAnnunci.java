@@ -112,26 +112,39 @@ public class GestioneAnnunci {
         return list;
     }
     
-    public static ArrayList<Map> cercaAppartamento (String path,final String [] parameters)
+    public static Document cercaAppartamento (String path,final String [] parameters) throws ParserConfigurationException
     {
         ArrayList<Apartment> list = searchApartment(path, parameters);
         
-        ArrayList<Map> array_map = new ArrayList<Map>();
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = dbf.newDocumentBuilder();
+        Document doc = builder.newDocument();
         
+        Element search = doc.createElement("search_result");
+        doc.appendChild(search);
+            
         for (int i = 0; i<list.size();i++)
         {
             Map <String, String> map = new HashMap<String,String>();
             
             Apartment ap = list.get(i);
-            ArrayList<String> images = ap.getImg_url();
             
+            Element apt_el = doc.createElement("apartment");
+            search.appendChild(apt_el);
+            
+            Element img_el = doc.createElement("img");
+            apt_el.appendChild(img_el);
+            
+            ArrayList<String> images = ap.getImg_url();
             if (images.size() > 0)
             {
-                map.put("img",images.get(0));
+                Text text = doc.createTextNode(images.get(0));
+                img_el.appendChild(text);
             } else {
-                map.put("img","");
+                Text text = doc.createTextNode("");
+                img_el.appendChild(text);
             }
-            
+
             String tipologia = "Locale";
             if (ap.getTipologia().equals("0")){
                 tipologia = "Appartamento";
@@ -145,13 +158,21 @@ public class GestioneAnnunci {
                                                       " n° " + ap.getCivico() + " a " + ap.getCitta() + " di propietà di "
                                                       + ap.getProprietario() + ". <br> Posti Liberi: " + ap.getPostiLiberi()
                                                       + " <br> Prezzo per persona: " + ap.getPrezzo() + " €";
-            map.put("description",descrizione);
-            map.put("id_apartment",ap.getId());
             
-            array_map.add(map);
+            Element descrp_el = doc.createElement("description");
+            apt_el.appendChild(descrp_el);
+
+            Text text = doc.createTextNode(descrizione);
+            descrp_el.appendChild(text);
+            
+            Element id_ap_el = doc.createElement("id_apartment");
+            apt_el.appendChild(id_ap_el);
+
+            Text text2 = doc.createTextNode(ap.getId());
+            id_ap_el.appendChild(text2);
         }
         
-        return array_map;
+        return doc;
     }
     
     private static ArrayList<Apartment> searchApartment (String path,final String [] parameters)
