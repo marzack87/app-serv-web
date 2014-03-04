@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Progetto d'esame di Applicativi e Servizi Web</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body bgcolor="#F5F5F5">
+        <div>
+        	<h1><font color="red"> Progetto d'esame di Applicativi e Servizi Web</font></h1>
+        </div>
+        
+        <div>
+        	<h2>Titolo: </h2>
+        	<p>Gestione annunci alloggi studenti</p>
+        </div>
+        
+        <div>
+        	<h2>Autori:</h2>
+        		<ul>
+        			<li>Buscarini Andrea 0000681254 andrea.buscarini@studio.unibo.it</li>
+        			<li>Nompleggio Pietro Antonio 0000681295 pietro.nompleggio@studio.unibo.it</li>
+        			<li>Zaccheroni Marco 0000681215 marco.zaccheroni2@studio.unibo.it</li>
+        		</ul>
+        </div>
+        
+        <div>
+        	<h2>Descrizione del servizio offerto:</h2>
+        		<p>il nostro progetto prevede la realizzazione di un sito web per la gestione degli annunci per gli alloggi di studenti universitari. Offriamo la possibilità  di realizzare un account per poter inserire/modificare i propri annunci utilizzando una form di inserimento, inoltre è possibile per tutti poter cercare gli annunci già inseriti in base ad alcuni criteri di ricerca.<br>L'operazione di inserimento e di modifica prevede due step: il primo per l'inserimento dei dati dell'annuncio tramite un form e il secondo step prevede l'inserimento delle immagini dell'alloggio; immagini che vengono poi visualizzate tramite un applet.</p>
+        </div>
+        
+        <div>
+        	<h2>Utilizzo del sito:</h2>
+        		<ul>
+	        		<li>Ogni Utente Pubblico, quindi non registrato alla nostra piattaforma, può liberamente cercare un annuncio di un locale tramite un apposito servizio, che permette di effettuare una ricerca per campi, come indirizzo, posti liberi, costo e tipologia dell'alloggio. In oltre può consultare una pagina dedica ai contatti.</li>
+	        		<li>Gli Utenti Registrati al sito possono inserire nuovi annunci per i loro alloggi che intendono mettere a disposizione, inserendo le informazioni richieste ed eventualmente anche le relative immagini; inoltre vi è la possibilità di consultare una lista con tutti gli annunci inseriti dall'utente ed i relativi dati, e pulsanti che permettono la modifica e la cancellazione di un singolo annuncio.</li>
+	        		<li>Il ruolo dell'amministratore consiste nella cancellazione di un singolo utente e di singoli annunci dal database nella sezione riservata agli utenti registrati, accedendovi con un account dedicato, interagendo con le sezioni <i>Gestione Utenti</i> e <i>Gestione Annunci</i>.
+	        		</li>
+        		</ul>
+        </div>
+        
+        <div>
+        	<h2>Realizzazione del sito:</h2>
+        		<ol>
+        			<li><b>Computazione lato client: </b><br>
+        				lato client è possibile ricercare un annuncio andando nell'apposita sezione <i>Cerca Alloggio</i> dove, tramite un applet, si effettua una ricerca nel database xml per corrispondenza dei campi di ricerca inseriti; in particolare si può ricercare un annuncio per: indirizzo, tipologia del locale, posti liberi e costo per persona. I risultati della ricerca vengono brevemente descritti dentro l'applet in una tabella dove per ogni riga vi è un'immagine (se disponibile) e una breve descrizione dell'annuncio. Cliccando sopra la riga della tabella si aprirà una pagina dedicata all'annuncio dove questo viene descritto in maniera più particolareggiata e vengono mostrate le foto tramite un applet che crea una vista orizzontale scorrevole per una visione completa e più compatta delle foto.<br> Oltre alla ricerca, lato client è possibile registrarsi al sito tramite l'apposito form e interagire con la sezione dedicata agli utenti registrati; che permette di visualizzare gli annunci inseriti dall'utente, sezione <i>Elenco Annunci Inseriti</i>, e all'occorrenza modificarli (tramite un form apposito) o eliminarli, inserire un nuovo annuncio e visualizzare le proprie informazioni.<br>
+        				<br>
+        			<center>
+        				<input type="button" onclick="location.href='#lato_client'" value="Sezione specifica per le tecnologie e la computazione utilizzate lato client">
+        			</center>
+	        		<br>
+	        		<br>
+        			</li>
+        			<li><b>Computazione lato server: </b><br>
+        			lato server la computazione consiste nella memorizzazione degli annunci inseriti e nella loro effettiva gestione sul database, che consiste quindi nella modifica e nell'eliminazione. Oltre alla gestione degli annunci, lato server si gestiscono anche gli utenti; infatti si memorizzano i nuovi utenti e le loro informazioni su un database dedicato e si gestisce il loro accesso al sito tramite un form di login, dove si cercheranno le corrispondenze tra il nome utente e password inserite nel form e tutti gli utenti e relative password memorizzate nel database; ciò è visibile cliccando il pulsante <i>ADMIN</i>.<br>
+        			<br>
+        			<center>
+        				<input type="button" onclick="location.href='#lato_server'" value="Sezione specifica per le tecnologie e la computazione utilizzate lato server"> 
+        			</center>
+        			<br>
+        			<br>
+        			</li>
+        			<li><b>Il tipo di informazione memorizzata sul server e scambiata su rete: </b><br>
+        			il database utilizzato nel server è una base di dati XML. Le informazioni scambiate sono principalmente stringhe contenenti i campi di ricerca, come identificativo dell'alloggio o indirizzo, e URL di pagine jsp o servlet del sito oppure URL di immagini di un particolare alloggio. In locale vengono anche memorizzati file che contengono le foto degli annunci, in particolare hanno una dimensione massima prestabilite (10 MB).<br>
+        			<br>
+        			<center>
+        				<input type="button"onclick="location.href='#scambio_data'" value="Sezione specifica per le tecnologie e la computazione utilizzate per lo scambio e la memorizzazione dei dati">
+        			</center>
+        			<br>
+        			<br>
+        			</li>
+        	
+        </div>
+        
+        <div>
+        	<a name="lato_client">
+        		<h3>Dettaglio computazione lato client:</h3><br>
+        			<ul>
+        				<li><b>Ricerca annuncio</b>: la ricerca di un annuncio avviene tramite un Applet Java (<code>SearchApplet</code>) che recupera i valori dei campi di ricerca, inseriti nella propria GUI, e quando si clicca il pulsante <i>Cerca</i> li spedisce ad una servlet (<code>SearchServlet.java</code>), mediante metodo Post, dopo essersi connessa ad essa tramite il metodo <code>getServletConnection()</code>. La servlet cerca i campi nel database (specifica nella descrizione lato server) e restituisce i risultati inviandoli allo stream dati creato e collegato alla connessione alla servlet; tali dati vengono poi visualizzati nella tabella (<i>XML Over HTTP</i>). Ogni riga della tabella è cliccabile e genera un evento gestito da un <code>MouseListener</code> che genera un oggetto di classe <code>MouseAdapter</code>, il quale tramite il metodo <code>mouseClicked</code> richiede l'esecuzione di una servlet (<code>AnnuncioServlet</code>), la quale cerca tutte le informazioni relative al particolare id dell'annuncio descritto nella riga della tabella, inserito nell'URL con metodo GET, nel database e visualizza all'utente una nuova pagina jsp, <code>user_elenco_annunci.jsp</code>, che conterrà tutte le informazioni dell'annuncio cliccato.<br>
+        				Nella stessa pagina jsp c'è un'altra Applet Java (<code>viewApplet</code>) che visualizza le immagini (per la descrizione della seguente Applet si veda in seguito).<br>
+        				L'utilizzo di un Applet per la ricerca è stato deciso per ottenere i risultati della computazione visibili in maniera asincrona e con un'interfaccia grafica che fosse migliore e più interattiva di un semplice form html, in quanto riteniamo questa sezione centrale all'interno del contesto della piattaforma.<br>
+        				Oltre al pulsante <i>Cerca</i> l'applet è dotata anche di un pulsante <i>Reset</i> che azzera i campi.
+        				</li>
+        				<br>
+        				<li><b>Descrizione di un annuncio e visualizzazione delle immagini</b>: questa sezione prende corpo quando si clicca in una riga della tabella dell'Applet descritta in precedenza (<code>SearchApplet</code>). Cliccando viene generato un <code>MouseEvent</code> che viene gestito da un ascoltatore di tipo <code>MouseAdapter</code>, il quale invoca la servlet <code>AnnuncioServlet</code>, passando nell'URL tramite metodo GET l'identificativo dell'appartamento di cui desideriamo visualizzare le informazioni. Nella servlet invochiamo il metodo <code>cercaAppartamentoPerID</code> passandogli il percorso che raggiunge il database e l'id dell'apartamento, il quale andrà a cercare dentro il database le corrispondenze con il parametro passato e restituirà un ArrayList di oggetti <code>Apartment</code>, che definiscono un locale secondo tutti i suoi parametri. Aggiungo la lista appena ottenuta come paramentro della <code>response</code>, insieme ad un altro paramentro (<code>from</code>) che indica la provenienza della richiesta, e la invio alla pagina jsp <code>user_elenco_annunci.jsp</code>. Tale pagina esamina i parametri passati dalla <code>request</code> e li stampa in maniera ordinata e leggibile. Sotto questa descrizione c'è un area dedicata alla visualizzazione delle foto dell'annuncio; se non sono state inserite foto si visualizzerà una immagine di default (<code>no_foto.png</code>), in caso contrario viene invocata l'esecuzione di un Applet Java, la <code>viewApplet</code>, alla quale è passato un parametro tramite tag html <code>&ltparam&gt</code> contenente una stringa composta dai nomi delle immagini separati da un carattere speciale predefito (#).<br>
+        				L'Applet recupera il parametro e lo splitta per ottenere i singoli nomi delle immagini; questi nomi servono per recuperare dal server le immagini e visualizzarle con una dimensione stabilita, mantendendo però lo stesso rapporto altezza/larghezza, dentro un pannello scorrevole orizzontalmente posto sotto la descrizione dell'annuncio.
+        				</li>
+        				<br>
+        				<li><b>Registrazione al sito</b>: Per registrarsi al sito si clicca sul pulsante <i>ACCEDI</i> nella barra in alto e si carica la pagina jsp <code>login.jsp</code>. Da questa pagina si può accedere oppure registrarsi al sito, nel caso non si sia in possesso di un account:
+        					<ul>
+        						<li>per accedere al sito si devono riempire i campi <i>USERNAME</i> e <i>PASSWORD</i> del form html presente nella pagina jsp e cliccando sul bottone <i>ACCEDI</i> viene lanciata la servlet <code>LoginServlet</code> passandogli tramite metodo POST i parametri. La servlet recupera i parametri e tramite il metodo <code>check_user</code> controllo se le credenziali inserite sono presenti nel database riservati agli utenti, <code>users.xml</code>, e nel caso sia presente controlla anche se l'utente è l'admin, in questo caso il metodo ritorna 2, o un utente normale, ritorna 1; nel caso non sia registrato ritorna 0. Nel caso l'utente sia registrato viene settato un cookie e viene preparata una richiesta GET impacchettando come parametri l'username e un flag admin, tale richiesta viene inviata alla servlet <code>ElencoAnnunciServlet</code>; in caso di errore viene visualizzato un messaggio di errore o rimandato alla registrazione. La servlet recupera i parametri e cerca gli annunci relativi all'username passato (nel caso sia l'amministratore vengono passati tutti gli annunci) tramite il metodo <code>listAnnunci</code> contenuto nella classe <code>GestioneAnnunci</code> del package <code>utility</code>. La lista ottenuta viene impostata come paramentro della richiesta insieme ad un campo <code>from</code> che indica la provenienza del processo; la richiesta viene poi inoltrata alla pagina jsp <code>user_elenco_annunci</code> che visualizza gli annunci dell'utente passati come parametro. Oltre alle informazioni, per ogni annuncio, vengono visualizzate le foto, se disponibili, riferite al locale in esame tramite l'Applet <code>viewApplet</code> descritta in precedenza.
+        						</li>
+        						<li>per registrarsi al sito viene invocata la pagina jsp <code>register</code> che visualizza un form html e invia i parametri , mediante metodo POST, alla servlet <code>RegisterServlet</code> che controllerà se l'utente esiste e nel caso lo memorizzerà nel database degli utenti (<code>user.xml</code>).
+        						</li>
+        					</ul>
+        				</li>
+        				<br>
+        				<li><b>Visualizzazione degli annunci inseriti</b>: si consultano questa sezione dopo essere acceduti alla piattaforma con le proprie credenziali. Cliccando nella barra menu alla voce <i>Annunci Inseriti</i> si invoca l'esecuzione della sopra citata <code>ElencoAnnunciServlet</code>, a cui rimandiamo per le specifiche sul processo.
+        				</li>
+        				<li><b>Modifica degli annunci</b>: si esegue questa procedura dalla lista degli annunci inseriti descritta al punto precendetemente; infatti sotto le immagini visualizzate dall'Applet ci sono due bottoni: <i>Modifica</i> ed <i>Elimina</i>. Cliccando <i>Modifica</i> viene invocata la servlet <code>AnnuncioServlet</code>, settando con metodo GET il parametro edit a 1. La servlet recupera le informazioni dell'annuncio tramite il metodo <code>cercaAppartamentoPerID</code> contenuto nella classe <code>GestioneAnnunci</code>, setta l'arraylist come attributo della richiesta ed la inoltra alla pagina jsp <code>user_modifica</code>. In questa pagina è presente un form html, uguale a quello visualizzato per l'inserimento di un annuncio, con i campi che mostrano le attuali informazioni memorizzate per l'annuncio; è possibile quindi modificare tali informazioni. Una volta completate le modifiche, cliccando sul bottone <i>MODIFICA</i> viene eseguita una funzione javascript (<code>check_form()</code>). La funzione <code>check_form()</code> richiama le funzioni javascript <code>check_input_field()</code> e <code>check_group()</code> che controllano che i campi obbligatori siano effettivamente stati compilati; ulteriori controlli sulla compilazione vengono effettuati dalle funzioni <code>no_spese()</code>, che controlla che se viene cliccato il campo Nessuna spesa inclusa gli altri campi che descrivono le altre spese siano spuntati e, e <code>check_floor()</code>, che controlla che il campo Ascensore sia imputato a locali che non siano a piano terra. Una volta che tutte queste funzioni di controllano abbiano ritornato un valore positivo, si esegue la funzione javascript <code>submit_form()</code> che inoltra l'annuncio a <code>ModificaAnnuncioServlet</code>. La servlet controlla la presenza del database, poi chiama il metodo <code>modificaAnnuncio</code> del package <code>GestioneAnnunci</code> che andrà a modificare l'annuncio sul database per poi richiamare la pagina jsp <code>user_modifica_foto</code> che visualizza un form html che richiama la servlet <code>AggiuntaFotoServlet</code> che carica effettivamente le foto sul server e che richiama delle funzioni javascript che eliminano le foto e che le salvano: <code>remove_photo</code>, <code>remove_photo_saved</code>, <code>add_photo</code>, <code>save_photo</code>.
+        				</li>
+        				<br>
+        				<li><b>Elimina degli annunci</b>: tale processo viene inizializzato cliccando il bottone <i>Elimina</i> descritto al punto precedente. Cliccando sul bottone <i>Elimina</i> si richiede l'esecuzione della servlet <code>EliminaAnnuncioServlet</code> tramite metodo GET passando come parametro l'identificativo dell'annuncio. La servlet elimina l'annuncio utilizzando il metodo <code>eliminaAnnuncio</code> contenuto nel package <code>GestioneAnnunci</code>. In base all'esito della procedura di eliminazione, viene visualizzato da una pagina jsp apposita invocata dopo il processo di eliminazione, <code>user_messaggio</code>, che appunto visualizza il messaggio inviato dalla servlet settandolo come attributo della richiesta.
+        				</li>
+        				<br>
+        				<li><b>Inserimento di nuovo annuncio</b>: viene creato un nuovo annuncio cliccando sul menu nella sezione <i>Nuovo Annuncio</i>. Viene invocata la pagina jsp <code>user_nuovo</code> che contiene un form html che visualizza i campi che descrivono l'annuncio. Cliccando su <i>INSERISCI ANNUNCIO</i> viene lanciata una serie di funzioni javascript, come quelle descritte in precedenza per la modifica di un annuncio, che controllano la bontà delle informazioni inserite; in particolare tali funzioni sono:<code>check_input_field()</code>, <code>check_group()</code> e <code>check_floor()</code>, richiamate dalla funzione <code>check_form()</code>, che come ultima funzione esegue la funzione <code>submit_form()</code> che a sua volta emette una richiesta POST a <code>NuovoAnnuncioServlet</code> settando come parametri i campi inseriti nel form. La servlet tramite il metodo <code>aggiungiAnnuncio</code> del package <code>GestioneAnnunci</code> andrà a memorizzare sulla base di dati l'annuncio inserito. Viene poi effettuata una richiesta alla pagina jsp <code>user_nuova_foto</code>. Nella pagina jsp vi è un form che consente di inserire immagini presenti in locale nel client, gestirle tramite le funzioni javascript <code>remove_photo</code>, <code>add_photo</code> e  <code>save_photo</code>. Tali foto vengono poi salvate inviando una richiesta alla servlet <code>AggiuntaFotoServlet</code> tramite metodo POST. Vi è anche la possibilità di proseguire senza aggiungere foto. 
+        				</li>
+        				<br>
+        				<li><b>Visualizzazione delle informazioni di un utente</b>: le informazioni di un utente vengono visualizzate nella sezione del sito dedicata agli utenti registrati, cliccando sul bottone <i>Informazioni Utente</i>, che inoltra una richiesta GET a <code>GestioneUtentiServlet</code> settando come attributo <code>user_info</code>. La servlet recupera dalla sessione l'attributo <code>user</code> e tramite il metodo <code>getUserInfo</code> della classe <code>GestioneUtente</code> recupera le informazioni su un utente, un oggetto di tipo <code>User</code>, che poi verra impostato come attributo della richiesta della pagina jsp <code>user_info</code> che visualizzerà le informazioni e dove sarà possibile modificarle cliccando sul bottone <i>MODIFICA</i> che a sua volta richiede la pagina jsp <code>user_modifica_info</code>. In quest'ultima jsp c'è un form html compilato con le attuali informazioni sull'utente che è però editabile; si controllano le informazioni modificate tramite le funzioni javascript descritte sopra. Cliccando su <i>MODIFICA</i> si richiederà di nuovo la servlet <code>GestioneUtentiServlet</code> che salva sul database le nuove informazioni.
+        				</li>
+        				
+        			</ul>
+        	</a>
+        </div>
+        
+        <div>
+        	<a name="lato_server">
+        		<h3>Dettaglio computazione lato server:</h3><br>
+        			<ul>
+        				<li><b>Ricerca di un annuncio</b>: la servlet <code>SearchServlet</code> recupera i parametri di ricerca dall'Applet (<code>SearchApplet</code>) aprendo e leggendo l'<code>InputStream</code> che viene trasmesso come parametro della richiesta. Cerca poi i campi nel database ,sfruttando il metodo <code>cercaAppartamento</code> della classe <code>GestioneAnnunci</code>. Questo metodo sfrutta un altro metodo per cercare le informazioni sul database: il metodo <code>searchApartment</code>, che sfrutta un oggetto di classe <code>SAXParser</code>. Abbiamo scelto di cercare le informazioni dentro il database xml con un oggetto <code>SAXParser</code> (che si utilizza solo in lettura) perchè risulta più efficiente in lettura del parser DOM che di default fornisce Java. Per funzionare il <code>SAXParser</code> necessita di un oggetto <code>DeafultHandler</code>, dove abbiamo sovrascritto i metodi per adattarli al nostro database e alle nostre richieste. Il processo di parsing si sviluppa in questo modo: si richiama il metodo <code>parse</code> sull'oggetto <code>SAXParser</code> passando come parametri sia il percorso sul server del database che l'oggetto <code>DeafultHandler</code>, in questo modo vengono automaticamente richiamati in loop, fino alla fine del file xml, in questa successione, i metodi <code>startElement</code>, <code>character</code> e <code>endElement</code> che effettueranno effettivamente le letture sul database. I risultati della lettura vengono inseriti in un oggetto arraylist di oggetti <code>Apartment</code> che sono processati e ne vengono stampate le informazioni che essi contengono.
+        				</li>
+        				<br>
+        				<li><b>Ricerca di un annuncio per ID</b>: questo processo viene generato dalla servlet <code>AnnuncioServlet</code> che richiama il metodo <code>cercaAppartamentoPerID</code> della classe <code>GestioneAnnunci</code>. Il metodo in evidenza richiama un metodo della stessa classe: <code>serchApartmentForID</code>, il quale si sviluppa come il metodo <code>searchApartment</code> descritto sopra, differenziandosi solamente nel metodo <code>characters</code> dell'oggetto <code>DefaultHandler</code>; infatti in questo caso ricerca una corrispondenza tra l'identificativo passato come parametro e i campi che definiscono l'id di un annuncio dentro il database.
+        				</li>
+        				<br>
+        				<li><b>Aggiunta foto</b>: si ottiene eseguendo la servlet <code>AggiuntaFotoServlet</code> alla quale viene passato come parametro della richiesta un file diviso in più parti (<code>ServletFileUpload.isMultipartContent(request);</code>). Si crea quindi un oggetto di tipo <code>DiskFileItemFactory</code> (classe compresa nella libreria <code>org.apache.commons.fileupload.disk.DiskFileItemFactory</code>), il quale ha il compito di memorizzare temporaneamente parti di file fintanto che la loro grandezza non supera una soglia prefissata dal parametro <code>SizeThresold</code> (che nel nostro caso sono 4 KB). Le foto vengono salvate al percorso <code>multimedia/photos</code>, che viene impostato nella <code>DiskFileItemFactory</code> con il metodo <code>setRepository</code>. Per ricevere effettivamente i bit che compongono la foto si crea un oggetto <code>ServletFileUpload</code>, passandogli come parametro la factory creata e settando la dimensione massima del file da processare (10 MB). Si traduce la richiesta  si processano le parti di file da memorizzare. Infine si crea un nome univoco per l'immagine creando una stringa particolare che aggiunge al nome del file anche un timestamp, si memorizza quindi il nome della foto tra le informazioni dell'annuncio corrispondente tramite in metodo <code>gestioneImmagini</code> della classe <code>GestioneAnnunci</code>. Questo metodo si appoggia al metodo della stessa classe <code>handleImages</code>, il quale crea un oggetto <code>DocumetBuilder</code> che una volta trovato l'annuncio che corrisponde all'identificativo cercato, scrive il nome della foto caricata creato in precedenza tra le informazioni creando un nuovo nodo all'albero xml sfruttando un oggetto <code>DOMSource</code> che agisce come supporto per le trasformazioni di Source tree nella forma di Document Object Model tree. L'effettiva scrittura viene eseguita da un oggetto <code>Transformer</code> che con il metodo <code>trasform</code> scrive l'oggetto  <code>DOMSource</code> nel database.
+        				</li>
+        				<br>
+        				<li><b>Elenco annunci</b>: viene creato grazie alla servlet <code>ElencoAnnunciServlet</code>, che sfrutta il metodo <code>listAnnunci</code> della classe <code>GestioneAnnunci</code>, la quale a sua volta si appoggia al metodo <code>cercaAnnunciPerUtente</code> che sfrutta il medesimo processo descritto per le altre azioni di ricerca, aggiungendo un controllo nel metodo <code>character</code> dell'oggetto <code>DefaultHandler</code> per cercare una corrispondenza tra l'utente cercato e quelli presenti nel database.
+        				</li>
+        				<br>
+        				<li><b>Elimina annuncio</b>: questa funzionalità viene generata dalla servlet <code>EliminaAnnuncioServlet</code> che grazie al metodo <code>eliminaAnnuncio</code>, il quale sfrutta <code>deleteAnnuncio</code>, cerca tra tutte le radici del file xml, grazie ad un oggetto <code>Documet</code>, l'annuncio desiderato e rimuove tutti i figli sfruttando i soliti oggetti <code>DOMSource</code> e <code>Transformer</code>.
+        				</li>
+        				<li><b>Nuovo annuncio</b>: per l'inserimento di un nuovo annuncio si sfrutta la servlet <code>NuovoAnnuncioServlet</code>. Questa servlet richiama il metodo <code>aggiungiAnnuncio</code> della classe <code>GestioneAnnunci</code>. A sua volta viene richiamato il metodo statico <code>addApartment</code> che tramite un oggetto di tipo <code>Documet</code> crea un nuovo nodo nel database indicato aggiungendo opportunamente i campi passati e memorizzandoli grazie al supporto degli oggetti <code>DOMSource</code> e <code>Transformer</code>.
+        				</li>
+        				<br>
+        				<li><b>Modifica annuncio </b>: per la modifica di un nuovo annuncio si sfrutta la servlet <code>ModificaAnnuncioServlet</code>. La servlet esegue il metodo <code>modificaAnnuncio</code> della classe <code>GestioneAnnunci</code>, che si appoggia al metodo statico <code>editAnnuncio</code>. Quest'ultimo metodo, tramite un oggetto di tipo <code>Document</code>, recupera tutti gli elementi <code>Apartment</code> e ricerca tra questi elementi quello che corrisponde con l'identificativo cercato che viene passato dalla servlet. Una volta trovato si aggiornano tutti i campi e si riscrive l'elemento sfruttando gli oggetti <code>DOMSource</code> e <code>Transformer</code>.
+        				</li>
+        				<br>
+        				<li><b>Creazione nuovo utente</b>: questo processo viene generato dalla servlet <code>RegisterServlet</code>, che richiama un su metodo interno <code>checkDatabase</code> per controllare se esiste il database o se è la prima registrazione al sito; successivamente viene chiamato il metodo <code>check_add_user</code> che prende in ingresso i parametri della richiesta (che sono i campi della form html descritta lato client) e tramite l'oggetto <code>Document</code>, prima controllo che l'utente non sia già presente nel database confrontando l'username passato con quelli presenti, nel caso non sia presente allora creo un nuovo nodo nell'albero xml e con il metodo <code>appendChild</code> aggiungo al nodo tutti i campi dell'elemento. L'effettiva scrittura viene assegnata agli elementi <code>DOMSource</code> e <code>Transformer</code>.
+        				</li>
+        				<br>
+        			</ul>
+        	
+        	</a>
+        </div>
+
+        <div>
+        	<a name="scambio_data">
+        		<h3>Dettaglio delle informazioni memorizzate sul server:</h3><br>
+        		ci sono due database xml memorizzati sul server: <code>home_db.xml</code> e <code>users.xml</code>. Il file <code>home_db.xml</code> contiene tutte le informazioni relative al locale descritto in un annuncio; in particolare ogni nodo <code>Apartment</code> è composto da una serie di figli: ID, indirizzo, civico, città, tipo_alloggio, tipo_cucina, bagni, camere_letto, n_piano, ascensore, garage, terrazzo, posti_totali, posti_liberi, prezzo_posto, spese_acqua, spese_gas, spese_luce, spese_condominiali, nessune_spese e images. Per quanto riguarda l'<code>users.xml</code>, ogni elemento è composto dai campi: username, password, name, surname, phone e admin (che può contenere solo valori pari a 1, se l'utente è l'admin, o 0).       	
+        	</a>
+        </div>
+
+        
+    </body>
+</html>
+
