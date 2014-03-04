@@ -4,15 +4,13 @@
  * and open the template in the editor.
  */
 
-package gestione_annunci;
+package asw1016;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,15 +26,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
-import utility.GestioneAnnunci;
 
 /**
  *
- * @author marco
+ * @author Piero
  */
-@WebServlet(name = "NuovoAnnuncioServlet", urlPatterns = {"/NuovoAnnuncioServlet"})
-public class NuovoAnnuncioServlet extends HttpServlet {
-    
+public class ModificaAnnuncioServlet extends HttpServlet {
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -50,8 +46,8 @@ public class NuovoAnnuncioServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/user_nuovo.jsp");
-        PrintWriter out= response.getWriter();
+        //RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/user_nuovo.jsp");
+        //PrintWriter out= response.getWriter();
         
         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
         path = path+"/home_db.xml";
@@ -60,6 +56,7 @@ public class NuovoAnnuncioServlet extends HttpServlet {
         {
             try 
             {
+                String apartment_id = request.getParameter("id_apartment");
                 String user = request.getParameter("user_name");
                 String indirizzo = request.getParameter("indirizzo");
                 String civico = request.getParameter("civico");
@@ -94,6 +91,8 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                 String condominiali = "0";
                 String nessune_spese = "0";
                 
+                String images = request.getParameter("images");
+                
                 for (int i = 0; i < spese_incluse.length; i++) {
                     switch (Integer.parseInt(spese_incluse[i])) {
                         case 0:
@@ -114,30 +113,39 @@ public class NuovoAnnuncioServlet extends HttpServlet {
                     }
                 }
                 
-                String id_apartment = GestioneAnnunci.aggiungiAnnuncio(path, user, indirizzo, civico, citta, tipo_alloggio,
+                int annuncioedited = GestioneAnnunci.modificaAnnuncio(path, apartment_id, user, indirizzo, civico, citta, tipo_alloggio,
                         tipo_cucina, bagni, camere_da_letto, n_piano, ascensore, garage, 
                         terrazzo, posti_totali, posti_liberi, prezzo_posto, acqua, gas, luce, condominiali,nessune_spese);
                 
-                if (id_apartment != null)
+                if (annuncioedited == 0)
                 {
-                    //Annuncio inserito correttamente
-                    request.setAttribute("id_apartment", id_apartment);
-                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_nuovo_foto.jsp");
+                    //Modificato correttamente
+                    request.setAttribute("images", images);
+                    request.setAttribute("id_apartment", apartment_id);
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/user_modifica_foto.jsp");
                     rd_forward.forward(request, response);
-                    
-                } else {
-                    out.println("<div align=center><font color=red >Errore inserimento annuncio.</font></div>");
-                    rd.include(request, response);
+                } else if (annuncioedited == 1)
+                {
+                    //Annuncio non trovato con quell'id
+                    request.setAttribute("msg", "nessun annuncio trovato con l'ID indicato");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
+                } else if (annuncioedited == 2)
+                {
+                    //Errore nella modifica dell'annuncio
+                    request.setAttribute("msg", "si è verificato un problema durante la modifica dell'annuncio");
+                    RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
+                    rd_forward.forward(request, response);
                 }
                   
             } catch (Exception ex) {
-                out.println("<div align=center><font color=red >Errore nella creazionde dell'annuncio.</font></div>");
-                rd.include(request, response);
+                //out.println("<div align=center><font color=red >Errore nella modifica dell'annuncio.</font></div>");
+                //rd.include(request, response);
             }
             
         } else {
-            out.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
-            rd.include(request, response);
+            //out.println("<div align=center><font color=red >Errore nella lettura del database.</font></div>");
+            //rd.include(request, response);
         }
     }
     
@@ -150,29 +158,8 @@ public class NuovoAnnuncioServlet extends HttpServlet {
             return true;
         } else {
             //Non esiste il database quindi è la prima registrazione e va creato
-            try
-            {
-                DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-                Document doc = documentBuilder.newDocument();
-                Element root_users = doc.createElement("Apartments");
-                doc.appendChild(root_users);
-
-                DOMSource source = new DOMSource(doc);
-
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                StreamResult result = new StreamResult(path);
-                transformer.transform(source, result);
-                
-                return true;
-            }
-            catch(Exception e)
-            {
-               System.out.println(e);
-               return false;
-            }
+            return false;
         }
     }
+
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gestione_annunci;
+package asw1016;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,8 +20,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import utility.Apartment;
-import utility.GestioneAnnunci;
 
 /**
  *

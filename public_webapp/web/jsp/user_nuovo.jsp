@@ -51,7 +51,7 @@
             <span class='space'></span>
             <label>N° Piano: <input type="number" class="smaller" min="-1" name="n_piano" onchange="check_floor()"></label>
             <span class='space'></span>
-            <label style="display: inline"><input type="checkbox" name="ascensore" value="1" disabled="true"> Ascensore</label>
+            <label style="display: inline"><input type="checkbox" name="ascensore" value="1" disabled> Ascensore</label>
             <br>
             <label style="display: inline"><input type="checkbox" name="garage" value="1"> Garage</label>
             <span class='space'></span>

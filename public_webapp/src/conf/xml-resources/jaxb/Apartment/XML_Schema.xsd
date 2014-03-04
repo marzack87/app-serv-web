@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="username"/>
+                            <xs:element type="xs:string" name="password"/>
+                            <xs:element type="xs:string" name="name"/>
+                            <xs:element type="xs:string" name="surname"/>
+                            <xs:element type="xs:string" name="phone"/>
+                            <xs:element type="xs:byte" name="admin"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="user_name" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="apartments">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="apartment" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="id"/>
+                            <xs:element type="xs:string" name="indirizzo"/>
+                            <xs:element type="xs:short" name="civico"/>
+                            <xs:element type="xs:string" name="citta"/>
+                            <xs:element type="xs:byte" name="tipo_alloggio"/>
+                            <xs:element type="xs:byte" name="tipo_cucina"/>
+                            <xs:element type="xs:byte" name="bagni"/>
+                            <xs:element type="xs:byte" name="camere_letto"/>
+                            <xs:element type="xs:byte" name="n_piano"/>
+                            <xs:element type="xs:byte" name="ascensore"/>
+                            <xs:element type="xs:byte" name="garage"/>
+                            <xs:element type="xs:byte" name="terrazzo"/>
+                            <xs:element type="xs:byte" name="posti_totali"/>
+                            <xs:element type="xs:byte" name="posti_liberi"/>
+                            <xs:element type="xs:short" name="prezzo_posto"/>
+                            <xs:element type="xs:byte" name="spese_acqua"/>
+                            <xs:element type="xs:byte" name="spese_gas"/>
+                            <xs:element type="xs:byte" name="spese_luce"/>
+                            <xs:element type="xs:byte" name="spese_condominiali"/>
+                            <xs:element type="xs:byte" name="nessune_spese"/>
+                            <xs:element name="images" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="image" maxOccurs="unbounded" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                    </xs:sequence>
+                        <xs:attribute type="xs:string" name="user_name" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gestione_annunci;
+package asw1016;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
-import utility.GestioneAnnunci;
 
 /**
  *

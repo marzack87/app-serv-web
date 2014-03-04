@@ -4,7 +4,7 @@
     Author     : marco
 --%>
 
-<%@page import="utility.User"%>
+<%@page import="asw1016.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,13 +24,13 @@
                 User user_info = (User) request.getAttribute("utente");
             %>
             NOME:<br>
-            <div class="text_very_big"><%=user_info.name %></div>
+            <div class="text_very_big"><%= user_info.getName() %></div>
             <br>COGNOME:<br>
-            <div class="text_very_big"><%=user_info.surname %></div>
+            <div class="text_very_big"><%= user_info.getSurname() %></div>
             <br>USERNAME:<br>
-            <div class="text_very_big"><%=user_info.user_name %></div>
+            <div class="text_very_big"><%= user_info.getUser_name() %></div>
             <br>TELEFONO:<br>
-            <div class="text_very_big"><%=user_info.phone %></div>
+            <div class="text_very_big"><%= user_info.getPhone() %></div>
         </div>
         <br>
         <div class="centered">

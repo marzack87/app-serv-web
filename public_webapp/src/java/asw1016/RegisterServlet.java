@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package login;
+package asw1016;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -104,7 +104,7 @@ public class RegisterServlet extends HttpServlet {
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
                 Document doc = documentBuilder.newDocument();
-                Element root_users = doc.createElement("Users");
+                Element root_users = doc.createElement("users");
                 doc.appendChild(root_users);
 
                 DOMSource source = new DOMSource(doc);
@@ -134,7 +134,7 @@ public class RegisterServlet extends HttpServlet {
         
         boolean register_user = true;
         
-        NodeList nList = document.getElementsByTagName("User");
+        NodeList nList = document.getElementsByTagName("user");
         
         for (int temp = 0; temp < nList.getLength(); temp++)
         {
@@ -158,41 +158,41 @@ public class RegisterServlet extends HttpServlet {
         Element root = document.getDocumentElement();
         
         //This method creates an element node
-        Element root_user = document.createElement("User");
+        Element root_user = document.createElement("user");
         root_user.setAttribute("user_name", username);
         root.appendChild(root_user);
 
-        Element username_child = document.createElement("Username");
+        Element username_child = document.createElement("username");
         root_user.appendChild(username_child);
 
         Text text = document.createTextNode(username);
         username_child.appendChild(text);
 
-        Element password_child = document.createElement("Password");
+        Element password_child = document.createElement("password");
         root_user.appendChild(password_child);
 
         Text text1 = document.createTextNode(pwd);
         password_child.appendChild(text1);
         
-        Element name_element = document.createElement("Name");
+        Element name_element = document.createElement("name");
         root_user.appendChild(name_element);
 
         Text text2 = document.createTextNode(name);
         name_element.appendChild(text2);
         
-        Element surname_element = document.createElement("Surname");
+        Element surname_element = document.createElement("surname");
         root_user.appendChild(surname_element);
 
         Text text3 = document.createTextNode(surname);
         surname_element.appendChild(text3);
         
-        Element phone_element = document.createElement("Phone");
+        Element phone_element = document.createElement("phone");
         root_user.appendChild(phone_element);
 
         Text text4 = document.createTextNode(phone);
         phone_element.appendChild(text4);
         
-        Element admin_element = document.createElement("Admin");
+        Element admin_element = document.createElement("admin");
         root_user.appendChild(admin_element);
 
         Text text5 = document.createTextNode("0");

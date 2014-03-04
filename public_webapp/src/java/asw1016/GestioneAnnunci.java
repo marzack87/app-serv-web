@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package utility;
+package asw1016;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class GestioneAnnunci {
         int result = 0;
         
         for (Apartment ap : annunci_utente) {
-            result = deleteAnnuncio(path, ap.id_apartment);
+            result = deleteAnnuncio(path, ap.getId());
             if (result == 2) return 2;
         }
         
@@ -86,7 +86,7 @@ public class GestioneAnnunci {
         
     }
     
-    public static String aggiungiAnnuncio (String pathToWrite, String user,String indirizzo,String civico,String citta,
+    public static String aggiungiAnnuncio (String pathToWrite, String user, String indirizzo,String civico,String citta,
             String tipo_alloggio,String tipo_cucina,String bagni,
             String camere_da_letto,String n_piano,String ascensore,String garage,
             String terrazzo,String posti_totali,String posti_liberi,String prezzo_posto,
@@ -122,28 +122,31 @@ public class GestioneAnnunci {
         {
             Map <String, String> map = new HashMap<String,String>();
             
-            if (list.get(i).img_url.size() > 0)
+            Apartment ap = list.get(i);
+            ArrayList<String> images = ap.getImg_url();
+            
+            if (images.size() > 0)
             {
-                map.put("img",list.get(i).img_url.get(0));
+                map.put("img",images.get(0));
             } else {
                 map.put("img","");
             }
             
             String tipologia = "Locale";
-            if (list.get(i).tipologia == "0"){
+            if (ap.getTipologia().equals("0")){
                 tipologia = "Appartamento";
-            }else if(list.get(i).tipologia == "1"){
+            }else if(ap.getTipologia().equals("1")){
                 tipologia = "Villetta";
-            }else if(list.get(i).tipologia == "2"){
+            }else if(ap.getTipologia().equals("2")){
                 tipologia = "Casa Indipendente";
             }
             
-            String descrizione = "<html>" + tipologia+ " in " + list.get(i).address + 
-                                                      " n° " + list.get(i).civico + " a " + list.get(i).citta + " di propietà di "
-                                                      + list.get(i).user_owner + ". <br> Posti Liberi: " + list.get(i).posti_liberi 
-                                                      + " <br> Prezzo per persona: " + list.get(i).prezzo + " €";
+            String descrizione = "<html>" + tipologia+ " in " + ap.getIndirizzo() + 
+                                                      " n° " + ap.getCivico() + " a " + ap.getCitta() + " di propietà di "
+                                                      + ap.getProprietario() + ". <br> Posti Liberi: " + ap.getPostiLiberi()
+                                                      + " <br> Prezzo per persona: " + ap.getPrezzo() + " €";
             map.put("description",descrizione);
-            map.put("id_apartment",list.get(i).id_apartment);
+            map.put("id_apartment",ap.getId());
             
             array_map.add(map);
         }
@@ -183,35 +186,34 @@ public class GestioneAnnunci {
                 public void startElement(String uri, String localName,String qName, 
                         Attributes attributes) throws SAXException {
 
-                    if (qName.equals("Apartment"))
+                    if (qName.equals("apartment"))
                     {
                         aprt = new Apartment();
-                        aprt.user_owner = attributes.getValue("user_name");
-                        aprt.img_url = new ArrayList<String> ();
+                        aprt.setProprietario(attributes.getValue("user_name"));
                         jump_element = false;
                         
-                    } else if (qName.equals("ID") && !jump_element)
+                    } else if (qName.equals("id") && !jump_element)
                     {
                         ap_id = true;
-                    } else if (qName.equals("Indirizzo") && !jump_element)
+                    } else if (qName.equals("indirizzo") && !jump_element)
                     {
                         ap_address = true;
-                    } else if (qName.equals("Prezzo_Posto") && !jump_element)
+                    } else if (qName.equals("prezzo_posto") && !jump_element)
                     {
                         ap_prezzo_posto = true;
-                    } else if (qName.equals("Posti_Liberi") && !jump_element)
+                    } else if (qName.equals("posti_liberi") && !jump_element)
                     {
                         ap_posti_liberi = true;
-                    } else if (qName.equals("Civico") && !jump_element)
+                    } else if (qName.equals("civico") && !jump_element)
                     {
                         ap_civico = true;
-                    } else if (qName.equals("Citta") && !jump_element)
+                    } else if (qName.equals("citta") && !jump_element)
                     {
                         ap_citta = true;
-                    } else if (qName.equals("Tipo_Alloggio") && !jump_element)
+                    } else if (qName.equals("tipo_alloggio") && !jump_element)
                     {
                         ap_tipo_alloggio = true;
-                    } else if (qName.equals("Image") && !jump_element)
+                    } else if (qName.equals("image") && !jump_element)
                     {
                         ap_image = true;
                     } 
@@ -220,14 +222,14 @@ public class GestioneAnnunci {
                public void characters(char ch[], int start, int length) throws SAXException {
                    
                    if (ap_id) {
-                       aprt.id_apartment = new String(ch, start, length);
+                       aprt.setId(new String(ch, start, length));
                        ap_id = false;
                    }
                    if (ap_address){
-                       aprt.address = new String(ch, start, length);
+                       aprt.setIndirizzo(new String(ch, start, length));
                        ap_address = false;
                        
-                       if (!parameters[0].equals("") && !aprt.address.toLowerCase().contains(parameters[0].toLowerCase()))
+                       if (!parameters[0].equals("") && !aprt.getIndirizzo().toLowerCase().contains(parameters[0].toLowerCase()))
                        {
                            jump_element = true;
                        }
@@ -235,7 +237,7 @@ public class GestioneAnnunci {
                    if (ap_prezzo_posto){
                        int prezzo_apt = Integer.parseInt(new String(ch, start, length));
                        int prezzo_search = (!parameters[1].equals("")) ? Integer.parseInt(parameters[1]) : 0;
-                       aprt.prezzo = new String(ch, start, length);
+                       aprt.setPrezzo(new String(ch, start, length));
                        ap_prezzo_posto = false;
                        if(!parameters[1].equals("") && prezzo_apt > prezzo_search)
                        {
@@ -245,7 +247,7 @@ public class GestioneAnnunci {
                    if (ap_posti_liberi){
                        int posti_apt = Integer.parseInt(new String(ch, start, length));
                        int posti_search = (!parameters[2].equals("")) ? Integer.parseInt(parameters[2]) : 0;
-                       aprt.posti_liberi = new String(ch, start, length);
+                       aprt.setPostiLiberi(new String(ch, start, length));
                        ap_posti_liberi = false;
                        if (!parameters[2].equals("") && posti_apt < posti_search)
                        {
@@ -253,25 +255,25 @@ public class GestioneAnnunci {
                        }
                    }
                    if (ap_tipo_alloggio){
-                       aprt.tipologia = new String(ch, start, length);
+                       aprt.setTipologia(new String(ch, start, length));
                        ap_tipo_alloggio = false;
                        String str = parameters[3];
-                       if (!parameters[3].equals("") && !parameters[3].equals(aprt.tipologia))
+                       if (!parameters[3].equals("") && !parameters[3].equals(aprt.getTipologia()))
                        {
                            jump_element = true;
                        }
                        
                    }
                    if (ap_civico){
-                       aprt.civico = new String(ch, start, length);
+                       aprt.setCivico(new String(ch, start, length));
                        ap_civico = false;
                    }
                    if (ap_citta){
-                       aprt.citta = new String(ch, start, length);
+                       aprt.setCitta(new String(ch, start, length));
                        ap_citta = false;
                    }
                    if (ap_image){
-                       aprt.img_url.add(new String(ch, start, length));
+                       aprt.addImg_url(new String(ch, start, length));
                        ap_image = false;
                    }
                 }
@@ -280,7 +282,7 @@ public class GestioneAnnunci {
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
-                    if (qName.equals("Apartment"))
+                    if (qName.equals("apartment"))
                     {
                        if (!jump_element)
                        {
@@ -351,75 +353,74 @@ public class GestioneAnnunci {
                 public void startElement(String uri, String localName,String qName, 
                         Attributes attributes) throws SAXException {
 
-                    if (qName.equals("Apartment"))
+                    if (qName.equals("apartment"))
                     {
                         aprt = new Apartment();
-                        aprt.user_owner = attributes.getValue("user_name");
-                        aprt.img_url = new ArrayList<String> ();
+                        aprt.setProprietario(attributes.getValue("user_name"));
                         jump_element = false;
                         
-                    } else if (qName.equals("ID") && !jump_element)
+                    } else if (qName.equals("id") && !jump_element)
                     {
                         ap_id = true;
-                    } else if (qName.equals("Indirizzo") && !jump_element)
+                    } else if (qName.equals("indirizzo") && !jump_element)
                     {
                         ap_address = true;
-                    } else if (qName.equals("Prezzo_Posto") && !jump_element)
+                    } else if (qName.equals("prezzo_posto") && !jump_element)
                     {
                         ap_prezzo_posto = true;
-                    } else if (qName.equals("Posti_Liberi") && !jump_element)
+                    } else if (qName.equals("posti_liberi") && !jump_element)
                     {
                         ap_posti_liberi = true;
-                    } else if (qName.equals("Civico") && !jump_element)
+                    } else if (qName.equals("civico") && !jump_element)
                     {
                         ap_civico = true;
-                    } else if (qName.equals("Citta") && !jump_element)
+                    } else if (qName.equals("citta") && !jump_element)
                     {
                         ap_citta = true;
-                    } else if (qName.equals("Tipo_Alloggio") && !jump_element)
+                    } else if (qName.equals("tipo_alloggio") && !jump_element)
                     {
                         ap_tipo_alloggio = true;
-                    } else if (qName.equals("Tipo_Cucina") && !jump_element)
+                    } else if (qName.equals("tipo_cucina") && !jump_element)
                     {
                         ap_tipo_cucina = true;
-                    } else if (qName.equals("Bagni") && !jump_element)
+                    } else if (qName.equals("bagni") && !jump_element)
                     {
                         ap_bagni = true;
-                    } else if (qName.equals("Camere_Letto") && !jump_element)
+                    } else if (qName.equals("camere_letto") && !jump_element)
                     {
                         ap_cam_letto = true;
-                    } else if (qName.equals("N_Piano") && !jump_element)
+                    } else if (qName.equals("n_piano") && !jump_element)
                     {
                         ap_piano = true;
-                    } else if (qName.equals("Ascensore") && !jump_element)
+                    } else if (qName.equals("ascensore") && !jump_element)
                     {
                         ap_ascensore = true;
-                    } else if (qName.equals("Garage") && !jump_element)
+                    } else if (qName.equals("garage") && !jump_element)
                     {
                         ap_garage = true;
-                    } else if (qName.equals("Terrazzo") && !jump_element)
+                    } else if (qName.equals("terrazzo") && !jump_element)
                     {
                         ap_terrazzo = true;
-                    } else if (qName.equals("Posti_Totali") && !jump_element)
+                    } else if (qName.equals("posti_totali") && !jump_element)
                     {
                         ap_posti_tot = true;
-                    } else if (qName.equals("Spese_Acqua") && !jump_element)
+                    } else if (qName.equals("spese_acqua") && !jump_element)
                     {
                         ap_spese_acqua = true;
-                    } else if (qName.equals("Spese_Gas") && !jump_element)
+                    } else if (qName.equals("spese_gas") && !jump_element)
                     {
                         ap_spese_gas = true;
-                    } else if (qName.equals("Spese_Luce") && !jump_element)
+                    } else if (qName.equals("spese_luce") && !jump_element)
                     {
                         ap_spese_luce = true;
-                    } else if (qName.equals("Spese_Condominiali") && !jump_element)
+                    } else if (qName.equals("spese_condominiali") && !jump_element)
                     {
                         ap_spese_cond = true;
                     }
-                    else if (qName.equals("Nessune_Spese") && !jump_element)
+                    else if (qName.equals("nessune_spese") && !jump_element)
                     {
                         ap_nessuna_spesa = true;
-                    } else if (qName.equals("Image") && !jump_element)
+                    } else if (qName.equals("image") && !jump_element)
                     {
                         ap_image = true;
                     }
@@ -428,92 +429,92 @@ public class GestioneAnnunci {
                public void characters(char ch[], int start, int length) throws SAXException {
                    
                    if (ap_id) {
-                       aprt.id_apartment = new String(ch, start, length);
-                       if (!aprt.id_apartment.equals(apartment_id))
+                       aprt.setId(new String(ch, start, length));
+                       if (!aprt.getId().equals(apartment_id))
                        {
                            jump_element = true;
                        }
                        ap_id = false;
                    }
                    if (ap_address){
-                       aprt.address = new String(ch, start, length);
+                       aprt.setIndirizzo(new String(ch, start, length));
                        ap_address = false;
                    }
                    if (ap_prezzo_posto){
-                       aprt.prezzo = new String(ch, start, length);
+                       aprt.setPrezzo(new String(ch, start, length));
                        ap_prezzo_posto = false;
                    }
                    if (ap_posti_liberi){
-                       aprt.posti_liberi = new String(ch, start, length);
+                       aprt.setPostiLiberi(new String(ch, start, length));
                        ap_posti_liberi = false;
                    }
                    if (ap_tipo_alloggio){
-                       aprt.tipologia = new String(ch, start, length);
+                       aprt.setTipologia(new String(ch, start, length));
                        ap_tipo_alloggio = false;
                        
                    }
                    if (ap_civico){
-                       aprt.civico = new String(ch, start, length);
+                       aprt.setCivico(new String(ch, start, length));
                        ap_civico = false;
                    }
                    if (ap_citta){
-                       aprt.citta = new String(ch, start, length);
+                       aprt.setCitta(new String(ch, start, length));
                        ap_citta = false;
                    }
                    if (ap_tipo_cucina){
-                       aprt.tipo_cucina = new String(ch, start, length);
+                       aprt.setTipo_cucina(new String(ch, start, length));
                        ap_tipo_cucina = false;
                    }
                    if (ap_bagni){
-                       aprt.bagni = new String(ch, start, length);
+                       aprt.setBagni(new String(ch, start, length));
                        ap_bagni = false;
                    }
                    if (ap_cam_letto){
-                       aprt.camere_letto = new String(ch, start, length);
+                       aprt.setCamere_letto(new String(ch, start, length));
                        ap_cam_letto = false;
                    }
                    if (ap_piano){
-                       aprt.n_piano = new String(ch, start, length);
+                       aprt.setPiano(new String(ch, start, length));
                        ap_piano = false;
                    }
                    if (ap_ascensore){
-                       aprt.ascensore = new String(ch, start, length);
+                       aprt.setAscensore(new String(ch, start, length));
                        ap_ascensore = false;
                    }
                    if (ap_garage){
-                       aprt.garage = new String(ch, start, length);
+                       aprt.setGarage(new String(ch, start, length));
                        ap_garage = false;
                    }
                    if (ap_terrazzo){
-                       aprt.terrazzo = new String(ch, start, length);
+                       aprt.setTerrazzo(new String(ch, start, length));
                        ap_terrazzo = false;
                    }
                    if (ap_posti_tot){
-                       aprt.posti_totali = new String(ch, start, length);
+                       aprt.setPostiTotali(new String(ch, start, length));
                        ap_posti_tot = false;
                    }
                    if (ap_spese_acqua){
-                       aprt.spese_acqua = new String(ch, start, length);
+                       aprt.setSpeseAcqua(new String(ch, start, length));
                        ap_spese_acqua = false;
                    }
                    if (ap_spese_gas){
-                       aprt.spese_gas = new String(ch, start, length);
+                       aprt.setSpeseGas(new String(ch, start, length));
                        ap_spese_gas = false;
                    }
                    if (ap_spese_luce){
-                       aprt.spese_luce = new String(ch, start, length);
+                       aprt.setSpeseLuce(new String(ch, start, length));
                        ap_spese_luce = false;
                    }
                    if (ap_spese_cond){
-                       aprt.spese_cond = new String(ch, start, length);
+                       aprt.setSpeseCond(new String(ch, start, length));
                        ap_spese_cond = false;
                    }
                    if (ap_nessuna_spesa){
-                       aprt.ness_spesa = new String(ch, start, length);
+                       aprt.setNoSpese(new String(ch, start, length));
                        ap_nessuna_spesa = false;
                    }
                    if (ap_image){
-                       aprt.img_url.add(new String(ch, start, length));
+                       aprt.addImg_url(new String(ch, start, length));
                        ap_image = false;
                    }
                 }
@@ -522,7 +523,7 @@ public class GestioneAnnunci {
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
-                    if (qName.equals("Apartment"))
+                    if (qName.equals("apartment"))
                     {
                        if (!jump_element)
                        {
@@ -558,7 +559,7 @@ public class GestioneAnnunci {
             Document document = documentBuilder.parse(pathToWrite);
 
             //Prendo tutti gli apartment:
-            NodeList apartments = document.getElementsByTagName("Apartment");
+            NodeList apartments = document.getElementsByTagName("apartment");
 
             for (int i = 0; i < apartments.getLength(); i++)
             {
@@ -567,7 +568,7 @@ public class GestioneAnnunci {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    if ("ID".equals(list.item(k).getNodeName()))
+                    if ("id".equals(list.item(k).getNodeName()))
                     {
                         if (list.item(k).getTextContent().equals(apartment_id))
                         {
@@ -587,7 +588,7 @@ public class GestioneAnnunci {
                         
                         for (int n = 0; n < list.getLength(); n++)
                         {
-                            if ("Images".equals(list.item(n).getNodeName()))
+                            if ("images".equals(list.item(n).getNodeName()))
                             {
                                 delete_done = true;
                                 NodeList all_images = list.item(n).getChildNodes();
@@ -610,12 +611,12 @@ public class GestioneAnnunci {
                     
                     for (int n = 0; n < list.getLength(); n++)
                     {
-                        if ("Images".equals(list.item(n).getNodeName()))
+                        if ("images".equals(list.item(n).getNodeName()))
                         {
                              exist_images = true;
                              for (int j = 0; j < images.size(); j++)
                              {
-                                Element img = document.createElement("Image");
+                                Element img = document.createElement("image");
                                 list.item(n).appendChild(img);
                                 Text text_img = document.createTextNode(images.get(j));
                                 img.appendChild(text_img);
@@ -630,12 +631,12 @@ public class GestioneAnnunci {
                     
                     if (exist_images == false)
                     {
-                        Element imges_node = document.createElement("Images");
+                        Element imges_node = document.createElement("images");
                         node.appendChild(imges_node);
 
                         for (int j = 0; j < images.size(); j++)
                         {
-                            Element img = document.createElement("Image");
+                            Element img = document.createElement("image");
                             imges_node.appendChild(img);
                             Text text_img = document.createTextNode(images.get(j));
                             img.appendChild(text_img);
@@ -675,126 +676,126 @@ public class GestioneAnnunci {
         Element root = document.getDocumentElement();
         
         //This method creates an element node
-        Element root_user = document.createElement("Apartment");
+        Element root_user = document.createElement("apartment");
         root_user.setAttribute("user_name", user);
         root.appendChild(root_user);
         
         String id_apartment = String.valueOf(UUID.randomUUID());
-        Element id_apartment_el = document.createElement("ID");
+        Element id_apartment_el = document.createElement("id");
         root_user.appendChild(id_apartment_el);
 
         Text text_id = document.createTextNode(id_apartment);
         id_apartment_el.appendChild(text_id);
         
-        Element indirizzo_el = document.createElement("Indirizzo");
+        Element indirizzo_el = document.createElement("indirizzo");
         root_user.appendChild(indirizzo_el);
 
         Text text = document.createTextNode(indirizzo);
         indirizzo_el.appendChild(text);
 
-        Element civico_el = document.createElement("Civico");
+        Element civico_el = document.createElement("civico");
         root_user.appendChild(civico_el);
 
         Text text1 = document.createTextNode(civico);
         civico_el.appendChild(text1);
         
-        Element citta_el = document.createElement("Citta");
+        Element citta_el = document.createElement("citta");
         root_user.appendChild(citta_el);
 
         Text text2 = document.createTextNode(citta);
         citta_el.appendChild(text2);
         
-        Element tipo_alloggio_el = document.createElement("Tipo_Alloggio");
+        Element tipo_alloggio_el = document.createElement("tipo_alloggio");
         root_user.appendChild(tipo_alloggio_el);
 
         Text text3 = document.createTextNode(tipo_alloggio);
         tipo_alloggio_el.appendChild(text3);
         
-        Element tipo_cucina_el = document.createElement("Tipo_Cucina");
+        Element tipo_cucina_el = document.createElement("tipo_cucina");
         root_user.appendChild(tipo_cucina_el);
 
         Text text4 = document.createTextNode(tipo_cucina);
         tipo_cucina_el.appendChild(text4);
         
-        Element bagni_el = document.createElement("Bagni");
+        Element bagni_el = document.createElement("bagni");
         root_user.appendChild(bagni_el);
 
         Text text5 = document.createTextNode(bagni);
         bagni_el.appendChild(text5);
         
-        Element camere_lett_el = document.createElement("Camere_Letto");
+        Element camere_lett_el = document.createElement("camere_letto");
         root_user.appendChild(camere_lett_el);
 
         Text text6 = document.createTextNode(camere_da_letto);
         camere_lett_el.appendChild(text6);
         
-        Element n_piano_el = document.createElement("N_Piano");
+        Element n_piano_el = document.createElement("n_piano");
         root_user.appendChild(n_piano_el);
 
         Text text7 = document.createTextNode(n_piano);
         n_piano_el.appendChild(text7);
         
-        Element ascensore_el = document.createElement("Ascensore");
+        Element ascensore_el = document.createElement("ascensore");
         root_user.appendChild(ascensore_el);
 
         Text text8 = document.createTextNode(ascensore);
         ascensore_el.appendChild(text8);
         
-        Element garage_el = document.createElement("Garage");
+        Element garage_el = document.createElement("garage");
         root_user.appendChild(garage_el);
 
         Text text9 = document.createTextNode(garage);
         garage_el.appendChild(text9);
         
-        Element terrazzo_el = document.createElement("Terrazzo");
+        Element terrazzo_el = document.createElement("terrazzo");
         root_user.appendChild(terrazzo_el);
 
         Text text10 = document.createTextNode(terrazzo);
         terrazzo_el.appendChild(text10);
         
-        Element posti_totali_el = document.createElement("Posti_Totali");
+        Element posti_totali_el = document.createElement("posti_totali");
         root_user.appendChild(posti_totali_el);
 
         Text text11 = document.createTextNode(posti_totali);
         posti_totali_el.appendChild(text11);
         
-        Element posti_liberi_el = document.createElement("Posti_Liberi");
+        Element posti_liberi_el = document.createElement("posti_liberi");
         root_user.appendChild(posti_liberi_el);
 
         Text text12 = document.createTextNode(posti_liberi);
         posti_liberi_el.appendChild(text12);
         
-        Element prezzo_posto_el = document.createElement("Prezzo_Posto");
+        Element prezzo_posto_el = document.createElement("prezzo_posto");
         root_user.appendChild(prezzo_posto_el);
 
         Text text13 = document.createTextNode(prezzo_posto);
         prezzo_posto_el.appendChild(text13);
         
-        Element acqua_el = document.createElement("Spese_Acqua");
+        Element acqua_el = document.createElement("spese_acqua");
         root_user.appendChild(acqua_el);
 
         Text text14 = document.createTextNode(acqua);
         acqua_el.appendChild(text14);
         
-        Element gas_el = document.createElement("Spese_Gas");
+        Element gas_el = document.createElement("spese_gas");
         root_user.appendChild(gas_el);
 
         Text text15 = document.createTextNode(gas);
         gas_el.appendChild(text15);
         
-        Element luce_el = document.createElement("Spese_Luce");
+        Element luce_el = document.createElement("spese_luce");
         root_user.appendChild(luce_el);
 
         Text text16 = document.createTextNode(luce);
         luce_el.appendChild(text16);
         
-        Element spese_cond_el = document.createElement("Spese_Condominiali");
+        Element spese_cond_el = document.createElement("spese_condominiali");
         root_user.appendChild(spese_cond_el);
 
         Text text17 = document.createTextNode(condominiali);
         spese_cond_el.appendChild(text17);
         
-        Element nessune_spese_el = document.createElement("Nessune_Spese");
+        Element nessune_spese_el = document.createElement("nessune_spese");
         root_user.appendChild(nessune_spese_el);
 
         Text text18 = document.createTextNode(nessune_spese);
@@ -824,7 +825,7 @@ public class GestioneAnnunci {
             Document document = documentBuilder.parse(pathToWrite);
 
             //Prendo tutti gli apartment:
-            NodeList apartments = document.getElementsByTagName("Apartment");
+            NodeList apartments = document.getElementsByTagName("apartment");
 
             for (int i = 0; i < apartments.getLength(); i++)
             {
@@ -833,7 +834,7 @@ public class GestioneAnnunci {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    if ("ID".equals(list.item(k).getNodeName()))
+                    if ("id".equals(list.item(k).getNodeName()))
                     {
                         if (list.item(k).getTextContent().equals(apartment_id))
                         {
@@ -849,62 +850,62 @@ public class GestioneAnnunci {
                 {
                     for (int n = 0; n < list.getLength(); n++)
                     {
-                        if (list.item(n).getNodeName().equals("Indirizzo"))
+                        if (list.item(n).getNodeName().equals("indirizzo"))
                         {
                             list.item(n).setTextContent(indirizzo);
-                        } else if (list.item(n).getNodeName().equals("Prezzo_Posto"))
+                        } else if (list.item(n).getNodeName().equals("prezzo_posto"))
                         {
                             list.item(n).setTextContent(prezzo_posto);
-                        } else if (list.item(n).getNodeName().equals("Posti_Liberi"))
+                        } else if (list.item(n).getNodeName().equals("posti_liberi"))
                         {
                             list.item(n).setTextContent(posti_liberi);
-                        } else if (list.item(n).getNodeName().equals("Civico"))
+                        } else if (list.item(n).getNodeName().equals("civico"))
                         {
                             list.item(n).setTextContent(civico);
-                        } else if (list.item(n).getNodeName().equals("Citta"))
+                        } else if (list.item(n).getNodeName().equals("citta"))
                         {
                             list.item(n).setTextContent(citta);
-                        } else if (list.item(n).getNodeName().equals("Tipo_Alloggio"))
+                        } else if (list.item(n).getNodeName().equals("tipo_alloggio"))
                         {
                             list.item(n).setTextContent(tipo_alloggio);
-                        } else if (list.item(n).getNodeName().equals("Tipo_Cucina"))
+                        } else if (list.item(n).getNodeName().equals("tipo_cucina"))
                         {
                             list.item(n).setTextContent(tipo_cucina);
-                        } else if (list.item(n).getNodeName().equals("Bagni"))
+                        } else if (list.item(n).getNodeName().equals("bagni"))
                         {
                             list.item(n).setTextContent(bagni);
-                        } else if (list.item(n).getNodeName().equals("Camere_Letto"))
+                        } else if (list.item(n).getNodeName().equals("camere_letto"))
                         {
                             list.item(n).setTextContent(camere_da_letto);
-                        } else if (list.item(n).getNodeName().equals("N_Piano"))
+                        } else if (list.item(n).getNodeName().equals("n_piano"))
                         {
                             list.item(n).setTextContent(n_piano);
-                        } else if (list.item(n).getNodeName().equals("Ascensore"))
+                        } else if (list.item(n).getNodeName().equals("ascensore"))
                         {
                             list.item(n).setTextContent(ascensore);
-                        } else if (list.item(n).getNodeName().equals("Garage"))
+                        } else if (list.item(n).getNodeName().equals("garage"))
                         {
                             list.item(n).setTextContent(garage);
-                        } else if (list.item(n).getNodeName().equals("Terrazzo"))
+                        } else if (list.item(n).getNodeName().equals("terrazzo"))
                         {
                             list.item(n).setTextContent(terrazzo);
-                        } else if (list.item(n).getNodeName().equals("Posti_Totali"))
+                        } else if (list.item(n).getNodeName().equals("posti_totali"))
                         {
                             list.item(n).setTextContent(posti_totali);
-                        } else if (list.item(n).getNodeName().equals("Spese_Acqua"))
+                        } else if (list.item(n).getNodeName().equals("spese_acqua"))
                         {
                             list.item(n).setTextContent(acqua);
-                        } else if (list.item(n).getNodeName().equals("Spese_Gas"))
+                        } else if (list.item(n).getNodeName().equals("spese_gas"))
                         {
                             list.item(n).setTextContent(gas);
-                        } else if (list.item(n).getNodeName().equals("Spese_Luce"))
+                        } else if (list.item(n).getNodeName().equals("spese_luce"))
                         {
                             list.item(n).setTextContent(luce);
-                        } else if (list.item(n).getNodeName().equals("Spese_Condominiali"))
+                        } else if (list.item(n).getNodeName().equals("spese_condominiali"))
                         {
                             list.item(n).setTextContent(condominiali);
                         }
-                        else if (list.item(n).getNodeName().equals("Nessune_Spese"))
+                        else if (list.item(n).getNodeName().equals("nessune_spese"))
                         {
                             list.item(n).setTextContent(nessune_spese);
                         }
@@ -940,7 +941,7 @@ public class GestioneAnnunci {
             Element root = document.getDocumentElement();
             
             //Prendo tutti gli apartment:
-            NodeList apartments = document.getElementsByTagName("Apartment");
+            NodeList apartments = document.getElementsByTagName("apartment");
 
             for (int i = 0; i < apartments.getLength(); i++)
             {
@@ -949,7 +950,7 @@ public class GestioneAnnunci {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    if ("ID".equals(list.item(k).getNodeName()))
+                    if ("id".equals(list.item(k).getNodeName()))
                     {
                         if (list.item(k).getTextContent().equals(apartment_id))
                         {
@@ -1031,11 +1032,10 @@ public class GestioneAnnunci {
                 public void startElement(String uri, String localName,String qName, 
                         Attributes attributes) throws SAXException {
 
-                    if (qName.equals("Apartment"))
+                    if (qName.equals("apartment"))
                     {
                         aprt = new Apartment();
-                        aprt.user_owner = attributes.getValue("user_name");
-                        aprt.img_url = new ArrayList<String> ();
+                        aprt.setProprietario(attributes.getValue("user_name"));
                         jump_element = false;
                         if (!admin) {
                             if (!attributes.getValue("user_name").equals(user_name))
@@ -1045,68 +1045,68 @@ public class GestioneAnnunci {
                         }
                         
                         
-                    } else if (qName.equals("ID") && !jump_element)
+                    } else if (qName.equals("id") && !jump_element)
                     {
                         ap_id = true;
-                    } else if (qName.equals("Indirizzo") && !jump_element)
+                    } else if (qName.equals("indirizzo") && !jump_element)
                     {
                         ap_address = true;
-                    } else if (qName.equals("Prezzo_Posto") && !jump_element)
+                    } else if (qName.equals("prezzo_posto") && !jump_element)
                     {
                         ap_prezzo_posto = true;
-                    } else if (qName.equals("Posti_Liberi") && !jump_element)
+                    } else if (qName.equals("posti_liberi") && !jump_element)
                     {
                         ap_posti_liberi = true;
-                    } else if (qName.equals("Civico") && !jump_element)
+                    } else if (qName.equals("civico") && !jump_element)
                     {
                         ap_civico = true;
-                    } else if (qName.equals("Citta") && !jump_element)
+                    } else if (qName.equals("citta") && !jump_element)
                     {
                         ap_citta = true;
-                    } else if (qName.equals("Tipo_Alloggio") && !jump_element)
+                    } else if (qName.equals("tipo_alloggio") && !jump_element)
                     {
                         ap_tipo_alloggio = true;
-                    } else if (qName.equals("Tipo_Cucina") && !jump_element)
+                    } else if (qName.equals("tipo_cucina") && !jump_element)
                     {
                         ap_tipo_cucina = true;
-                    } else if (qName.equals("Bagni") && !jump_element)
+                    } else if (qName.equals("bagni") && !jump_element)
                     {
                         ap_bagni = true;
-                    } else if (qName.equals("Camere_Letto") && !jump_element)
+                    } else if (qName.equals("camere_letto") && !jump_element)
                     {
                         ap_cam_letto = true;
-                    } else if (qName.equals("N_Piano") && !jump_element)
+                    } else if (qName.equals("n_piano") && !jump_element)
                     {
                         ap_piano = true;
-                    } else if (qName.equals("Ascensore") && !jump_element)
+                    } else if (qName.equals("ascensore") && !jump_element)
                     {
                         ap_ascensore = true;
-                    } else if (qName.equals("Garage") && !jump_element)
+                    } else if (qName.equals("garage") && !jump_element)
                     {
                         ap_garage = true;
-                    } else if (qName.equals("Terrazzo") && !jump_element)
+                    } else if (qName.equals("terrazzo") && !jump_element)
                     {
                         ap_terrazzo = true;
-                    } else if (qName.equals("Posti_Totali") && !jump_element)
+                    } else if (qName.equals("posti_totali") && !jump_element)
                     {
                         ap_posti_tot = true;
-                    } else if (qName.equals("Spese_Acqua") && !jump_element)
+                    } else if (qName.equals("spese_acqua") && !jump_element)
                     {
                         ap_spese_acqua = true;
-                    } else if (qName.equals("Spese_Gas") && !jump_element)
+                    } else if (qName.equals("spese_gas") && !jump_element)
                     {
                         ap_spese_gas = true;
-                    } else if (qName.equals("Spese_Luce") && !jump_element)
+                    } else if (qName.equals("spese_luce") && !jump_element)
                     {
                         ap_spese_luce = true;
-                    } else if (qName.equals("Spese_Condominiali") && !jump_element)
+                    } else if (qName.equals("spese_condominiali") && !jump_element)
                     {
                         ap_spese_cond = true;
                     }
-                    else if (qName.equals("Nessune_Spese") && !jump_element)
+                    else if (qName.equals("nessune_spese") && !jump_element)
                     {
                         ap_nessuna_spesa = true;
-                    } else if (qName.equals("Image") && !jump_element)
+                    } else if (qName.equals("image") && !jump_element)
                     {
                         ap_image = true;
                     }
@@ -1115,88 +1115,88 @@ public class GestioneAnnunci {
                public void characters(char ch[], int start, int length) throws SAXException {
                    
                    if (ap_id) {
-                       aprt.id_apartment = new String(ch, start, length);
+                       aprt.setId(new String(ch, start, length));
                        ap_id = false;
                    }
                    if (ap_address){
-                       aprt.address = new String(ch, start, length);
+                       aprt.setIndirizzo(new String(ch, start, length));
                        ap_address = false;
                    }
                    if (ap_prezzo_posto){
-                       aprt.prezzo = new String(ch, start, length);
+                       aprt.setPrezzo(new String(ch, start, length));
                        ap_prezzo_posto = false;
                    }
                    if (ap_posti_liberi){
-                       aprt.posti_liberi = new String(ch, start, length);
+                       aprt.setPostiLiberi(new String(ch, start, length));
                        ap_posti_liberi = false;
                    }
                    if (ap_tipo_alloggio){
-                       aprt.tipologia = new String(ch, start, length);
+                       aprt.setTipologia(new String(ch, start, length));
                        ap_tipo_alloggio = false;
                        
                    }
                    if (ap_civico){
-                       aprt.civico = new String(ch, start, length);
+                       aprt.setCivico(new String(ch, start, length));
                        ap_civico = false;
                    }
                    if (ap_citta){
-                       aprt.citta = new String(ch, start, length);
+                       aprt.setCitta(new String(ch, start, length));
                        ap_citta = false;
                    }
                    if (ap_tipo_cucina){
-                       aprt.tipo_cucina = new String(ch, start, length);
+                       aprt.setTipo_cucina(new String(ch, start, length));
                        ap_tipo_cucina = false;
                    }
                    if (ap_bagni){
-                       aprt.bagni = new String(ch, start, length);
+                       aprt.setBagni(new String(ch, start, length));
                        ap_bagni = false;
                    }
                    if (ap_cam_letto){
-                       aprt.camere_letto = new String(ch, start, length);
+                       aprt.setCamere_letto(new String(ch, start, length));
                        ap_cam_letto = false;
                    }
                    if (ap_piano){
-                       aprt.n_piano = new String(ch, start, length);
+                       aprt.setPiano(new String(ch, start, length));
                        ap_piano = false;
                    }
                    if (ap_ascensore){
-                       aprt.ascensore = new String(ch, start, length);
+                       aprt.setAscensore(new String(ch, start, length));
                        ap_ascensore = false;
                    }
                    if (ap_garage){
-                       aprt.garage = new String(ch, start, length);
+                       aprt.setGarage(new String(ch, start, length));
                        ap_garage = false;
                    }
                    if (ap_terrazzo){
-                       aprt.terrazzo = new String(ch, start, length);
+                       aprt.setTerrazzo(new String(ch, start, length));
                        ap_terrazzo = false;
                    }
                    if (ap_posti_tot){
-                       aprt.posti_totali = new String(ch, start, length);
+                       aprt.setPostiTotali(new String(ch, start, length));
                        ap_posti_tot = false;
                    }
                    if (ap_spese_acqua){
-                       aprt.spese_acqua = new String(ch, start, length);
+                       aprt.setSpeseAcqua(new String(ch, start, length));
                        ap_spese_acqua = false;
                    }
                    if (ap_spese_gas){
-                       aprt.spese_gas = new String(ch, start, length);
+                       aprt.setSpeseGas(new String(ch, start, length));
                        ap_spese_gas = false;
                    }
                    if (ap_spese_luce){
-                       aprt.spese_luce = new String(ch, start, length);
+                       aprt.setSpeseLuce(new String(ch, start, length));
                        ap_spese_luce = false;
                    }
                    if (ap_spese_cond){
-                       aprt.spese_cond = new String(ch, start, length);
+                       aprt.setSpeseCond(new String(ch, start, length));
                        ap_spese_cond = false;
                    }
                    if (ap_nessuna_spesa){
-                       aprt.ness_spesa = new String(ch, start, length);
+                       aprt.setNoSpese(new String(ch, start, length));
                        ap_nessuna_spesa = false;
                    }
                    if (ap_image){
-                       aprt.img_url.add(new String(ch, start, length));
+                       aprt.addImg_url(new String(ch, start, length));
                        ap_image = false;
                    }
                 }
@@ -1205,7 +1205,7 @@ public class GestioneAnnunci {
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
-                    if (qName.equals("Apartment"))
+                    if (qName.equals("apartment"))
                     {
                        if (!jump_element)
                        {

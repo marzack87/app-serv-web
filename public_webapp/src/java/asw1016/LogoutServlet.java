@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package login;
+package asw1016;
 
 import java.io.IOException;
  

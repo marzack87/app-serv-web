@@ -4,8 +4,8 @@
     Author     : marco
 --%>
 
-<%@page import="utility.User"%>
-<%@page import="utility.GestioneUtente"%>
+<%@page import="asw1016.User"%>
+<%@page import="asw1016.GestioneUtente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,24 +25,24 @@
         <div class="register_form">
             <form action="/public_webapp/GestioneUtentiServlet" method="post" id="user_info_form">
                 <input type="hidden" name="q" value="edit_user">
-                <input type="hidden" name="username" value="<%= user_info.user_name %>">
+                <input type="hidden" name="username" value="<%= user_info.getUser_name() %>">
                 Nome 
                 <br>
-                <input type="text" name="name" value="<%= user_info.name %>">
+                <input type="text" name="name" value="<%= user_info.getName() %>">
                 <br>
                 Cognome 
                 <br>
-                <input type="text" name="surname" value="<%= user_info.surname %>">
+                <input type="text" name="surname" value="<%= user_info.getSurname() %>">
                 Telefono 
                 <br>
-                <input type="text" name="phone" value="<%= user_info.phone %>">
+                <input type="text" name="phone" value="<%= user_info.getPhone() %>">
                 USERNAME 
                 <br>
-                <input type="text" name="user_name" value="<%= user_info.user_name %>" disabled>
+                <input type="text" name="user_name" value="<%= user_info.getUser_name() %>" disabled>
                 <br>
                 PASSWORD 
                 <br>
-                <input type="password" name="password" value="<%= user_info.password %>">
+                <input type="password" name="password" value="<%= user_info.getPassword() %>">
                 <br>
                 <br>
                 <a class="button" href="#" onclick="check_form()">MODIFICA</a>

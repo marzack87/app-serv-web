@@ -75,59 +75,57 @@
         </div>
         <br>
         <br>
+        <script type="text/javascript">
+        
+            var photos = 0;
+            var remove = 0;
+
+            function add_photo(){
+                photos++;
+
+                var new_div = document.createElement('div');
+                new_div.id = "foto_" + photos;
+
+                var new_input = document.createElement('input');
+                new_input.type = "file";
+                new_input.name = "foto";
+                new_input.accept = "image/*";
+
+                var remove_input = document.createElement('span');
+                remove_input.innerHTML = '<a class="button bg_red text_small" href="#" onclick="return remove_photo(' + photos + ');">rimuovi</a>';
+
+                new_div.appendChild(document.createElement('br'));
+                new_div.appendChild(new_input);
+                new_div.appendChild(remove_input);
+                document.getElementById("foto_input").appendChild(new_div);
+
+                return false;
+            }
+
+            function remove_photo(number){
+                document.getElementById('foto_' + number).remove();
+                return false;
+            }
+
+            function remove_photo_saved(name){
+                remove++;
+                var new_input = document.createElement('input');
+                new_input.type = "hidden";
+                new_input.name = "foto_da_cancellare_" + remove;
+                new_input.value = name;
+                document.getElementById("foto_form").appendChild(new_input);
+
+                var element = document.getElementById(name);
+                element.parentNode.removeChild(element);
+                return false;
+            }
+
+            function save_photos(){
+
+                document.getElementById('foto_form').submit();
+                return false;
+
+            }
+        </script>
     </body>
-    
-    <script type="text/javascript">
-        
-        var photos = 0;
-        var remove = 0;
-        
-        function add_photo(){
-            photos++;
-            
-            var new_div = document.createElement('div');
-            new_div.id = "foto_" + photos;
-            
-            var new_input = document.createElement('input');
-            new_input.type = "file";
-            new_input.name = "foto";
-            new_input.accept = "image/*";
-            
-            var remove_input = document.createElement('span');
-            remove_input.innerHTML = '<a class="button bg_red text_small" href="#" onclick="return remove_photo(' + photos + ');">rimuovi</a>';
-            
-            new_div.appendChild(document.createElement('br'));
-            new_div.appendChild(new_input);
-            new_div.appendChild(remove_input);
-            document.getElementById("foto_input").appendChild(new_div);
-            
-            return false;
-        }
-        
-        function remove_photo(number){
-            document.getElementById('foto_' + number).remove();
-            return false;
-        }
-        
-        function remove_photo_saved(name){
-            remove++;
-            var new_input = document.createElement('input');
-            new_input.type = "hidden";
-            new_input.name = "foto_da_cancellare_" + remove;
-            new_input.value = name;
-            document.getElementById("foto_form").appendChild(new_input);
-            
-            var element = document.getElementById(name);
-            element.parentNode.removeChild(element);
-            return false;
-        }
-        
-        function save_photos(){
-            
-            document.getElementById('foto_form').submit();
-            return false;
-            
-        }
-    </script>
-    
 </html>

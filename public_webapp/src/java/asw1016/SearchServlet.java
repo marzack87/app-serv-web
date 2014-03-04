@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package search;
+package asw1016;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import utility.GestioneAnnunci;
 
 /**
  *

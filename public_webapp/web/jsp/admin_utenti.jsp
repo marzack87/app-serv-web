@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="utility.User"%>
+<%@page import="asw1016.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,12 +28,12 @@
         %>
         <div class ="centered">
             <br>
-            <div class="text_very_big"><%=users_list.get(i).name %> <%=users_list.get(i).surname %></div>
-            <div class="text_big italic"> (<%=users_list.get(i).user_name %>) </div>
+            <div class="text_very_big"><%=users_list.get(i).getName() %> <%=users_list.get(i).getSurname() %></div>
+            <div class="text_big italic"> (<%=users_list.get(i).getUser_name() %>) </div>
             <br>
-            <div class="text_big"><%=users_list.get(i).phone %></div>
+            <div class="text_big"><%=users_list.get(i).getPhone() %></div>
             <br>
-            <a class="bg_red button text_small" href="/public_webapp/GestioneUtentiServlet?q=delete_user&user=<%=users_list.get(i).user_name %>" >elimina</a>
+            <a class="bg_red button text_small" href="/public_webapp/GestioneUtentiServlet?q=delete_user&user=<%=users_list.get(i).getUser_name() %>" >elimina</a>
         </div>
         <br>
         <hr>

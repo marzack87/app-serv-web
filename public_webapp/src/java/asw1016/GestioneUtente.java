@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package utility;
+package asw1016;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,10 +105,10 @@ public class GestioneUtente {
                 public void startElement(String uri, String localName,String qName, 
                         Attributes attributes) throws SAXException {
 
-                    if (qName.equals("User"))
+                    if (qName.equals("user"))
                     {
                         usr_n = new User();
-                        usr_n.user_name = attributes.getValue("user_name");
+                        usr_n.setUser_name(attributes.getValue("user_name"));
                         jump_element = false;
                         if (!usr.equals(""))
                         {
@@ -121,16 +121,16 @@ public class GestioneUtente {
                     } else if (qName.equals("Password") && !jump_element)
                     {
                         us_pwd = true;
-                    } else if (qName.equals("Name") && !jump_element)
+                    } else if (qName.equals("name") && !jump_element)
                     {
                         us_name = true;
-                    } else if (qName.equals("Surname") && !jump_element)
+                    } else if (qName.equals("surname") && !jump_element)
                     {
                         us_surname = true;
-                    } else if (qName.equals("Phone") && !jump_element)
+                    } else if (qName.equals("phone") && !jump_element)
                     {
                         us_phone = true;
-                    } else if (qName.equals("Admin") && !jump_element)
+                    } else if (qName.equals("admin") && !jump_element)
                     {
                         us_admin = true;
                     }
@@ -139,23 +139,23 @@ public class GestioneUtente {
                public void characters(char ch[], int start, int length) throws SAXException {
                    
                    if (us_pwd) {
-                       usr_n.password = new String(ch, start, length);
+                       usr_n.setPassword(new String(ch, start, length));
                        us_pwd = false;
                    }
                    if (us_name){
-                       usr_n.name = new String(ch, start, length);
+                       usr_n.setName(new String(ch, start, length));
                        us_name = false;
                    }
                    if (us_surname){
-                       usr_n.surname = new String(ch, start, length);
+                       usr_n.setSurname(new String(ch, start, length));
                        us_surname = false;
                    }
                    if (us_phone){
-                       usr_n.phone = new String(ch, start, length);
+                       usr_n.setPhone(new String(ch, start, length));
                        us_phone = false;
                    }
                    if (us_admin){
-                       usr_n.admin = new String(ch, start, length);
+                       usr_n.setAdmin(new String(ch, start, length));
                        us_admin = false;
                        
                    }
@@ -165,7 +165,7 @@ public class GestioneUtente {
                         String qName) throws SAXException {
 
                     //Finito elemento Apartment, se è diverso da nil lo metto in lista
-                    if (qName.equals("User"))
+                    if (qName.equals("user"))
                     {
                        if (!jump_element)
                        {
@@ -201,7 +201,7 @@ public class GestioneUtente {
             Document document = documentBuilder.parse(pathToWrite);
 
             //Prendo tutti gli apartment:
-            NodeList users = document.getElementsByTagName("User");
+            NodeList users = document.getElementsByTagName("user");
 
             for (int i = 0; i < users.getLength(); i++)
             {
@@ -210,7 +210,7 @@ public class GestioneUtente {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    if ("Username".equals(list.item(k).getNodeName()))
+                    if ("username".equals(list.item(k).getNodeName()))
                     {
                         if (list.item(k).getTextContent().equals(usr))
                         {
@@ -229,16 +229,16 @@ public class GestioneUtente {
                         if (list.item(n).getNodeName().equals("Password"))
                         {
                             list.item(n).setTextContent(pwd);
-                        } else if (list.item(n).getNodeName().equals("Name"))
+                        } else if (list.item(n).getNodeName().equals("name"))
                         {
                             list.item(n).setTextContent(name);
-                        } else if (list.item(n).getNodeName().equals("Surname"))
+                        } else if (list.item(n).getNodeName().equals("surname"))
                         {
                             list.item(n).setTextContent(surname);
-                        } else if (list.item(n).getNodeName().equals("Phone"))
+                        } else if (list.item(n).getNodeName().equals("phone"))
                         {
                             list.item(n).setTextContent(phone);
-                        } else if (list.item(n).getNodeName().equals("Admin"))
+                        } else if (list.item(n).getNodeName().equals("admin"))
                         {
                             list.item(n).setTextContent(admin);
                         }
@@ -274,7 +274,7 @@ public class GestioneUtente {
             Element root = document.getDocumentElement();
             
             //Prendo tutti gli apartment:
-            NodeList users = document.getElementsByTagName("User");
+            NodeList users = document.getElementsByTagName("user");
 
             for (int i = 0; i < users.getLength(); i++)
             {
@@ -283,7 +283,7 @@ public class GestioneUtente {
                 boolean find = false;
                 for (int k = 0; k < list.getLength(); k++)
                 {
-                    if ("Username".equals(list.item(k).getNodeName()))
+                    if ("username".equals(list.item(k).getNodeName()))
                     {
                         if (list.item(k).getTextContent().equals(usr))
                         {

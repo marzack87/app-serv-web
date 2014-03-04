@@ -2,47 +2,47 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>login.LoginServlet</servlet-class>
+        <servlet-class>asw1016.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>login.RegisterServlet</servlet-class>
+        <servlet-class>asw1016.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>login.LogoutServlet</servlet-class>
+        <servlet-class>asw1016.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>search.SearchServlet</servlet-class>
+        <servlet-class>asw1016.SearchServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AggiuntaFotoServlet</servlet-name>
-        <servlet-class>gestione_annunci.AggiuntaFotoServlet</servlet-class>
+        <servlet-class>asw1016.AggiuntaFotoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ElencoAnnunciServlet</servlet-name>
-        <servlet-class>gestione_annunci.ElencoAnnunciServlet</servlet-class>
+        <servlet-class>asw1016.ElencoAnnunciServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EliminaAnnuncioServlet</servlet-name>
-        <servlet-class>gestione_annunci.EliminaAnnuncioServlet</servlet-class>
+        <servlet-class>asw1016.EliminaAnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ModificaAnnuncioServlet</servlet-name>
-        <servlet-class>gestione_annunci.ModificaAnnuncioServlet</servlet-class>
+        <servlet-class>asw1016.ModificaAnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NuovoAnnuncioServlet</servlet-name>
-        <servlet-class>gestione_annunci.NuovoAnnuncioServlet</servlet-class>
+        <servlet-class>asw1016.NuovoAnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AnnuncioServlet</servlet-name>
-        <servlet-class>search.AnnuncioServlet</servlet-class>
+        <servlet-class>asw1016.AnnuncioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GestioneUtentiServlet</servlet-name>
-        <servlet-class>gestione_utenti.GestioneUtentiServlet</servlet-class>
+        <servlet-class>asw1016.GestioneUtentiServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

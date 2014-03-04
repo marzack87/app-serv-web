@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Users>
-<User user_name="admin">
-<Username>admin</Username>
-<Password>admin</Password>
-<Name>Amministratore</Name>
-<Surname>Del Mondo</Surname>
-<Phone>7777777</Phone>
-<Admin>1</Admin>
-</User>
-<User user_name="walt">
-<Username>walt</Username>
-<Password>heisenberg</Password>
-<Name>Walter</Name>
-<Surname>White</Surname>
-<Phone>(505) 555-1258</Phone>
-<Admin>0</Admin>
-</User>
-<User user_name="homer">
-<Username>homer</Username>
-<Password>password</Password>
-<Name>Homer</Name>
-<Surname>Simpson</Surname>
-<Phone>(939) 555-0113</Phone>
-<Admin>0</Admin>
-</User>
-<User user_name="shelly">
-<Username>shelly</Username>
-<Password>bazinga</Password>
-<Name>Sheldon</Name>
-<Surname>Cooper</Surname>
-<Phone>(294) 555-9264</Phone>
-<Admin>0</Admin>
-</User>
-<User user_name="monopoli">
-<Username>monopoli</Username>
-<Password>monopoli</Password>
-<Name>Signor</Name>
-<Surname>Monopoli</Surname>
-<Phone>(+39) 01-1738634</Phone>
-<Admin>0</Admin>
-</User>
-</Users>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../xml-types/XML_Schema.xsd">
+<user user_name="admin">
+<username>admin</username>
+<password>admin</password>
+<name>Amministratore</name>
+<surname>Del Mondo</surname>
+<phone>7777777</phone>
+<admin>1</admin>
+</user>
+<user user_name="walt">
+<username>walt</username>
+<password>heisenberg</password>
+<name>Walter</name>
+<surname>White</surname>
+<phone>(505) 555-1258</phone>
+<admin>0</admin>
+</user>
+<user user_name="homer">
+<username>homer</username>
+<password>password</password>
+<name>Homer</name>
+<surname>Simpson</surname>
+<phone>(939) 555-0113</phone>
+<admin>0</admin>
+</user>
+<user user_name="shelly">
+<username>shelly</username>
+<password>bazinga</password>
+<name>Sheldon</name>
+<surname>Cooper</surname>
+<phone>(294) 555-9264</phone>
+<admin>0</admin>
+</user>
+<user user_name="monopoli">
+<username>monopoli</username>
+<password>monopoli</password>
+<name>Signor</name>
+<surname>Monopoli</surname>
+<phone>(+39) 01-1738634</phone>
+<admin>0</admin>
+</user>
+</users>

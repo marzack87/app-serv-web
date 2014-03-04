@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/Users/marco/NetBeansProjects/app-serv-web_website/public_webapp/web/xml-types/XML_Schema.xsd" uri="src/conf/xml-resources/jaxb/Apartment/XML_Schema.xsd"/>
+</catalog>

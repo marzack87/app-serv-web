@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package login;
+package asw1016;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,15 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;  
 /**
  *
  * @author marco
@@ -117,7 +112,7 @@ public class LoginServlet extends HttpServlet {
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         Document document = documentBuilder.parse(pathToWrite);
         
-        NodeList nList = document.getElementsByTagName("User");
+        NodeList nList = document.getElementsByTagName("user");
         
         for (int temp = 0; temp < nList.getLength(); temp++)
         {
@@ -127,9 +122,9 @@ public class LoginServlet extends HttpServlet {
                 Element eElement = (Element) nNode;
                 if ((eElement.getAttribute("user_name")).equals(username))
                 {
-                    if (eElement.getElementsByTagName("Password").item(0).getTextContent().equals(pwd))
+                    if (eElement.getElementsByTagName("password").item(0).getTextContent().equals(pwd))
                     {
-                        if (eElement.getElementsByTagName("Admin").item(0).getTextContent().equals("1"))
+                        if (eElement.getElementsByTagName("admin").item(0).getTextContent().equals("1"))
                         {
                             return 2;
                         }

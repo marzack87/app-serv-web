@@ -4,7 +4,7 @@
     Author     : marco
 --%>
 
-<%@page import="utility.Apartment"%>
+<%@page import="asw1016.Apartment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
             
             String images = "";
             boolean first = true;
-            for (String image : ap.img_url)
+            for (String image : ap.getImg_url())
             {
                 if (image.equals("\n")) continue;
                 if (first){
@@ -49,13 +49,13 @@
         <br>
         <div class="centered">
             <form id="annuncio" class="nuovo_annuncio" action="/public_webapp/ModificaAnnuncioServlet" method="POST">
-                <input type="hidden" name="id_apartment" value="<%=ap.id_apartment %>">
+                <input type="hidden" name="id_apartment" value="<%=ap.getId() %>">
                 <input type="hidden" name="images" value="<%=images %>">
-            <label>Indirizzo: <input class="larger" type="text" name="indirizzo" value="<%= ap.address %>"></label>
+            <label>Indirizzo: <input class="larger" type="text" name="indirizzo" value="<%= ap.getIndirizzo() %>"></label>
             <span class='space'></span>
-            <label>Civico: <input type="text" class="smaller" name="civico" value="<%= ap.civico %>"></label>
+            <label>Civico: <input type="text" class="smaller" name="civico" value="<%= ap.getCivico() %>"></label>
             <br>
-            <label>Città: <input type="text" name="citta" value="<%= ap.citta %>"></label>
+            <label>Città: <input type="text" name="citta" value="<%= ap.getCitta() %>"></label>
             <hr>
             INFORMAZIONI ALLOGGIO
             <br>
@@ -64,9 +64,9 @@
             
                 <%
                 
-                String app = (ap.tipologia.equals("0")) ? "checked" : "";
-                String vil = (ap.tipologia.equals("1")) ? "checked" : "";
-                String ind = (ap.tipologia.equals("2")) ? "checked" : "";
+                String app = (ap.getTipologia().equals("0")) ? "checked" : "";
+                String vil = (ap.getTipologia().equals("1")) ? "checked" : "";
+                String ind = (ap.getTipologia().equals("2")) ? "checked" : "";
                 
                 %>
             
@@ -80,8 +80,8 @@
                 
                 <%
                 
-                String abitabile = (ap.tipo_cucina.equals("0")) ? "checked" : "";
-                String cucinotto = (ap.tipo_cucina.equals("1")) ? "checked" : "";
+                String abitabile = (ap.getTipo_cucina().equals("0")) ? "checked" : "";
+                String cucinotto = (ap.getTipo_cucina().equals("1")) ? "checked" : "";
                 
                 %>
                 
@@ -89,31 +89,31 @@
                 <label><input type="radio" name="tipo_cucina" value="0" <%= abitabile%>> Abitabile</label>
                 <label><input type="radio" name="tipo_cucina" value="1" <%= cucinotto%>> Cucinotto</label>
             </div>
-            <label>N° Bagni: <input type="number" class="smaller" min="0" name="bagni" value="<%= ap.bagni%>"></label>
+            <label>N° Bagni: <input type="number" class="smaller" min="0" name="bagni" value="<%= ap.getBagni() %>"></label>
             <span class='space'></span>
-            <label>N° Camere da letto: <input type="number" class="smaller" min="0" name="camere_da_letto" value="<%= ap.camere_letto%>"></label>
+            <label>N° Camere da letto: <input type="number" class="smaller" min="0" name="camere_da_letto" value="<%= ap.getCamere_letto()%>"></label>
             <span class='space'></span>
-            <label>N° Piano: <input type="number" class="smaller" min="-1" name="n_piano" onchange="check_floor()" value="<%= ap.n_piano%>"></label>
+            <label>N° Piano: <input type="number" class="smaller" min="-1" name="n_piano" onchange="check_floor()" value="<%= ap.getPiano()%>"></label>
             <span class='space'></span>
-            <label style="display: inline"><input type="checkbox" name="ascensore" value="1" disabled="true" <%= (ap.ascensore.equals("1")) ? "checked" : "" %>> Ascensore</label>
+            <label style="display: inline"><input type="checkbox" name="ascensore" value="1" disabled="true" <%= (ap.getAscensore().equals("1")) ? "checked" : "" %>> Ascensore</label>
             <br>
-            <label style="display: inline"><input type="checkbox" name="garage" value="1" <%= (ap.garage.equals("1")) ? "checked" : "" %>> Garage</label>
+            <label style="display: inline"><input type="checkbox" name="garage" value="1" <%= (ap.getGarage().equals("1")) ? "checked" : "" %>> Garage</label>
             <span class='space'></span>
-            <label style="display: inline"><input type="checkbox" name="terrazzo" value="1" <%= (ap.terrazzo.equals("1")) ? "checked" : "" %>> Terrazzo</label>
+            <label style="display: inline"><input type="checkbox" name="terrazzo" value="1" <%= (ap.getTerrazzo().equals("1")) ? "checked" : "" %>> Terrazzo</label>
             <hr>
-            <label>Posti letto totali: <input type="number" class="smaller" min="0" name="posti_totali" value="<%= ap.posti_totali %>"></label>
+            <label>Posti letto totali: <input type="number" class="smaller" min="0" name="posti_totali" value="<%= ap.getPostiTotali() %>"></label>
             <span class='space'></span>
-            <label>Posti Liberi: <input type="number" class="smaller" min="0" name="posti_liberi" value="<%= ap.posti_liberi %>"></label>
+            <label>Posti Liberi: <input type="number" class="smaller" min="0" name="posti_liberi" value="<%= ap.getPostiLiberi() %>"></label>
             <span class='space'></span>
-            <label>Prezzo per posto letto: <input type="number" class="smaller" min="0" name="prezzo_posto" value="<%= ap.prezzo %>"> € al mese</label>
+            <label>Prezzo per posto letto: <input type="number" class="smaller" min="0" name="prezzo_posto" value="<%= ap.getPrezzo() %>"> € al mese</label>
             <hr>
             <div class="input_group" id="spese_incluse">
                 Spese Incluse:
-                <label><input type="checkbox" name="spese_incluse" value="0" <%= (ap.spese_acqua.equals("1")) ? "checked" : "" %>> Spese Acqua</label>
-                <label><input type="checkbox" name="spese_incluse" value="1" <%= (ap.spese_gas.equals("1")) ? "checked" : "" %>> Spese Gas</label>
-                <label><input type="checkbox" name="spese_incluse" value="2" <%= (ap.spese_luce.equals("1")) ? "checked" : "" %>> Spese Luce</label>
-                <label><input type="checkbox" name="spese_incluse" value="3" <%= (ap.spese_cond.equals("1")) ? "checked" : "" %>> Spese Condominiali</label>
-                <label><input type="checkbox" name="spese_incluse" value="4" onchange="return no_spese();" <%= (ap.ness_spesa.equals("1")) ? "checked" : "" %>> NESSUNA</label>
+                <label><input type="checkbox" name="spese_incluse" value="0" <%= (ap.getSpeseAcqua().equals("1")) ? "checked" : "" %>> Spese Acqua</label>
+                <label><input type="checkbox" name="spese_incluse" value="1" <%= (ap.getSpeseGas().equals("1")) ? "checked" : "" %>> Spese Gas</label>
+                <label><input type="checkbox" name="spese_incluse" value="2" <%= (ap.getSpeseLuce().equals("1")) ? "checked" : "" %>> Spese Luce</label>
+                <label><input type="checkbox" name="spese_incluse" value="3" <%= (ap.getSpeseCond().equals("1")) ? "checked" : "" %>> Spese Condominiali</label>
+                <label><input type="checkbox" name="spese_incluse" value="4" onchange="return no_spese();" <%= (ap.getNoSpese().equals("1")) ? "checked" : "" %>> NESSUNA</label>
             </div>
         </form>
         </div>
@@ -125,9 +125,8 @@
             </a>
         </div>
         <br>
-    </body>
     
-    <script type="text/javascript">
+        <script type="text/javascript">
         function check_floor(){
             var floor = document.getElementsByName("n_piano")[0];
             if (floor.value != '' & floor.value != 0){
@@ -222,5 +221,5 @@
             
         }
     </script>
-    
+    </body>
 </html>

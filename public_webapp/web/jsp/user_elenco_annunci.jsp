@@ -4,8 +4,8 @@
     Author     : marco
 --%>
 
-<%@page import="utility.GestioneUtente"%>
-<%@page import="utility.Apartment"%>
+<%@page import="asw1016.GestioneUtente"%>
+<%@page import="asw1016.Apartment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -69,11 +69,11 @@
             } else {
                 
                 for(int i = 0; i < apartments_list.size(); i++){
-                    String indirizzo = apartments_list.get(i).address;
-                    indirizzo += ", " + apartments_list.get(i).civico;
-                    indirizzo += " - " + apartments_list.get(i).citta;
+                    String indirizzo = apartments_list.get(i).getIndirizzo();
+                    indirizzo += ", " + apartments_list.get(i).getCivico();
+                    indirizzo += " - " + apartments_list.get(i).getCitta();
                     
-                    String piano = apartments_list.get(i).n_piano;
+                    String piano = apartments_list.get(i).getPiano();
                     if (piano.equals("-1")){
                         piano = "Seminterrato";
                     } else if (piano.equals("0")) {
@@ -83,8 +83,8 @@
                     }
                     
                     String ascensore = "";
-                    if (Integer.parseInt(apartments_list.get(i).n_piano) > 0){
-                        switch (Integer.parseInt(apartments_list.get(i).ascensore)) {
+                    if (Integer.parseInt(apartments_list.get(i).getPiano()) > 0){
+                        switch (Integer.parseInt(apartments_list.get(i).getAscensore())) {
                             case 0:
                                 ascensore = "(senza ascensore)";
                                 break;
@@ -95,7 +95,7 @@
                     }
                     
                     String tipo = "";
-                    switch (Integer.parseInt(apartments_list.get(i).tipologia)) {
+                    switch (Integer.parseInt(apartments_list.get(i).getTipologia())) {
                         case 0:
                             tipo = "Appartamento, " + piano + " " + ascensore;
                             break;
@@ -108,7 +108,7 @@
                     }
                     
                     String descrizione = "";
-                    switch (Integer.parseInt(apartments_list.get(i).tipo_cucina)) {
+                    switch (Integer.parseInt(apartments_list.get(i).getTipo_cucina())) {
                         case 0:
                             descrizione = "Cucina Abitabile";
                             break;
@@ -117,64 +117,64 @@
                             break;   
                     }
                     
-                    descrizione += ", " + apartments_list.get(i).bagni;
-                    if (Integer.parseInt(apartments_list.get(i).bagni) == 1) {
+                    descrizione += ", " + apartments_list.get(i).getBagni();
+                    if (Integer.parseInt(apartments_list.get(i).getBagni()) == 1) {
                          descrizione += " Bagno";
                     } else {
                          descrizione += " Bagni";
                     }
                     
-                    descrizione += ", " + apartments_list.get(i).camere_letto;
-                    if (Integer.parseInt(apartments_list.get(i).camere_letto) == 1) {
+                    descrizione += ", " + apartments_list.get(i).getCamere_letto();
+                    if (Integer.parseInt(apartments_list.get(i).getCamere_letto()) == 1) {
                          descrizione += " Camera da Letto";
                     } else {
                          descrizione += " Camere da Letto";
                     } 
                     
-                    if (Integer.parseInt(apartments_list.get(i).garage) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getGarage()) == 1) {
                         descrizione += ", Garage";
                     }
                     
-                    if (Integer.parseInt(apartments_list.get(i).terrazzo) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getTerrazzo()) == 1) {
                         descrizione += ", Terrazzo";
                     }
                     
-                    String posti = apartments_list.get(i).posti_totali;
-                    if (Integer.parseInt(apartments_list.get(i).posti_totali) == 1) {
+                    String posti = apartments_list.get(i).getPostiTotali();
+                    if (Integer.parseInt(apartments_list.get(i).getPostiTotali()) == 1) {
                         posti += " Posto letto in totale, ";
                     } else {
                         posti += " Posti letto in totale, ";
                     }
-                    posti += apartments_list.get(i).posti_liberi;
-                    if (Integer.parseInt(apartments_list.get(i).posti_liberi) == 1) {
+                    posti += apartments_list.get(i).getPostiLiberi();
+                    if (Integer.parseInt(apartments_list.get(i).getPostiLiberi()) == 1) {
                         posti += " libero. ";
                     } else {
                         posti += " liberi. ";
                     }
-                    posti += apartments_list.get(i).prezzo + " €/mese per posto letto.";
+                    posti += apartments_list.get(i).getPrezzo() + " €/mese per posto letto.";
                     
                     String spese = "";
                     
-                    if (Integer.parseInt(apartments_list.get(i).spese_acqua) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getSpeseAcqua()) == 1) {
                         spese += " AQUA";
                     }
                     
-                    if (Integer.parseInt(apartments_list.get(i).spese_gas) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getSpeseGas()) == 1) {
                         if (!spese.equals("")) spese += ", ";
                         spese += " GAS";
                     }
                     
-                    if (Integer.parseInt(apartments_list.get(i).spese_luce) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getSpeseLuce()) == 1) {
                         if (!spese.equals("")) spese += ", ";
                         spese += " LUCE";
                     }
                     
-                    if (Integer.parseInt(apartments_list.get(i).spese_cond) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getSpeseCond()) == 1) {
                         if (!spese.equals("")) spese += ", ";
                         spese += " CONDOMINIALI";
                     }
                     
-                    if (Integer.parseInt(apartments_list.get(i).ness_spesa) == 1) {
+                    if (Integer.parseInt(apartments_list.get(i).getNoSpese()) == 1) {
                         spese = "NESSUNA SPESA INCLUSA";
                     } else {
                         spese = "SPESE INCLUSE:" + spese;
@@ -182,7 +182,7 @@
                     
                     String images = "";
                     boolean first = true;
-                    for (String image : apartments_list.get(i).img_url)
+                    for (String image : apartments_list.get(i).getImg_url())
                     {
                         if (image.equals("\n")) continue;
                         if (first){
@@ -193,7 +193,7 @@
                         images += image;
                     }
                     
-                    String owner = apartments_list.get(i).user_owner;
+                    String owner = apartments_list.get(i).getProprietario();
         %>
         
         <div class="centered">
@@ -218,11 +218,11 @@
                     path = path+"/users.xml";
             %>
             <br>
-                per info telefonare a <%=GestioneUtente.getUserInfo(path, owner).phone%>
+                per info telefonare a <%=GestioneUtente.getUserInfo(path, owner).getPhone()%>
             <br>
             <% } %>
             
-            <% if (apartments_list.get(i).img_url.size() > 0){ %>
+            <% if (apartments_list.get(i).getImg_url().size() > 0){ %>
             
             <br>
             <applet code="visione_foto.viewApplet.class" archive="/public_webapp/applet/SearchApplet.jar" width="800" height="430">
@@ -239,8 +239,8 @@
             <br>
             <% if (from.equals("user")){ %>
             
-            <a class="text_big button inLine" href="/public_webapp/AnnuncioServlet?edit=1&id_apartment=<%= apartments_list.get(i).id_apartment %>">Modifica</a>
-            <a class="text_big button inLine bg_red" href="/public_webapp/EliminaAnnuncioServlet?id_apartment=<%= apartments_list.get(i).id_apartment %>">Elimina</a>
+            <a class="text_big button inLine" href="/public_webapp/AnnuncioServlet?edit=1&id_apartment=<%= apartments_list.get(i).getId() %>">Modifica</a>
+            <a class="text_big button inLine bg_red" href="/public_webapp/EliminaAnnuncioServlet?id_apartment=<%= apartments_list.get(i).getId() %>">Elimina</a>
             
             <% } %>
             <br>
