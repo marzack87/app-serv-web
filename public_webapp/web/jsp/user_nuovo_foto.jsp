@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Annuncio inserito</title>
+        <title>Aggiunta Foto</title>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>

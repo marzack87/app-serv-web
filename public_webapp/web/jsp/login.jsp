@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
-        <title>Login Page</title>
+        <title>Pagina di Accesso</title>
     </head>
         <body>
             <%@ include file="/WEB-INF/jspf/navigation_bar.jspf" %>

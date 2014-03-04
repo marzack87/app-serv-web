@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
-        <title>User Home</title>
+        <title>Messaggio</title>
     </head>
     <body>
         <%@ include file="/WEB-INF/jspf/navigation_bar_logged.jspf" %>

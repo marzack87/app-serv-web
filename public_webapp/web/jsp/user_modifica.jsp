@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modifica Informazioni Annuncio</title>
+        <title>Modifica Foto Annuncio</title>
         <link rel="stylesheet" type="text/css" href="/public_webapp/style-sheets/style.css">
     </head>
     <body>
