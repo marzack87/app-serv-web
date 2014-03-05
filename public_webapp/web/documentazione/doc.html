@@ -152,13 +152,17 @@ and open the template in the editor.
 
         <div>
         	<a name="scambio_data">
-        		<h3>Dettaglio delle informazioni memorizzate sul server:</h3><br>
-        		ci sono due database xml memorizzati sul server: <code>home_db.xml</code> e <code>users.xml</code>. Il file <code>home_db.xml</code> contiene tutte le informazioni relative al locale descritto in un annuncio; in particolare ogni nodo <code>Apartment</code> è composto da una serie di figli: ID, indirizzo, civico, città, tipo_alloggio, tipo_cucina, bagni, camere_letto, n_piano, ascensore, garage, terrazzo, posti_totali, posti_liberi, prezzo_posto, spese_acqua, spese_gas, spese_luce, spese_condominiali, nessune_spese e images. Per quanto riguarda l'<code>users.xml</code>, ogni elemento è composto dai campi: username, password, name, surname, phone e admin (che può contenere solo valori pari a 1, se l'utente è l'admin, o 0). Entrambi i database sono stati validati tramiti il rispettivo XML Schema che è descritto nel file <code>XML_Schema.xsd</code> (nella cartella xml-types). In oltre vengono scambiati oggetti xml gestiti e generati da stringhe dall'oggetto <code>ManageXML</code>, per effettuare servizi di XML over HTTP: <code>search.xml</code> e <code>search_result.xml</code>; che vengono utilizzate da <code>Applet1</code> e <code>SearchServlet</code>.   	
+                    <h3>Dettaglio delle informazioni memorizzate sul server:</h3><br>
+                    ci sono due database xml memorizzati sul server: <code>home_db.xml</code> e <code>users.xml</code>. Il file <code>home_db.xml</code> contiene tutte le informazioni relative al locale descritto in un annuncio; in particolare ogni nodo <code>Apartment</code> è composto da una serie di figli: ID, indirizzo, civico, città, tipo_alloggio, tipo_cucina, bagni, camere_letto, n_piano, ascensore, garage, terrazzo, posti_totali, posti_liberi, prezzo_posto, spese_acqua, spese_gas, spese_luce, spese_condominiali, nessune_spese e images. Per quanto riguarda l'<code>users.xml</code>, ogni elemento è composto dai campi: username, password, name, surname, phone e admin (che può contenere solo valori pari a 1, se l'utente è l'admin, o 0). Entrambi i database sono stati validati tramite il rispettivo XML Schema che è descritto nei file <code>XMLSchema_DB_Annunci.xsd</code> e <code>XMLSchema_DB_Utenti.xsd</code> (nella cartella xml-types). In oltre vengono scambiati oggetti xml gestiti e generati da stringhe dall'oggetto <code>ManageXML</code>, per effettuare servizi di XML over HTTP: <code>search.xml</code> e <code>search_result.xml</code> (i cui XML Schema sono <code>XMLSchema_Richiesta_Applet.xsd</code> e <code>XMLSchema_Risposta_Servlet.xsd</code> presenti nella cartella indicata in precedenza) che vengono utilizzati da <code>Applet1</code> e <code>SearchServlet</code>.   	
         	</a>
         </div>
         
         <div>
             <a href="javadoc/index.html">Link a Javadoc della lib1.jar</a>
+            <a href="XMLSchema_DB_Annunci.xsd">Link a XML Schema DB Annunci</a>
+            <a href="XMLSchema_DB_Utenti.xsd">Link a XML Schema DB Utenti</a>
+            <a href="XMLSchema_Richiesta_Applet.xsd">Link a XML Schema per la richiesta della Applet di ricerca annuci</a>
+            <a href="XMLSchema_Risposta_Servlet.xsd">Link a XML Schema per la risposta della Servlet</a>
         </div>
         
     </body>
