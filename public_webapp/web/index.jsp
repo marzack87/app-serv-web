@@ -46,12 +46,5 @@
             </a>
         </div>     
         <br>
-        <div class="centered">
-            <a href="/public_webapp/doc.html" class="button inLine fixed_size">
-                <span class="text_normal">DOCUMENTAZIONE</span>
-                <br> del sito per esame
-            </a>
-        </div>
-        <br>
     </body>
 </html>

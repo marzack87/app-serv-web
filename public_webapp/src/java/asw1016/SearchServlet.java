@@ -101,8 +101,6 @@ public class SearchServlet extends HttpServlet {
                 Node node = apartments.item(i);
                 NodeList results = node.getChildNodes();
                 
-                Map <String, String> map = new HashMap<String,String>();
-                
                 for (int k = 0; k < results.getLength(); k++)
                 {
                     if ("indirizzo".equals(results.item(k).getNodeName()))
