@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="../../xml-types/XML_Schema.xsd">
+       xsi:noNamespaceSchemaLocation="../../xml-types/XMLSchema_DB_Utenti.xsd">
 <user user_name="admin">
 <username>admin</username>
 <password>admin</password>

@@ -225,7 +225,7 @@
             <% if (apartments_list.get(i).getImg_url().size() > 0){ %>
             
             <br>
-            <applet code="visione_foto.viewApplet.class" archive="/public_webapp/applet/Applets.jar" width="800" height="430">
+            <applet code="visione_foto.viewApplet" archive="/public_webapp/applet/Applet2.jar" width="800" height="430">
                 <param name="parameter" value="<%= images %>">
                 <div class="text_red text_big">Attenzione! Java non supportato dal browser</div>
             </applet>

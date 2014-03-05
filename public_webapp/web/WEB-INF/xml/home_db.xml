@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <apartments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:noNamespaceSchemaLocation="../../xml-types/XML_Schema.xsd">
+            xsi:noNamespaceSchemaLocation="../../xml-types/XMLSchema_DB_Annunci.xsd">
 <apartment user_name="walt">
 <id>1cd1f8ff-a718-4d45-86e4-4188d316d8a4</id>
 <indirizzo>Negra Arroyo Lane</indirizzo>
