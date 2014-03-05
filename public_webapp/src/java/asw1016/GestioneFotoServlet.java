@@ -12,20 +12,21 @@ import java.util.*;
 import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
 
 /**
  *
  * @author marco
  */
+@MultipartConfig(location="/tmp",
+fileSizeThreshold=32,
+maxFileSize=1024*1024*10,
+maxRequestSize=1024*1024*10)
 public class GestioneFotoServlet extends HttpServlet {
 
     private boolean isMultipart;
-    private String filePath;
-    private int maxFileSize = 10 * 1024 * 1024;
-    private int maxMemSize = 4 * 1024;
-    private File file ;
-    
     
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -56,36 +57,36 @@ public class GestioneFotoServlet extends HttpServlet {
         
         String path = request.getSession().getServletContext().getRealPath("/multimedia/photos");
         
-        // elenco di tutti i parametri "normali" del form
-        Map<String,String[]> parameters = request.getParameterMap();
-
         try{ 
-            // Iteratore di tutte le parti del form (dovrebbero essere le foto)
             Iterator i = request.getParts().iterator();
 
-            filePath = path;
             int index = 0;
             
             String id_annuncio = request.getParameter("id_annuncio");
+            String[] foto_da_cancellare = request.getParameterValues("foto_da_cancellare");
             String now = "";
             
             ArrayList <String> images = new ArrayList<String>();
-            ArrayList <String> images_to_delete = new ArrayList<String>();
             
-            // finchè ci sono parti...
+            ArrayList <String> images_to_delete;
+            if (foto_da_cancellare != null){
+                 images_to_delete= new ArrayList<String>(Arrays.asList(foto_da_cancellare));
+            } else {
+                 images_to_delete = new ArrayList<String>();
+            }
+            
             while ( i.hasNext () ) 
             {
                Part p = (Part) i.next();
                
-               // ...se è una immagine (il content type dovrebbe essere "image/jpg", "image/png", ecc)...
-               if (p.getContentType().contains("image") && p.getSize() < maxFileSize) {
+               String cont_type = p.getContentType();
+               if (cont_type != null && cont_type.contains("image")) {
                    
                    java.util.Date date= new java.util.Date();
                    now = new Timestamp(date.getTime()).toString();
                    now = now.replace(" ", "_");
                    
-                   String[] fileNameComp = p.getName().split(".");
-                   String fileExt = fileNameComp[(fileNameComp.length - 1)];
+                   String fileExt = cont_type.replaceAll("image/", "");
                    
                    String fileName =  id_annuncio + "_" + index + "_" + now + "." + fileExt;
                    
@@ -95,29 +96,21 @@ public class GestioneFotoServlet extends HttpServlet {
                         file.createNewFile();
                    }
                    
+                   InputStream filecontent = null;
                    OutputStream outputStream = new FileOutputStream(file);
+                   
+                   filecontent = p.getInputStream();
+                   
                    int read = 0;
                    byte[] bytes = new byte[1024];
 
-                   while ((read = p.getInputStream().read(bytes)) != -1) {
+                   while ((read = filecontent.read(bytes)) != -1) {
                         outputStream.write(bytes, 0, read);
                    }
-               // ...altrimenti se è testo
-               } else if (p.getContentType().contains("text")) {
                    
-                   BufferedReader inPart = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                   String value = "";
-                   while ((value = inPart.readLine()) != null) {
-                        value += value;
-                   }
-                   inPart.close();
+                   outputStream.close();
                    
-                   if (p.getName().equals("id_annuncio")){
-                      id_annuncio = value;
-                   } else {
-                       images_to_delete.add(value);
-                   }
-                   
+                   images.add(fileName);
                }
             }
         
@@ -154,7 +147,7 @@ public class GestioneFotoServlet extends HttpServlet {
             
             
          } catch(Exception ex) {
-            request.setAttribute("msg", ex);
+            request.setAttribute("msg", ex.getMessage());
             RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
             rd_forward.forward(request, response);
          }

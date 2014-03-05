@@ -58,15 +58,21 @@
                         images = (String) request.getAttribute("images");
                     }
                     
-                    String[] photos = images.split("#");
+                    if (!images.equals("")){
+                        String[] photos = images.split("#");
                     
-                    for (String photo : photos){
+                        for (String photo : photos){
                 %>
                 <div id="<%=photo%>">
                     <img class="preview inLine" src ="/public_webapp/multimedia/photos/<%=photo%>">
                     <a class="button bg_red text_small inLine vertically_centered" href="#" onclick="return remove_photo_saved('<%=photo%>');">rimuovi</a>
                 </div>
-                <%  } %>
+                <%      }
+                    } else {%>
+                    <div class="text_small centered">
+                        Nessuna foto presente nel database
+                    </div>
+                <%  }%>
                 <br>
                 <hr>
             <br>
@@ -78,8 +84,7 @@
         <script type="text/javascript">
         
             var photos = 0;
-            var remove = 0;
-
+            
             function add_photo(){
                 photos++;
 
@@ -108,10 +113,9 @@
             }
 
             function remove_photo_saved(name){
-                remove++;
                 var new_input = document.createElement('input');
                 new_input.type = "hidden";
-                new_input.name = "foto_da_cancellare_" + remove;
+                new_input.name = "foto_da_cancellare";
                 new_input.value = name;
                 document.getElementById("foto_form").appendChild(new_input);
 
