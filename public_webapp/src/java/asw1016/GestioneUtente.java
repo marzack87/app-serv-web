@@ -25,6 +25,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -80,6 +81,136 @@ public class GestioneUtente {
         //2 - errore
         return result;
     }
+    
+    public static int loginUser(String path, String username, String pwd) throws Exception
+    {
+        int result = check_user(path,username,pwd);
+        
+        return result;
+    }
+    
+    public static boolean registerUser(String pathToWrite, String name,
+            String surname, String phone, String username, String pwd) throws Exception
+    {
+        boolean result = check_add_user(pathToWrite, name, surname, phone, username, pwd);
+        
+        return result;
+    }
+    
+    private static boolean check_add_user(String pathToWrite, String name,
+            String surname, String phone, String username, String pwd) throws Exception {
+        
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        Document document = documentBuilder.parse(pathToWrite);
+        
+        boolean register_user = true;
+        
+        NodeList nList = document.getElementsByTagName("user");
+        
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node nNode = nList.item(temp);
+            
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                if ((eElement.getAttribute("user_name")).equals(username))
+                {
+                    register_user = false;
+                    break;
+                }
+            }
+        }
+        
+        if (!register_user)
+        {
+            return false;
+        }
+        
+        Element root = document.getDocumentElement();
+        
+        //This method creates an element node
+        Element root_user = document.createElement("user");
+        root_user.setAttribute("user_name", username);
+        root.appendChild(root_user);
+
+        Element username_child = document.createElement("username");
+        root_user.appendChild(username_child);
+
+        Text text = document.createTextNode(username);
+        username_child.appendChild(text);
+
+        Element password_child = document.createElement("password");
+        root_user.appendChild(password_child);
+
+        Text text1 = document.createTextNode(pwd);
+        password_child.appendChild(text1);
+        
+        Element name_element = document.createElement("name");
+        root_user.appendChild(name_element);
+
+        Text text2 = document.createTextNode(name);
+        name_element.appendChild(text2);
+        
+        Element surname_element = document.createElement("surname");
+        root_user.appendChild(surname_element);
+
+        Text text3 = document.createTextNode(surname);
+        surname_element.appendChild(text3);
+        
+        Element phone_element = document.createElement("phone");
+        root_user.appendChild(phone_element);
+
+        Text text4 = document.createTextNode(phone);
+        phone_element.appendChild(text4);
+        
+        Element admin_element = document.createElement("admin");
+        root_user.appendChild(admin_element);
+
+        Text text5 = document.createTextNode("0");
+        admin_element.appendChild(text5);
+        
+        DOMSource source = new DOMSource(document);
+
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        StreamResult result = new StreamResult(pathToWrite);
+        transformer.transform(source, result);
+      
+        return register_user;
+    }
+    
+    private static int check_user(String pathToWrite, String username, String pwd) throws Exception {
+            
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        Document document = documentBuilder.parse(pathToWrite);
+        
+        NodeList nList = document.getElementsByTagName("user");
+        
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node nNode = nList.item(temp);
+            
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                if ((eElement.getAttribute("user_name")).equals(username))
+                {
+                    if (eElement.getElementsByTagName("password").item(0).getTextContent().equals(pwd))
+                    {
+                        if (eElement.getElementsByTagName("admin").item(0).getTextContent().equals("1"))
+                        {
+                            return 2;
+                        }
+                        return 1;
+                    }
+                }
+            }
+        }
+        
+            return 0;
+        }
     
     private static ArrayList<User> userInfoList (String path, final String usr)
     {

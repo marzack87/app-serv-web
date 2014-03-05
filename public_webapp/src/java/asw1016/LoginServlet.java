@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             {
                 try {
                     //Esiste il database utenti, controllo se è presente l'utente
-                    int user_type = check_user(path, user, pwd);
+                    int user_type = GestioneUtente.loginUser(path, user, pwd);
                     if ( user_type == 1)
                     {
                         //UTENTE NORMALE
@@ -105,35 +105,4 @@ public class LoginServlet extends HttpServlet {
             rd.include(request, response);
         }
     }
-    
-    private int check_user(String pathToWrite, String username, String pwd) throws Exception {
-            
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(pathToWrite);
-        
-        NodeList nList = document.getElementsByTagName("user");
-        
-        for (int temp = 0; temp < nList.getLength(); temp++)
-        {
-            Node nNode = nList.item(temp);
-            
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) nNode;
-                if ((eElement.getAttribute("user_name")).equals(username))
-                {
-                    if (eElement.getElementsByTagName("password").item(0).getTextContent().equals(pwd))
-                    {
-                        if (eElement.getElementsByTagName("admin").item(0).getTextContent().equals("1"))
-                        {
-                            return 2;
-                        }
-                        return 1;
-                    }
-                }
-            }
-        }
-        
-            return 0;
-        }
 }
