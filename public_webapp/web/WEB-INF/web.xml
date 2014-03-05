@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>AggiuntaFotoServlet</servlet-name>
-        <servlet-class>asw1016.AggiuntaFotoServlet</servlet-class>
+        <servlet-class>asw1016.GestioneFotoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ElencoAnnunciServlet</servlet-name>

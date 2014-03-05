@@ -20,7 +20,7 @@ and open the template in the editor.
                             <xs:element type="xs:string" name="name"/>
                             <xs:element type="xs:string" name="surname"/>
                             <xs:element type="xs:string" name="phone"/>
-                            <xs:element type="xs:byte" name="admin"/>
+                            <xs:element type="xs:string" name="admin" default="0"/>
                         </xs:sequence>
                         <xs:attribute type="xs:string" name="user_name" use="required"/>
                     </xs:complexType>
@@ -37,24 +37,24 @@ and open the template in the editor.
                         <xs:sequence>
                             <xs:element type="xs:string" name="id"/>
                             <xs:element type="xs:string" name="indirizzo"/>
-                            <xs:element type="xs:short" name="civico"/>
+                            <xs:element type="xs:string" name="civico"/>
                             <xs:element type="xs:string" name="citta"/>
-                            <xs:element type="xs:byte" name="tipo_alloggio"/>
-                            <xs:element type="xs:byte" name="tipo_cucina"/>
-                            <xs:element type="xs:byte" name="bagni"/>
-                            <xs:element type="xs:byte" name="camere_letto"/>
-                            <xs:element type="xs:byte" name="n_piano"/>
-                            <xs:element type="xs:byte" name="ascensore"/>
-                            <xs:element type="xs:byte" name="garage"/>
-                            <xs:element type="xs:byte" name="terrazzo"/>
-                            <xs:element type="xs:byte" name="posti_totali"/>
-                            <xs:element type="xs:byte" name="posti_liberi"/>
-                            <xs:element type="xs:short" name="prezzo_posto"/>
-                            <xs:element type="xs:byte" name="spese_acqua"/>
-                            <xs:element type="xs:byte" name="spese_gas"/>
-                            <xs:element type="xs:byte" name="spese_luce"/>
-                            <xs:element type="xs:byte" name="spese_condominiali"/>
-                            <xs:element type="xs:byte" name="nessune_spese"/>
+                            <xs:element type="xs:string" name="tipo_alloggio"/>
+                            <xs:element type="xs:string" name="tipo_cucina"/>
+                            <xs:element type="xs:string" name="bagni"/>
+                            <xs:element type="xs:string" name="camere_letto"/>
+                            <xs:element type="xs:string" name="n_piano"/>
+                            <xs:element type="xs:string" name="ascensore"/>
+                            <xs:element type="xs:string" name="garage"/>
+                            <xs:element type="xs:string" name="terrazzo"/>
+                            <xs:element type="xs:string" name="posti_totali"/>
+                            <xs:element type="xs:string" name="posti_liberi"/>
+                            <xs:element type="xs:string" name="prezzo_posto"/>
+                            <xs:element type="xs:string" name="spese_acqua"/>
+                            <xs:element type="xs:string" name="spese_gas"/>
+                            <xs:element type="xs:string" name="spese_luce"/>
+                            <xs:element type="xs:string" name="spese_condominiali"/>
+                            <xs:element type="xs:string" name="nessune_spese"/>
                             <xs:element name="images" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>

@@ -129,7 +129,7 @@ public class GestioneAnnunci {
             
             Apartment ap = list.get(i);
             
-            Element apt_el = doc.createElement("apartment");
+            Element apt_el = doc.createElement("result");
             search.appendChild(apt_el);
             
             Element img_el = doc.createElement("img");
@@ -154,10 +154,10 @@ public class GestioneAnnunci {
                 tipologia = "Casa Indipendente";
             }
             
-            String descrizione = "<html>" + tipologia+ " in " + ap.getIndirizzo() + 
-                                                      " n° " + ap.getCivico() + " a " + ap.getCitta() + " di propietà di "
-                                                      + ap.getProprietario() + ". <br> Posti Liberi: " + ap.getPostiLiberi()
-                                                      + " <br> Prezzo per persona: " + ap.getPrezzo() + " €";
+            String descrizione = tipologia + " in " + ap.getIndirizzo() + 
+                                    " n° " + ap.getCivico() + " a " + ap.getCitta() + " di propietà di "
+                                    + ap.getProprietario() + ". ## Posti Liberi: " + ap.getPostiLiberi()
+                                    + " ## Prezzo per persona: " + ap.getPrezzo() + " €";
             
             Element descrp_el = doc.createElement("description");
             apt_el.appendChild(descrp_el);
