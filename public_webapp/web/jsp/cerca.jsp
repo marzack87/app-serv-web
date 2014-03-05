@@ -17,7 +17,7 @@
         
         <div class="centered">
             <h1>Cerca</h1>
-            <applet code="gestione_annuncio.SearchApplet" archive="/public_webapp/applet/SearchApplet.jar" width="650" height="900"/>
+            <applet code="gestione_annuncio.SearchApplet" archive="/public_webapp/applet/Applets.jar, /public_webapp/applet/Lib1.jar" width="650" height="900"/>
         </div>
            
         <script> 
