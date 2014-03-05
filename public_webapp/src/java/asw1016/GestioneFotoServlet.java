@@ -12,14 +12,7 @@ import java.util.*;
 import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FilenameUtils;
+import javax.servlet.http.*;
 
 /**
  *
@@ -45,8 +38,15 @@ public class GestioneFotoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        String content_type = request.getContentType();
         
-        isMultipart = ServletFileUpload.isMultipartContent(request);
+        if (request.getContentType() != null && 
+            request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
+                isMultipart = true;
+        } else {
+                isMultipart = false;
+        } 
         response.setContentType("text/html");
         if( !isMultipart ){
             request.setAttribute("msg", "Errore nel caricamento delle foto");
@@ -54,73 +54,73 @@ public class GestioneFotoServlet extends HttpServlet {
             rd_forward.forward(request, response);
         }
         
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        // maximum size that will be stored in memory
-        factory.setSizeThreshold(maxMemSize);
-        // Location to save data that is larger than maxMemSize.
-
         String path = request.getSession().getServletContext().getRealPath("/multimedia/photos");
-
-        factory.setRepository(new File(path));
-
-        // Create a new file upload handler
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        // maximum file size to be uploaded.
-        upload.setSizeMax( maxFileSize );
+        
+        // elenco di tutti i parametri "normali" del form
+        Map<String,String[]> parameters = request.getParameterMap();
 
         try{ 
-            // Parse the request to get file items.
-            List fileItems = upload.parseRequest(request);
-
-            // Process the uploaded file items
-            Iterator i = fileItems.iterator();
+            // Iteratore di tutte le parti del form (dovrebbero essere le foto)
+            Iterator i = request.getParts().iterator();
 
             filePath = path;
             int index = 0;
-            String id_annuncio = "";
+            
+            String id_annuncio = request.getParameter("id_annuncio");
             String now = "";
             
             ArrayList <String> images = new ArrayList<String>();
             ArrayList <String> images_to_delete = new ArrayList<String>();
             
+            // finchè ci sono parti...
             while ( i.hasNext () ) 
             {
-               FileItem fi = (FileItem)i.next();
-               if ( !fi.isFormField () )	
-               {
-                  index++; 
-                  
-                  java.util.Date date= new java.util.Date();
-                  now = new Timestamp(date.getTime()).toString();
-                  now = now.replace(" ", "_"); 
-                 // Get the uploaded file parameters
-                  String fieldName = fi.getFieldName();
-                  String fileExt = FilenameUtils.getExtension(fi.getName());
-                  String fileName =  id_annuncio + "_" + index + "_" + now + "." + fileExt;
-                  String contentType = fi.getContentType();
-                  boolean isInMemory = fi.isInMemory();
-                  long sizeInBytes = fi.getSize();
-                  // Write the file
-                  if( fileName.lastIndexOf("\\") >= 0 ){
-                     file = new File( filePath + "/" +
-                     fileName.substring( fileName.lastIndexOf("\\"))) ;
-                  }else{
-                     file = new File( filePath + "/" +
-                     fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-                  }
-                  fi.write( file ) ;
-                  
-                  images.add(fileName);
-                  
-               } else {
-                   if (fi.getFieldName().equals("id_annuncio")){
-                      id_annuncio = fi.getString();
-                   } else {
-                       images_to_delete.add(fi.getString());
+               Part p = (Part) i.next();
+               
+               // ...se è una immagine (il content type dovrebbe essere "image/jpg", "image/png", ecc)...
+               if (p.getContentType().contains("image") && p.getSize() < maxFileSize) {
+                   
+                   java.util.Date date= new java.util.Date();
+                   now = new Timestamp(date.getTime()).toString();
+                   now = now.replace(" ", "_");
+                   
+                   String[] fileNameComp = p.getName().split(".");
+                   String fileExt = fileNameComp[(fileNameComp.length - 1)];
+                   
+                   String fileName =  id_annuncio + "_" + index + "_" + now + "." + fileExt;
+                   
+                   File file = new File(path + "/" + fileName);
+                   
+                   if (!file.exists()) {
+                        file.createNewFile();
                    }
+                   
+                   OutputStream outputStream = new FileOutputStream(file);
+                   int read = 0;
+                   byte[] bytes = new byte[1024];
+
+                   while ((read = p.getInputStream().read(bytes)) != -1) {
+                        outputStream.write(bytes, 0, read);
+                   }
+               // ...altrimenti se è testo
+               } else if (p.getContentType().contains("text")) {
+                   
+                   BufferedReader inPart = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                   String value = "";
+                   while ((value = inPart.readLine()) != null) {
+                        value += value;
+                   }
+                   inPart.close();
+                   
+                   if (p.getName().equals("id_annuncio")){
+                      id_annuncio = value;
+                   } else {
+                       images_to_delete.add(value);
+                   }
+                   
                }
             }
-            
+        
             //Se è arrivato qui vuol dire che è riuscito a caricare correttamente le foto
             //Quindi ora le aggiungo nel rispettivo annuncio
             String pathApartment_db = request.getSession().getServletContext().getRealPath("/WEB-INF/xml/");
@@ -153,7 +153,7 @@ public class GestioneFotoServlet extends HttpServlet {
             }
             
             
-         }catch(Exception ex) {
+         } catch(Exception ex) {
             request.setAttribute("msg", ex);
             RequestDispatcher rd_forward = getServletContext().getRequestDispatcher("/jsp/error.jsp");
             rd_forward.forward(request, response);

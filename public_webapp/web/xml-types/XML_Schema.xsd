@@ -8,7 +8,6 @@ and open the template in the editor.
 <xs:schema version="1.0"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified">
-    
     <xs:element name="users">
         <xs:complexType>
             <xs:sequence>
@@ -28,7 +27,6 @@ and open the template in the editor.
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
     <xs:element name="apartments">
         <xs:complexType>
             <xs:sequence>
@@ -62,11 +60,36 @@ and open the template in the editor.
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                    </xs:sequence>
+                        </xs:sequence>
                         <xs:attribute type="xs:string" name="user_name" use="required"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="search">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="indirizzo"/>
+                <xs:element type="xs:string" name="prezzo"/>
+                <xs:element type="xs:string" name="posti_liberi"/>
+                <xs:element type="xs:string" name="tipologia"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="search_result">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="img"/>
+                            <xs:element type="xs:string" name="description"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>

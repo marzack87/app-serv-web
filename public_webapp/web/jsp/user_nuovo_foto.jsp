@@ -55,8 +55,6 @@
         </div>
         <br>
         <br>
-    </body>
-    
     <script type="text/javascript">
         
         var photos = 0;
@@ -93,5 +91,6 @@
             return false;
         }
     </script>
+    </body>
     
 </html>
