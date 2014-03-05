@@ -17,7 +17,7 @@
         <servlet-class>asw1016.SearchServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AggiuntaFotoServlet</servlet-name>
+        <servlet-name>GestioneFotoServlet</servlet-name>
         <servlet-class>asw1016.GestioneFotoServlet</servlet-class>
     </servlet>
     <servlet>
@@ -61,8 +61,8 @@
         <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AggiuntaFotoServlet</servlet-name>
-        <url-pattern>/AggiuntaFotoServlet</url-pattern>
+        <servlet-name>GestioneFotoServlet</servlet-name>
+        <url-pattern>/GestioneFotoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ElencoAnnunciServlet</servlet-name>

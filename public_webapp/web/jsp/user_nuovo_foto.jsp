@@ -32,7 +32,7 @@
         </div>
         <br>
         <div class="centered">
-            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/AggiuntaFotoServlet" method="POST" enctype="multipart/form-data">
+            <form id="foto_form" class="nuovo_annuncio" action="/public_webapp/GestioneFotoServlet" method="POST" enctype="multipart/form-data">
                 <br>
                 <%
                     String id_annuncio = "";
